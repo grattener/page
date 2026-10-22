@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#124a46">
+  <meta name="description" content="Guías de estudio interactivas para Derecho: apuntes, cuestionarios y tarjetas de memoria.">
+  <title>Mi biblioteca de Derecho</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Inicio">
+      <span class="brand-icon" aria-hidden="true">⚖</span>
+      <span>Mi biblioteca de Derecho</span>
+    </a>
+    <button id="menuButton" class="icon-button" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </header>
+
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head"><strong>Mi biblioteca de Derecho</strong><button id="closeMenu" class="icon-button" aria-label="Cerrar menú">×</button></div>
+    <nav>
+      <a href="#inicio" data-view="inicio">⌂ <span>Inicio</span></a>
+      <a href="#materias" data-view="materias">▣ <span>Materias</span></a>
+      <a href="#buscador" data-view="buscador">⌕ <span>Buscador</span></a>
+      <a href="#progreso" data-view="progreso">▥ <span>Mi progreso</span></a>
+    </nav>
+    <p class="drawer-note">El conocimiento también es una forma de libertad.</p>
+  </aside>
+  <div id="scrim" class="scrim"></div>
+
+  <main id="app">
+    <section id="inicio" class="view active">
+      <div class="hero">
+        <div class="hero-content">
+          <span class="back hidden">‹</span>
+          <p class="eyebrow">TU ESPACIO DE ESTUDIO</p>
+          <h1>Derecho Penal</h1>
+          <p>Guía de estudio · Delitos patrimoniales</p>
+          <div class="pills"><span>Robo</span><span>Fraude</span><span>Abuso de confianza</span></div>
+        </div>
+      </div>
+      <div class="home-cards">
+        <button class="nav-card" data-view="resumen"><span class="tile-icon">▤</span><span><strong>Resumen general</strong><small>Conceptos clave y panorama del tema</small></span><b>›</b></button>
+        <button class="nav-card" data-view="temas"><span class="tile-icon">▧</span><span><strong>Desarrollo por subtemas</strong><small>Explicación detallada de cada delito</small></span><b>›</b></button>
+        <button class="nav-card" data-view="quiz"><span class="tile-icon">☷</span><span><strong>Cuestionario</strong><small>Pon a prueba lo aprendido</small></span><b>›</b></button>
+        <button class="nav-card" data-view="flashcards"><span class="tile-icon">▱</span><span><strong>Tarjetas de estudio</strong><small>Conceptos importantes</small></span><b>›</b></button>
+      </div>
+      <div class="encouragement"><span>♧</span><p>La práctica constante también es parte del estudio. ¡Tú puedes!</p><span>♡</span></div>
+      <p class="disclaimer">Plantilla de demostración. Verifica siempre los conceptos y artículos con el código y las fuentes indicadas por tu docente.</p>
+    </section>
+
+    <section id="resumen" class="view">
+      <button class="back-link" data-view="inicio">‹ Volver</button>
+      <p class="eyebrow">DERECHO PENAL</p><h1>Resumen general</h1>
+      <p class="lead">Los delitos patrimoniales son conductas que afectan bienes, derechos o intereses económicos protegidos por la ley. Para distinguirlos, hay que analizar los hechos concretos y los elementos que exige la disposición aplicable.</p>
+      <div class="info-card"><span class="tile-icon">▤</span><div><strong>¿Cómo estudiar este tema?</strong><p>Identifica qué conducta ocurrió, qué relación tenía la persona con el bien, si existió engaño o abuso de confianza y qué establece exactamente la legislación aplicable.</p></div></div>
+      <h2>Figuras que debes distinguir</h2>
+      <article class="content-card"><h3>Robo</h3><p>En términos generales, se relaciona con el apoderamiento de una cosa mueble ajena sin derecho y sin consentimiento de quien legalmente puede otorgarlo. La definición exacta y sus elementos deben verificarse en el código aplicable.</p></article>
+      <article class="content-card"><h3>Fraude</h3><p>Generalmente implica engañar a alguien o aprovechar un error para obtener ilícitamente una cosa o un beneficio. Deben revisarse la conducta, el engaño o error, el beneficio y los demás requisitos legales.</p></article>
+      <article class="content-card"><h3>Abuso de confianza</h3><p>Se relaciona, en términos generales, con disponer indebidamente de un bien ajeno que se recibió bajo una relación de confianza o con una finalidad determinada. La entrega y la forma de disposición son claves para analizar el caso.</p></article>
+      <div class="callout"><strong>Importante</strong><p>Estas explicaciones son orientativas y no sustituyen el estudio de los artículos vigentes del Código Penal del Estado de Chihuahua ni las instrucciones de clase.</p></div>
+      <button class="primary full" data-view="quiz">Practicar con preguntas <span>›</span></button>
+    </section>
+
+    <section id="temas" class="view">
+      <button class="back-link" data-view="inicio">‹ Volver</button>
+      <p class="eyebrow">LECTURA POR SUBTEMAS</p><h1>Elementos del delito</h1>
+      <p class="lead">Abre cada apartado para repasar la idea principal. Completa el contenido con los artículos asignados por tu profesora.</p>
+      <div class="accordion">
+        <details open><summary>Conducta</summary><p>Consiste en el comportamiento que la norma describe. Al analizar un caso, distingue qué hizo la persona, en qué circunstancias y qué elementos exige la ley para esa figura.</p></details>
+        <details><summary>Objeto material</summary><p>Es la persona o cosa sobre la que recae directamente la conducta, según la figura jurídica estudiada. En delitos patrimoniales suele ser importante identificar el bien involucrado y su relación con la persona afectada.</p></details>
+        <details><summary>Consentimiento y derecho</summary><p>Revisa si existía consentimiento válido, autorización o algún derecho que justifique la conducta. No des por hecho estos elementos: deben analizarse con los hechos y la norma aplicable.</p></details>
+        <details><summary>Engaño o error</summary><p>En el análisis del fraude, estudia si hubo engaño o aprovechamiento de un error y qué relación tiene con la obtención del beneficio. Comprueba los requisitos específicos del artículo correspondiente.</p></details>
+        <details><summary>Entrega y disposición del bien</summary><p>Para distinguir el abuso de confianza de otras figuras, importa cómo llegó el bien a manos de la persona y qué facultades tenía para usarlo o disponer de él.</p></details>
+      </div>
+      <div class="callout"><strong>Tip para el examen</strong><p>En cada figura, aprende la definición legal, identifica sus verbos rectores y después compara sus diferencias con las otras figuras.</p></div>
+      <button class="primary full" data-view="flashcards">Repasar con tarjetas <span>›</span></button>
+    </section>
+
+    <section id="quiz" class="view">
+      <button class="back-link" data-view="inicio">‹ Volver</button>
+      <div class="quiz-head"><span class="quiz-icon">☷</span><div><h1>Cuestionario</h1><p>Pon a prueba lo aprendido</p></div></div>
+      <div class="progress-line"><span id="quizProgress"></span></div>
+      <div class="progress-meta"><span id="questionCount">Pregunta 1 de 5</span><span id="scoreLabel">Aciertos: 0</span></div>
+      <div id="quizArea"></div>
+      <div id="quizFeedback" class="feedback" aria-live="polite"></div>
+      <button id="nextQuestion" class="primary full" disabled>Siguiente pregunta ›</button>
+      <button id="restartQuiz" class="text-button hidden">Volver a intentarlo</button>
+      <p class="disclaimer">Preguntas didácticas de práctica; confirma las respuestas con tu legislación y materiales de clase.</p>
+    </section>
+
+    <section id="flashcards" class="view">
+      <button class="back-link" data-view="inicio">‹ Volver</button>
+      <p class="eyebrow">REPASO RÁPIDO</p><h1>Tarjetas de estudio</h1>
+      <p class="lead">Piensa en la respuesta y toca la tarjeta para voltearla.</p>
+      <div class="flashcard-wrap">
+        <button id="prevCard" class="round-button" aria-label="Tarjeta anterior">‹</button>
+        <button id="flashcard" class="flashcard"><span id="cardNumber">1 / 6</span><strong id="cardText">¿Qué debes identificar al analizar un delito?</strong><small id="cardHint">Toca para ver la respuesta</small></button>
+        <button id="nextCard" class="round-button" aria-label="Tarjeta siguiente">›</button>
+      </div>
+      <div id="dots" class="dots"></div>
+      <p class="center muted">No memorices solo palabras: intenta explicar cada concepto con tus propias palabras.</p>
+    </section>
+
+    <section id="buscador" class="view">
+      <button class="back-link" data-view="inicio">‹ Volver</button>
+      <p class="eyebrow">ENCUENTRA UN CONCEPTO</p><h1>Buscador</h1>
+      <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar en las guías…" autocomplete="off"></label>
+      <div id="searchResults" class="search-results"><p class="muted">Escribe una palabra como “robo”, “engaño” o “consentimiento”.</p></div>
+    </section>
+
+    <section id="progreso" class="view">
+      <button class="back-link" data-view="inicio">‹ Volver</button>
+      <p class="eyebrow">TU AVANCE</p><h1>Mi progreso</h1>
+      <div class="stats-grid"><div class="stat-card"><strong id="statAnswered">0</strong><span>Preguntas contestadas</span></div><div class="stat-card"><strong id="statCorrect">0</strong><span>Respuestas correctas</span></div><div class="stat-card"><strong id="statCards">0</strong><span>Tarjetas repasadas</span></div></div>
+      <div class="callout"><strong>Un paso a la vez</strong><p>El progreso se guarda en este navegador. Si cambias de dispositivo o borras los datos del navegador, no se sincronizará automáticamente.</p></div>
+      <button id="resetProgress" class="secondary full">Reiniciar progreso</button>
+    </section>
+  </main>
+  <footer><span>⚖</span> Hecho para estudiar con calma.</footer>
+  <script src="app.js"></script>
+</body>
+</html>
