@@ -1,65 +1,78 @@
 /**
- * IURISGUIDES - PLATAFORMA DE ESTUDIO JURÍDICO & ÍNDICE DE GUÍAS
- * Lógica de la aplicación: catálogo interactivo, creador de guías,
- * entorno de estudio (Resumen, Subtemas, Quiz, Flashcards 3D) y progreso.
+ * ARCHIVO DE ESTUDIO / VISOR Y CARPETA DE GUÍAS DE ESTUDIO
+ * Implementación fiel al sistema de diseño "The Digital Archivist" (Stitch)
  */
 
 // =============================================================================
-// 1. BASE DE DATOS INICIAL DE GUÍAS DIDÁCTICAS (PRECARGADAS)
+// 1. GUÍAS PRECARGADAS EN FORMATO EDITORIAL MARKDOWN
 // =============================================================================
-const DEFAULT_GUIDES = [
+const DEFAULT_DOCUMENTS = [
   {
-    id: "penal-patrimoniales",
-    title: "Derecho Penal: Delitos Patrimoniales",
+    id: "01_derecho_penal",
+    filename: "01_Derecho_Penal_Patrimoniales.md",
     materia: "Derecho Penal",
-    category: "Penal",
-    subtitle: "Estudio dogmático de Robo, Fraude, Abuso de Confianza y sus elementos típicos",
-    tags: ["Robo", "Fraude", "Abuso de Confianza", "Bien Jurídico", "Patrimonio"],
-    createdAt: 1700000000000,
-    resumen: {
-      lead: "Los delitos patrimoniales son conductas tipificadas que lesionan o ponen en peligro directo el patrimonio, la propiedad y los intereses económicos legítimos tutelados por el ordenamiento penal.",
-      blocks: [
-        {
-          title: "Robo",
-          desc: "Apoderamiento ilegítimo de una cosa mueble, ajena, sin derecho y sin el consentimiento de la persona facultada legalmente para disponer de ella. Puede concurrir con o sin violencia física o moral."
-        },
-        {
-          title: "Fraude Genérico",
-          desc: "Consiste en engañar a alguien o aprovecharse del error en que se halla, para alcanzar un lucro indebido en beneficio propio o de un tercero, provocando un detrimento correlativo en la víctima."
-        },
-        {
-          title: "Abuso de Confianza",
-          desc: "Se perfecciona cuando el sujeto activo dispone indebidamente para sí o para otro de una cosa mueble ajena, de la cual se le transmitió únicamente la tenencia precaria o posesión derivada, pero no el dominio."
-        },
-        {
-          title: "Metodología de Análisis",
-          desc: "Distingue siempre cómo entra el sujeto en contacto con el bien: si lo toma clandestinamente (robo), si se lo entregan con engaño (fraude) o si se lo entregan voluntariamente y luego no lo restituye (abuso)."
-        }
-      ],
-      callout: "Verifica invariablemente los artículos específicos del Código Penal Federal y del Código Penal de tu entidad federativa, ya que las penas, agravantes y requisitos de procedibilidad (querella u oficio) pueden variar."
-    },
-    temas: [
-      {
-        title: "1. Conducta y Verbos Rectores",
-        content: "El tipo penal describe con precisión la acción u omisión sancionada. En el robo el verbo rector fundamental es 'apoderarse'; en el fraude es 'engañar' o 'aprovecharse del error'; y en el abuso de confianza es 'disponer indebidamente' del bien recibido legalmente en custodia."
-      },
-      {
-        title: "2. Objeto Material y Jurídico",
-        content: "El bien jurídico tutelado es el patrimonio económico. El objeto material sobre el que recae físicamente la conducta debe ser, por regla general en el robo y abuso de confianza, un bien mueble corpóreo susceptible de apropiación."
-      },
-      {
-        title: "3. Ausencia de Consentimiento vs. Engaño",
-        content: "En el robo la víctima no consiente la desposesión. En el fraude, la víctima entrega el bien aparentemente de manera voluntaria, pero su consentimiento se encuentra viciado por el ardid, engaño o maquinación fraudulenta empleada."
-      },
-      {
-        title: "4. Naturaleza de la Posesión Previa en el Abuso de Confianza",
-        content: "Elemento sine qua non del abuso de confianza es la transmisión previa de la posesión derivada o precaria (como en el comodato, depósito o mandato). Si hubo transmisión de propiedad, no puede configurarse abuso de confianza."
-      },
-      {
-        title: "5. Querella de Parte Ofendida y Perseguibilidad",
-        content: "Gran parte de los delitos patrimoniales cometidos entre familiares o por cuantías menores admiten perdón del ofendido o exigen querella previa para el ejercicio de la acción penal, permitiendo salidas alternas y acuerdos reparatorios."
-      }
-    ],
+    title: "Fundamentos de Derecho Penal y Delitos Patrimoniales",
+    subtitle: "Estudio dogmático de Robo, Fraude, Abuso de Confianza y la estructura de tipicidad según el ordenamiento penal.",
+    date: "Hoy, 10:24",
+    status: "Leyendo",
+    statusClass: "text-primary bg-primary-container",
+    content: `
+# Fundamentos de Derecho Penal y Delitos Patrimoniales
+
+*Estudio dogmático de Robo, Fraude, Abuso de Confianza y la estructura de tipicidad según el ordenamiento penal.*
+
+> **ANOTACIÓN DE ESTUDIO**  
+> "La distinción sustantiva entre los delitos patrimoniales no reside en el valor económico del objeto material sustraído, sino en la naturaleza de la relación jurídica previa y en el vicio o ausencia absoluta del consentimiento del ofendido."
+
+---
+
+## 1. Cuadro Comparativo de Figuras Típicas
+
+Para analizar un caso penal con precisión dogmática, es indispensable contrastar el verbo rector, la posesión previa y el vicio en la voluntad de la víctima:
+
+| Delito Patrimonial | Verbo Rector Central | Posesión Previa del Bien | Estado del Consentimiento |
+| :--- | :--- | :--- | :--- |
+| **Robo** | *Apoderarse* | Clandestina o sin título alguno | **Inexistente**: No hay voluntad de entrega |
+| **Fraude** | *Engañar / Aprovechar error* | Se entrega por engaño | **Viciado**: Entrega voluntaria pero engañada |
+| **Abuso de Confianza** | *Disponer indebidamente* | Transmisión de tenencia precaria | **Concedido previamente**: Transmisión sin dominio |
+| **Despojo** | *Ocupar / Desposeer inmueble* | Vía de hecho sobre bien raíz | **Inexistente**: Realizado con violencia o furtividad |
+
+---
+
+## 2. Formalización del Tipo Penal en Esquema Lógico
+
+Consideremos la adecuación de la conducta típica al tipo de Robo Simple:
+
+\`\`\`
+// 1. Premisa Mayor: Tipo Penal Objetivo (Art. 367 CP)
+Premisa 1: [Apoderamiento] ∧ [Cosa Mueble Ajena] ∧ [Sin Derecho] ∧ [Sin Consentimiento] → Tipicidad de Robo
+
+// 2. Premisa Menor: Hechos Probados en la Carpeta de Investigación
+Premisa 2: El imputado sustrajo el vehículo del estacionamiento privado sin conocimiento del propietario.
+
+// ---------------------------------------------------------------------------------
+Conclusión: ∴ Se actualiza el encuadramiento formal y la tipicidad de la conducta.
+\`\`\`
+
+---
+
+## 3. Elementos Esenciales a Distinguir en Clase
+
+- **El Objeto Material:** Recae exclusivamente sobre bienes muebles corpóreos susceptibles de apreciación pecuniaria.
+- **La Posesión Originaria vs. Derivada:** En el abuso de confianza, quien recibe la cosa en virtud de un comodato o depósito tiene posesión derivada; disponer de ella con ánimo de dueño consuma el ilícito.
+- **El Perjuicio Patrimonial Correlativo:** En el fraude debe existir un vínculo causal directo entre el ardid desplegado y el detrimento patrimonial resentido.
+
+---
+
+## 4. Lista de Comprobación para Análisis de Casos
+
+Antes de formular la teoría del caso o resolver la guía, verifica cada elemento:
+
+- [x] Identificar el verbo rector y confrontarlo con el texto de la norma penal aplicable.
+- [x] Comprobar si existió transmisión previa de la custodia o si fue sustracción inmediata.
+- [ ] Descartar causas de justificación (estado de necesidad justificante o consentimiento presunto).
+- [ ] Verificar el requisito de procedibilidad: ¿se persigue de oficio o mediante querella de parte ofendida?
+    `,
     quiz: [
       {
         q: "¿Cuál es la diferencia medular en la entrega del bien entre el Robo y el Fraude?",
@@ -67,51 +80,27 @@ const DEFAULT_GUIDES = [
         a: [
           "En el robo no hay consentimiento de entrega; en el fraude la víctima entrega voluntariamente pero con la voluntad viciada por engaño.",
           "En el robo el objeto siempre es inmueble y en el fraude mueble.",
-          "El robo siempre exige violencia armada obligatoriamente.",
+          "El robo siempre exige violencia física obligatoriamente.",
           "No existe diferencia dogmática, son figuras idénticas."
         ],
         correct: 0,
-        why: "En el fraude existe un vicio en el consentimiento provocado por engaño o error inducido; en el robo hay un apoderamiento ilícito sin consentimiento alguno."
+        why: "En el fraude existe un vicio en el consentimiento provocado por engaño o error; en el robo hay un apoderamiento ilícito sin consentimiento alguno."
       },
       {
         q: "¿Qué elemento resulta indispensable para que se configure el Abuso de Confianza?",
         note: "Considera el título bajo el cual el sujeto activo recibió la cosa.",
         a: [
-          "Que previamente se le haya transmitido la posesión precaria o tenencia de la cosa mueble, no el dominio.",
+          "Que previamente se le haya transmitido la posesión precaria o custodia de la cosa mueble, no el dominio.",
           "Que haya existido violencia física en la obtención inicial.",
           "Que el valor del bien sea estrictamente mayor a 1,000 UMAs.",
-          "Que el imputado sea un servidor público en ejercicio de funciones."
+          "Que el imputado sea obligatoriamente un servidor público."
         ],
         correct: 0,
         why: "El abuso de confianza requiere que el bien haya sido entregado válidamente en posesión precaria o depósito, disponiendo de él indebidamente con posterioridad."
       },
       {
-        q: "Si una persona entra a una tienda y esconde mercancía en su abrigo saliendo sin pagar, ¿qué conducta se actualiza?",
-        note: "No existió engaño verbal ni entrega previa por confianza.",
-        a: [
-          "Robo",
-          "Fraude",
-          "Abuso de confianza",
-          "Despojo"
-        ],
-        correct: 0,
-        why: "Se actualiza el delito de robo por apoderamiento de cosa mueble ajena sin consentimiento ni derecho."
-      },
-      {
-        q: "¿Qué es un 'verbo rector' en la tipicidad penal?",
-        note: "Término fundamental de la teoría del delito.",
-        a: [
-          "La acción u omisión medular descrita por la ley que configura la conducta sancionada.",
-          "El argumento final expresado por el juez en la sentencia condenatoria.",
-          "La palabra que define exclusivamente la cuantía de la sanción económica.",
-          "La regla procesal para presentar la apelación."
-        ],
-        correct: 0,
-        why: "El verbo rector es el núcleo de la conducta descrita en el tipo penal (ej. matar, apoderar, defraudar, privar)."
-      },
-      {
-        q: "Si el sujeto activo vende un automóvil que se le entregó en comodato (préstamo de uso), ¿qué delito comete?",
-        note: "Tenía la posesión legal para usarlo temporalmente, pero no el dominio para enajenarlo.",
+        q: "Si una persona vende un automóvil que se le dio en comodato (préstamo de uso), ¿qué delito comete?",
+        note: "Tenía la tenencia para usarlo temporalmente, pero no el dominio para enajenarlo.",
         a: [
           "Abuso de confianza",
           "Robo calificado",
@@ -126,60 +115,54 @@ const DEFAULT_GUIDES = [
       ["¿Qué es el verbo rector del Robo?", "El apoderamiento ilegítimo de una cosa mueble ajena sin derecho ni consentimiento."],
       ["¿Qué distingue al Fraude?", "El empleo de engaño o el aprovechamiento de un error para hacerse ilícitamente de un lucro."],
       ["¿Qué condición previa exige el Abuso de Confianza?", "La entrega previa de la posesión derivada o precaria del bien mueble ajeno."],
-      ["¿Qué es el Bien Jurídico Tutelado?", "El valor o interés fundamental protegido por la norma penal, en este caso el patrimonio."],
-      ["¿En qué consiste el dolo penal?", "En conocer los elementos del tipo penal y querer o aceptar la realización de la conducta descrita."],
-      ["¿Qué consecuencia tiene el perdón del ofendido en delitos por querella?", "Extingue la acción penal o los efectos de la sentencia, según la etapa procesal."]
+      ["¿Qué es el Bien Jurídico Tutelado?", "El valor o interés fundamental protegido por la norma penal, en este caso el patrimonio económico."]
     ]
   },
 
   {
-    id: "constitucional-amparo",
-    title: "Derecho Constitucional: Juicio de Amparo",
+    id: "02_juicio_amparo",
+    filename: "02_Constitucional_Juicio_Amparo.md",
     materia: "Derecho Constitucional",
-    category: "Constitucional",
-    subtitle: "Garantías individuales, Amparo Directo e Indirecto, y Suspensión del Acto Reclamado",
-    tags: ["Amparo", "Derechos Humanos", "Suspensión", "Definitividad", "Supremacía"],
-    createdAt: 1700100000000,
-    resumen: {
-      lead: "El juicio de amparo es el principal medio de control constitucional y de tutela judicial efectiva que tienen los gobernados en México contra actos u omisiones de autoridades que violen sus derechos humanos reconocidos en la Constitución y tratados internacionales.",
-      blocks: [
-        {
-          title: "Amparo Indirecto",
-          desc: "Se promueve ante Juzgados de Distrito o Tribunales Colegiados de Apelación contra leyes autoaplicativas o heteroaplicativas, actos fuera de juicio o actos que dejen en indefensión irreparable."
-        },
-        {
-          title: "Amparo Directo",
-          desc: "Procede ante Tribunales Colegiados de Circuito contra sentencias definitivas, laudos y resoluciones que pongan fin al juicio, dictadas por tribunales judiciales, administrativos, agrarios o del trabajo."
-        },
-        {
-          title: "Principio de Definitividad",
-          desc: "Exige que el quejoso agote previamente todos los recursos ordinarios previstos en la ley secundaria antes de acudir al amparo, salvo excepciones constitucionales expresas."
-        },
-        {
-          title: "La Suspensión del Acto",
-          desc: "Medida cautelar que busca mantener viva la materia del amparo y evitar que se consumen de manera irreparable los daños al quejoso durante el trámite del juicio."
-        }
-      ],
-      callout: "Fundamento: Artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos, complementados por la Ley de Amparo reglamentaria."
-    },
-    temas: [
-      {
-        title: "1. Partes en el Juicio de Amparo",
-        content: "Las partes son: I. El quejoso (quien aduce ser titular de un derecho o interés legítimo); II. La autoridad responsable (quien emite, promulga, ejecuta o intenta ejecutar el acto reclamado); III. El tercero interesado; y IV. El Ministerio Público de la Federación."
-      },
-      {
-        title: "2. Principios Fundamentales del Amparo",
-        content: "Incluyen: Instancia de parte agraviada, Existencia de agravio personal y directo o interés legítimo, Principio de definitividad, y el Principio de estricto derecho (con excepción de la suplencia de la queja deficiente en materias vulnerables)."
-      },
-      {
-        title: "3. Tipos de Suspensión: Provisional y Definitiva",
-        content: "En el amparo indirecto, la suspensión puede ser de oficio o a petición de parte. Al admitirse la demanda, el juez decreta la suspensión provisional y en audiencia incidental resuelve sobre la suspensión definitiva."
-      },
-      {
-        title: "4. Plazos Generales para la Demanda",
-        content: "La regla general es de 15 días hábiles contados a partir del día siguiente a aquel en que surta efectos la notificación del acto o se tenga conocimiento de él, con excepciones especiales (ej. materia penal o privación de la libertad)."
-      }
-    ],
+    title: "El Juicio de Amparo y la Tutela Constitucional",
+    subtitle: "Control de regularidad, amparo directo e indirecto, principio de definitividad y suspensión del acto reclamado.",
+    date: "Ayer",
+    status: "Completada",
+    statusClass: "text-secondary",
+    content: `
+# El Juicio de Amparo y la Tutela Constitucional
+
+*Control de regularidad, amparo directo e indirecto, principio de definitividad y suspensión del acto reclamado.*
+
+> **ANOTACIÓN DE ESTUDIO**  
+> "El juicio de amparo no es una tercera instancia de apelación, sino un proceso jurisdiccional autónomo extraordinario de defensa del orden constitucional y los derechos fundamentales."
+
+---
+
+## 1. Competencia Jurisdiccional en Amparo
+
+| Modalidad de Amparo | Órgano Competente | Actos Reclamados Impugnables | Plazo Genérico |
+| :--- | :--- | :--- | :--- |
+| **Amparo Indirecto** | Juzgados de Distrito / Colegiados Apelación | Leyes heteroaplicativas, actos fuera de juicio o ejecución irreparable | 15 días hábiles |
+| **Amparo Directo** | Tribunales Colegiados de Circuito | Sentencias definitivas, laudos y resoluciones que ponen fin al juicio | 15 días hábiles |
+
+---
+
+## 2. Principios Rectores del Juicio de Garantías
+
+1. **Instancia de Parte Agraviada:** El amparo nunca procede de oficio por el juez; requiere siempre la presentación de la demanda.
+2. **Existencia de Interés Legítimo o Jurídico:** El quejoso debe aducir ser titular de un derecho subjetivo o de una situación cualificada y diferenciada.
+3. **Principio de Definitividad:** Obligación de agotar previamente todos los recursos ordinarios (apelación, revocación, etc.) antes de acudir al tribunal federal.
+4. **Relatividad de las Sentencias (Fórmula Otero):** La sentencia solo ampara y protege a la parte quejosa que promovió el juicio, con los matices de la declaratoria general de inconstitucionalidad.
+
+---
+
+## 3. Lista de Comprobación para Análisis de Amparo
+
+- [x] Verificar que el acto provenga de una autoridad o particular actuando con funciones equivalentes.
+- [x] Comprobar si se actualiza alguna causal de improcedencia del Art. 61 de la Ley de Amparo.
+- [ ] Constatar si se agotó el principio de definitividad o si opera una excepción de tutela urgente.
+- [ ] Solicitar oportunamente la medida cautelar de suspensión provisional y definitiva.
+    `,
     quiz: [
       {
         q: "¿Ante qué órgano jurisdiccional se promueve de manera general el Amparo Directo?",
@@ -191,7 +174,7 @@ const DEFAULT_GUIDES = [
           "Juzgados de Paz y Primera Instancia Local"
         ],
         correct: 0,
-        why: "El Amparo Directo es competencia originaria de los Tribunales Colegiados de Circuito."
+        why: "El Amparo Directo es competencia originaria de los Tribunales Colegiados de Circuito según la Ley de Amparo."
       },
       {
         q: "¿En qué consiste el principio de definitividad en el juicio de amparo?",
@@ -203,73 +186,59 @@ const DEFAULT_GUIDES = [
           "En que la demanda solo puede tener 10 fojas de extensión máxima."
         ],
         correct: 0,
-        why: "El amparo es un medio extraordinario; por regla general deben agotarse los medios ordinarios (apelación, revocación, juicio de nulidad) antes de acudir al juicio de garantías."
-      },
-      {
-        q: "¿Cuál es el objetivo principal de la suspensión del acto reclamado?",
-        note: "Función de tutela cautelar.",
-        a: [
-          "Conservar la materia del litigio e impedir que se consumen daños de imposible o difícil reparación.",
-          "Condenar de inmediato a prisión a la autoridad responsable.",
-          "Anular de manera automática todas las leyes del país.",
-          "Declarar concluido el juicio en la primera semana sin desahogar pruebas."
-        ],
-        correct: 0,
-        why: "La suspensión es una providencia cautelar para preservar la materia del amparo y evitar perjuicios irreparables al quejoso mientras se dicta sentencia definitiva."
+        why: "El amparo es un medio extraordinario; deben agotarse previamente los recursos ordinarios previstos en la ley secundaria."
       }
     ],
     cards: [
-      ["¿Cuáles son los 2 grandes tipos de Amparo?", "Amparo Directo (contra sentencias definitivas) y Amparo Indirecto (contra actos u omisiones en general y leyes)."],
-      ["¿Quién es la Autoridad Responsable?", "Aquélla que dicta, ordena, ejecuta o trata de ejecutar el acto que crea, modifica o extingue situaciones jurídicas de forma unilateral."],
-      ["¿Qué es la Suplencia de la Queja Deficiente?", "La facultad u obligación del juzgador constitucional de subsanar los errores u omisiones en los conceptos de violación en favor del quejoso en materias protegidas."],
-      ["¿Cuál es el plazo genérico para presentar la demanda de amparo?", "15 días hábiles a partir de la notificación o conocimiento del acto reclamado."]
+      ["¿Cuáles son los 2 grandes tipos de Amparo?", "Amparo Directo (contra sentencias definitivas) y Amparo Indirecto (contra actos fuera de juicio o leyes)."],
+      ["¿Qué es el Principio de Definitividad?", "La regla que exige agotar todos los recursos ordinarios antes de acudir al amparo."],
+      ["¿Cuál es la función de la suspensión del acto reclamado?", "Preservar viva la materia del juicio e impedir que se consumen daños de imposible reparación."]
     ]
   },
 
   {
-    id: "civil-obligaciones",
-    title: "Derecho Civil: Teoría de las Obligaciones",
+    id: "03_civil_obligaciones",
+    filename: "03_Civil_Teoria_Obligaciones.md",
     materia: "Derecho Civil",
-    category: "Civil",
-    subtitle: "Fuentes de las obligaciones, modalidades, vicios del consentimiento y cumplimiento",
-    tags: ["Obligaciones", "Contratos", "Consentimiento", "Dolo", "Mora", "Pago"],
-    createdAt: 1700200000000,
-    resumen: {
-      lead: "La obligación es el vínculo jurídico en virtud del cual una persona llamada acreedor puede exigir a otra llamada deudor una prestación que puede consistir en dar, hacer o no hacer alguna cosa.",
-      blocks: [
-        {
-          title: "Fuentes de las Obligaciones",
-          desc: "El contrato, la declaración unilateral de voluntad, el enriquecimiento ilegítimo, la gestión de negocios, los hechos ilícitos y el riesgo creado."
-        },
-        {
-          title: "Vicios del Consentimiento",
-          desc: "El consentimiento no es válido si ha sido dado por error, arrancado por violencia o sorprendido por dolo o mala fe."
-        },
-        {
-          title: "Efectos del Incumplimiento",
-          desc: "Origina la responsabilidad civil contractual: indemnización de daños y perjuicios moratorios o compensatorios, y pago de la cláusula penal pactada."
-        },
-        {
-          title: "Modos de Extinción",
-          desc: "El pago (cumplimiento exacto), la compensación, la confusión de derechos, la remisión de deuda, la novación y la prescripción liberatoria."
-        }
-      ],
-      callout: "Reguladas primordialmente en el Libro Cuarto de los Códigos Civiles sustantivos de las entidades y el Código Civil Federal."
-    },
-    temas: [
-      {
-        title: "1. Elementos de Existencia vs. Requisitos de Validez",
-        content: "Existencia: Consentimiento y Objeto que pueda ser materia del contrato (y solemnidad en casos excepcionales). Validez: Capacidad de las partes, ausencia de vicios del consentimiento, licitud en el objeto o motivo, y formalidad exigida por la ley."
-      },
-      {
-        title: "2. Dolo y Mala Fe Civil",
-        content: "El dolo es cualquier artificio, maquinación o sugestión que se emplee para inducir a error o mantener en él a uno de los contratantes. La mala fe es la disimulación del error de uno de los contratantes una vez conocido."
-      },
-      {
-        title: "3. Modalidades: Condición, Plazo y Modo",
-        content: "La condición es un acontecimiento futuro e incierto del que depende el nacimiento o extinción de la obligación. El plazo es un acontecimiento futuro y cierto de cuya llegada depende la exigibilidad o extinción."
-      }
-    ],
+    title: "Teoría General de las Obligaciones y Contratos",
+    subtitle: "Fuentes de las obligaciones, requisitos de validez, vicios del consentimiento y cumplimiento contractual.",
+    date: "12 May",
+    status: "Sin empezar",
+    statusClass: "text-secondary",
+    content: `
+# Teoría General de las Obligaciones y Contratos
+
+*Fuentes de las obligaciones, requisitos de validez, vicios del consentimiento y cumplimiento contractual.*
+
+> **ANOTACIÓN DE ESTUDIO**  
+> "La obligación civil constituye un vínculo jurídico patrimonial en virtud del cual el deudor queda constreñido a dar, hacer o no hacer alguna cosa en favor del acreedor, respondiendo de su cumplimiento con su patrimonio presente y futuro."
+
+---
+
+## 1. Elementos de Existencia vs. Requisitos de Validez
+
+| Categoría | Elementos Indispensables | Consecuencia Legal de la Omisión |
+| :--- | :--- | :--- |
+| **Existencia** | Consentimiento y Objeto materia del acto | **Inexistencia**: El acto no produce ningún efecto jurídico |
+| **Validez** | Capacidad, Ausencia de Vicios, Licitud y Forma | **Nulidad**: Relativa o absoluta según el caso |
+
+---
+
+## 2. Vicios del Consentimiento
+
+1. **Error:** Falsa apreciación de la realidad que recae sobre el motivo determinante de la voluntad.
+2. **Dolo:** Cualquier sugestión, artificio o maquinación activa empleada para inducir a error a la contraparte.
+3. **Mala Fe:** La disimulación pasiva del error ajeno una vez conocido.
+4. **Violencia:** El empleo de fuerza física o amenazas de pérdida patrimonial o personal grave que anula la libertad de contratación.
+
+---
+
+## 3. Lista de Comprobación para Análisis Contractual
+
+- [x] Comprobar capacidad jurídica y legitimación para obligarse de las partes.
+- [ ] Verificar que el objeto sea física y jurídicamente posible en el comercio.
+- [ ] Revisar la cláusula de mora, penalizaciones y resolución contractual por incumplimiento.
+    `,
     quiz: [
       {
         q: "¿Cuáles son los dos elementos indispensables para la existencia de un contrato?",
@@ -278,47 +247,104 @@ const DEFAULT_GUIDES = [
           "Consentimiento y Objeto",
           "Capacidad y Formalidad ante Notario",
           "Plazo y Condición Resolutoria",
-          "Firma autógrafa y dos testigos"
+          "Firma autógrafa de dos testigos"
         ],
         correct: 0,
         why: "Sin consentimiento y objeto idóneo el contrato es inexistente de pleno derecho."
-      },
-      {
-        q: "¿Qué diferencia al dolo de la mala fe en materia civil?",
-        note: "Uno es una acción positiva de inducción y el otro una omisión disimulada.",
-        a: [
-          "El dolo implica maquinación activa para inducir al error; la mala fe es la disimulación pasiva del error ajeno.",
-          "El dolo solo ocurre en materia penal y nunca en contratos civiles.",
-          "La mala fe extingue la obligación sin indemnización.",
-          "Son términos absolutamente sinónimos sin distinción alguna."
-        ],
-        correct: 0,
-        why: "El Código Civil define el dolo como artificios activos para inducir al error, y mala fe como el mero callar o disimular el error ya padecido por la contraparte."
       }
     ],
     cards: [
-      ["¿Qué es una obligación civil?", "Vínculo jurídico patrimonial donde un acreedor puede exigir a un deudor una prestación de dar, hacer o no hacer."],
-      ["¿Qué es el Pago en sentido jurídico?", "El cumplimiento de la prestación debida, sea de dar, hacer o abstenerse."],
-      ["¿Qué es el Caso Fortuito o Fuerza Mayor?", "Acontecimiento imprevisible o inevitable que imposibilita el cumplimiento de la obligación liberando al deudor de responsabilidad, salvo pacto en contrario."]
+      ["¿Qué es el Pago en sentido civil?", "El cumplimiento exacto de la prestación debida, sea de dar, hacer o abstenerse."],
+      ["¿Qué diferencia al dolo de la mala fe?", "El dolo es la inducción activa al error; la mala fe es callar y disimular el error ya padecido por la contraparte."]
+    ]
+  },
+
+  {
+    id: "04_logica_proposicional",
+    filename: "04_Logica_Proposicional.md",
+    materia: "Filosofía del Derecho",
+    title: "Fundamentos de la Lógica Proposicional y Pensamiento Crítico",
+    subtitle: "Un manual conciso para estructurar argumentos rigurosos, reconocer premisas implícitas y formalizar razonamientos sin caer en sofismas.",
+    date: "8 May",
+    status: "Borrador",
+    statusClass: "text-secondary",
+    content: `
+# Fundamentos de la Lógica Proposicional y Pensamiento Crítico
+
+*Un manual conciso para estructurar argumentos rigurosos, reconocer premisas implícitas y formalizar razonamientos sin caer en sofismas.*
+
+> **ANOTACIÓN DE ESTUDIO**  
+> "La validez de un argumento deductivo no depende de la verdad fáctica de sus proposiciones materiales, sino de la necesidad formal con la que la conclusión se deriva de sus premisas."
+
+---
+
+## 1. Proposiciones y Conectores Fundamentales
+
+En lógica clásica, una proposición es cualquier enunciado declarativo del cual tenga sentido afirmar que es **verdadero (V)** o **falso (F)**, excluyendo de plano las órdenes, interrogantes o valoraciones puramente emotivas. Toda proposición simple puede operar mediante operadores veritativo-funcionales:
+
+| Conector | Símbolo Formal | Lectura Natural | Condición de Verdad |
+| :--- | :--- | :--- | :--- |
+| **Negación** | ¬p | *"no es el caso que p"* | Invierte el valor de verdad |
+| **Conjunción** | p ∧ q | *"p y q"* | Verdadera solo si ambos son verdaderos |
+| **Disyunción Débil** | p ∨ q | *"p o q (o ambos)"* | Falsa solo si ambos son falsos |
+| **Condicional Material** | p → q | *"si p, entonces q"* | Falsa únicamente cuando p es V y q es F |
+
+---
+
+## 2. Ejemplo de Formalización en Código Lógico
+
+Consideremos el esquema de inferencia deductiva más universal: el *Modus Ponens*.
+
+\`\`\`
+// Premisa 1: Condicional formal
+Premisa 1: p → q  (Si el testigo es fidedigno, el documento es auténtico)
+Premisa 2: p      (El testigo es fidedigno)
+-------------------------------------------------------------
+Conclusión: ∴ q    (Por lo tanto, el documento es auténtico)
+\`\`\`
+
+---
+
+## 3. Lista de Comprobación para Análisis de Guías
+
+Antes de dar por concluida la sesión de lectura sobre este tema, asegúrate de verificar los siguientes puntos clave:
+
+- [x] Diferenciar con claridad entre verdad fáctica empírica y validez estructural de la fórmula.
+- [x] Identificar las tres falacias formales más frecuentes (afirmación del consecuente, negación del antecedente).
+- [ ] Elaborar la tabla de verdad para el bicondicional p ↔ q y el dilema constructivo.
+    `,
+    quiz: [
+      {
+        q: "¿De qué depende la validez formal de un razonamiento deductivo?",
+        note: "Distingue forma de contenido material.",
+        a: [
+          "De la estructura lógica que garantiza que si las premisas son verdaderas, la conclusión necesariamente lo es.",
+          "De que el autor sea una autoridad jurídica reconocida.",
+          "De la cantidad de palabras del documento.",
+          "De la opinión de la mayoría."
+        ],
+        correct: 0,
+        why: "La validez es una propiedad estrictamente formal de la relación de necesidad entre premisas y conclusión."
+      }
+    ],
+    cards: [
+      ["¿Qué es el Modus Ponens?", "Regla de inferencia: Si p implica q, y se afirma p, se concluye necesariamente q."],
+      ["¿Qué es una falacia formal?", "Un error en la estructura del razonamiento que lo invalida deductivamente."]
     ]
   }
 ];
 
 // =============================================================================
-// 2. GESTOR DE ESTADO Y ALMACENAMIENTO (LOCALSTORAGE)
+// 2. GESTOR DE ESTADO Y ALMACENAMIENTO LOCAL
 // =============================================================================
-class GuidesStateManager {
+class ArchivistStateManager {
   constructor() {
-    this.STORAGE_KEY_CUSTOM = 'iuris_custom_guides_v2';
-    this.STORAGE_KEY_STATS = 'iuris_user_stats_v2';
-    this.STORAGE_KEY_THEME = 'iuris_theme_pref';
-
-    this.allGuides = [];
-    this.activeGuide = null;
-    this.activeTab = 'resumen';
-    this.currentCategory = 'all';
-    this.searchQuery = '';
-    this.sortMethod = 'recent';
+    this.STORAGE_KEY = 'archivist_guides_library_v1';
+    this.guides = [];
+    this.activeGuideId = null;
+    this.activeMode = 'reader'; // 'reader' | 'quiz' | 'flashcards'
+    this.fontSizeStep = 1; // 0: sm, 1: base, 2: lg, 3: xl
+    this.filterQuery = '';
 
     // Estado del Quiz
     this.quizIndex = 0;
@@ -329,689 +355,436 @@ class GuidesStateManager {
     this.cardIndex = 0;
     this.cardFlipped = false;
 
-    // Estadísticas
-    this.stats = this.loadStats();
-    this.loadGuides();
+    this.loadLibrary();
   }
 
-  loadStats() {
-    const defaultStats = {
-      answered: 0,
-      correct: 0,
-      cardsFlipped: 0,
-      cardsMastered: 0,
-      guidesProgress: {} // id -> { completedQuiz: bool, score: n, totalQ: n, cardsReviewed: n }
-    };
+  loadLibrary() {
     try {
-      const saved = localStorage.getItem(this.STORAGE_KEY_STATS);
-      return saved ? { ...defaultStats, ...JSON.parse(saved) } : defaultStats;
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        this.guides = JSON.parse(stored);
+      } else {
+        this.guides = [...DEFAULT_DOCUMENTS];
+        this.persist();
+      }
     } catch (e) {
-      console.warn("No se pudo leer estadísticas locales", e);
-      return defaultStats;
+      console.warn("Error leyendo localStorage, usando valores por defecto", e);
+      this.guides = [...DEFAULT_DOCUMENTS];
+    }
+
+    if (this.guides.length > 0) {
+      this.activeGuideId = this.guides[0].id;
     }
   }
 
-  saveStats() {
+  persist() {
     try {
-      localStorage.setItem(this.STORAGE_KEY_STATS, JSON.stringify(this.stats));
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.guides));
     } catch (e) {
-      console.error("Error guardando estadísticas", e);
+      console.error("Error persistiendo guías", e);
     }
   }
 
-  loadGuides() {
-    try {
-      const customGuidesJson = localStorage.getItem(this.STORAGE_KEY_CUSTOM);
-      const customGuides = customGuidesJson ? JSON.parse(customGuidesJson) : [];
-      // Combinar guías por defecto + guías personalizadas creadas/subidas por el usuario
-      this.allGuides = [...DEFAULT_GUIDES, ...customGuides];
-    } catch (e) {
-      console.error("Error cargando guías personalizadas", e);
-      this.allGuides = [...DEFAULT_GUIDES];
-    }
+  getActiveGuide() {
+    return this.guides.find(g => g.id === this.activeGuideId) || this.guides[0] || null;
   }
 
-  saveCustomGuides(customGuides) {
-    try {
-      localStorage.setItem(this.STORAGE_KEY_CUSTOM, JSON.stringify(customGuides));
-      this.loadGuides();
-    } catch (e) {
-      console.error("Error persistiendo guías personalizadas", e);
-    }
-  }
-
-  addGuide(newGuide) {
-    // Validar id único
-    const id = newGuide.id || 'guia-' + Date.now();
-    const preparedGuide = {
-      ...newGuide,
-      id,
-      createdAt: newGuide.createdAt || Date.now(),
-      isCustom: true
+  addGuide(guideObj) {
+    const newId = guideObj.id || 'guide_' + Date.now();
+    const prepared = {
+      ...guideObj,
+      id: newId,
+      date: guideObj.date || 'Modificado hoy',
+      status: guideObj.status || 'Leyendo',
+      statusClass: guideObj.statusClass || 'text-primary bg-primary-container',
+      quiz: guideObj.quiz || [],
+      cards: guideObj.cards || []
     };
 
-    // Obtener las guías personalizadas existentes
-    const customGuidesJson = localStorage.getItem(this.STORAGE_KEY_CUSTOM);
-    const customGuides = customGuidesJson ? JSON.parse(customGuidesJson) : [];
-    
-    // Si ya existe con el mismo ID, actualizar, si no, agregar al inicio
-    const existingIndex = customGuides.findIndex(g => g.id === id);
-    if (existingIndex >= 0) {
-      customGuides[existingIndex] = preparedGuide;
-    } else {
-      customGuides.unshift(preparedGuide);
-    }
-
-    this.saveCustomGuides(customGuides);
-    return preparedGuide;
-  }
-
-  deleteGuide(guideId) {
-    const customGuidesJson = localStorage.getItem(this.STORAGE_KEY_CUSTOM);
-    let customGuides = customGuidesJson ? JSON.parse(customGuidesJson) : [];
-    customGuides = customGuides.filter(g => g.id !== guideId);
-    this.saveCustomGuides(customGuides);
-  }
-
-  getGuideById(id) {
-    return this.allGuides.find(g => g.id === id) || null;
-  }
-
-  resetAllStats() {
-    this.stats = {
-      answered: 0,
-      correct: 0,
-      cardsFlipped: 0,
-      cardsMastered: 0,
-      guidesProgress: {}
-    };
-    this.saveStats();
+    // Agregar al inicio del índice
+    this.guides.unshift(prepared);
+    this.activeGuideId = prepared.id;
+    this.persist();
+    return prepared;
   }
 }
 
 // =============================================================================
-// 3. CONTROLADOR DE LA INTERFAZ DE USUARIO (UI CONTROLLER)
+// 3. RENDERIZADOR Y CONTROLADOR DE INTERFAZ
 // =============================================================================
-class IurisApp {
+class ArchivistApp {
   constructor() {
-    this.state = new GuidesStateManager();
+    this.state = new ArchivistStateManager();
+    this.fontSizes = ['text-sm', 'text-base', 'text-lg', 'text-xl'];
+
     this.initDOMElements();
     this.initEventListeners();
-    this.initTheme();
-    this.renderCatalog();
-    this.updateHeroStats();
+    this.renderGuidesList();
+    this.renderCurrentGuide();
   }
 
   initDOMElements() {
-    // Vistas principales
-    this.viewCatalogo = document.getElementById('viewCatalogo');
-    this.viewGuiaDetail = document.getElementById('viewGuiaDetail');
-    this.viewProgresoGlobal = document.getElementById('viewProgresoGlobal');
+    // Sidebar & Dropzone
+    this.fileListContainer = document.getElementById('file-list');
+    this.guidesBadgeCount = document.getElementById('guidesBadgeCount');
+    this.dropzoneBox = document.getElementById('dropzone-box');
+    this.fileUploader = document.getElementById('file-uploader');
+    this.filterGuidesInput = document.getElementById('filter-guides-input');
+    this.btnOpenCreateModal = document.getElementById('btn-open-create-modal');
 
-    // Navegación
-    this.navLinks = document.querySelectorAll('.nav-link');
-    this.themeToggle = document.getElementById('themeToggle');
-    this.btnBackToCatalogo = document.getElementById('btnBackToCatalogo');
-    this.btnBackFromProgress = document.getElementById('btnBackFromProgress');
+    // Header Toolbar
+    this.docFilenameBadge = document.getElementById('doc-filename-badge');
+    this.docModifiedDate = document.getElementById('doc-modified-date');
+    this.docMateriaBadge = document.getElementById('doc-materia-badge');
+    this.docMetaStats = document.getElementById('doc-meta-stats');
 
-    // Catálogo
-    this.guidesGrid = document.getElementById('guidesGrid');
-    this.catalogSearchInput = document.getElementById('catalogSearchInput');
-    this.categoryPills = document.querySelectorAll('#categoryPillsContainer .pill');
-    this.sortGuidesSelect = document.getElementById('sortGuidesSelect');
-    this.visibleGuidesCount = document.getElementById('visibleGuidesCount');
-    this.totalGuidesCount = document.getElementById('totalGuidesCount');
-    this.emptyStateGuides = document.getElementById('emptyStateGuides');
-    this.btnClearFilters = document.getElementById('btnClearFilters');
+    // Controles de tamaño de fuente
+    this.btnDecFont = document.getElementById('btn-dec-font');
+    this.btnIncFont = document.getElementById('btn-inc-font');
 
-    // Hero stats
-    this.totalCardsStudied = document.getElementById('totalCardsStudied');
-    this.totalQuizAnswered = document.getElementById('totalQuizAnswered');
-    this.overallAccuracy = document.getElementById('overallAccuracy');
+    // Modos de Estudio
+    this.tabModeReader = document.getElementById('tab-mode-reader');
+    this.tabModeQuiz = document.getElementById('tab-mode-quiz');
+    this.tabModeFlashcards = document.getElementById('tab-mode-flashcards');
 
-    // Modal Subir Guía
-    this.uploadModal = document.getElementById('uploadModal');
-    this.btnOpenUploadModal = document.getElementById('btnOpenUploadModal');
-    this.btnHeroUpload = document.getElementById('btnHeroUpload');
-    this.btnCloseModal = document.getElementById('btnCloseModal');
-    this.btnCancelForm = document.getElementById('btnCancelForm');
-    this.tabBtnFormUpload = document.getElementById('tabBtnFormUpload');
-    this.tabBtnJsonUpload = document.getElementById('tabBtnJsonUpload');
-    this.createGuideForm = document.getElementById('createGuideForm');
-    this.jsonUploadContainer = document.getElementById('jsonUploadContainer');
-
-    // Dynamic Form Rows
-    this.btnAddSubtemaRow = document.getElementById('btnAddSubtemaRow');
-    this.subtemasInputsContainer = document.getElementById('subtemasInputsContainer');
-    this.btnAddQuizRow = document.getElementById('btnAddQuizRow');
-    this.quizInputsContainer = document.getElementById('quizInputsContainer');
-    this.btnAddCardRow = document.getElementById('btnAddCardRow');
-    this.cardsInputsContainer = document.getElementById('cardsInputsContainer');
-
-    // JSON upload
-    this.fileDropzone = document.getElementById('fileDropzone');
-    this.jsonFileInput = document.getElementById('jsonFileInput');
-    this.jsonTextInput = document.getElementById('jsonTextInput');
-    this.btnProcessJsonUpload = document.getElementById('btnProcessJsonUpload');
-    this.btnDownloadSampleJson = document.getElementById('btnDownloadSampleJson');
-    this.btnExportAllGuides = document.getElementById('btnExportAllGuides');
-
-    // Detalle de Guía
-    this.crumbMateria = document.getElementById('crumbMateria');
-    this.crumbTitulo = document.getElementById('crumbTitulo');
-    this.detailMateriaBadge = document.getElementById('detailMateriaBadge');
-    this.detailTitle = document.getElementById('detailTitle');
-    this.detailSubtitle = document.getElementById('detailSubtitle');
-    this.detailTags = document.getElementById('detailTags');
-    this.studyTabs = document.querySelectorAll('.study-tab');
-    this.btnShareGuide = document.getElementById('btnShareGuide');
-    this.btnDeleteCustomGuide = document.getElementById('btnDeleteCustomGuide');
-
-    // Tabs Contenidos
-    this.tabContentResumen = document.getElementById('tabContentResumen');
-    this.tabContentTemas = document.getElementById('tabContentTemas');
-    this.tabContentQuiz = document.getElementById('tabContentQuiz');
-    this.tabContentFlashcards = document.getElementById('tabContentFlashcards');
-    this.resumenContentArea = document.getElementById('resumenContentArea');
-    this.temasAccordionList = document.getElementById('temasAccordionList');
-    this.btnExpandAllTemas = document.getElementById('btnExpandAllTemas');
-    this.btnCollapseAllTemas = document.getElementById('btnCollapseAllTemas');
+    // Visores
+    this.markdownViewer = document.getElementById('markdown-viewer');
+    this.quizViewer = document.getElementById('quiz-viewer');
+    this.flashcardsViewer = document.getElementById('flashcards-viewer');
 
     // Quiz Elements
-    this.quizCurrentBadge = document.getElementById('quizCurrentBadge');
-    this.liveQuizScore = document.getElementById('liveQuizScore');
-    this.quizProgressBar = document.getElementById('quizProgressBar');
-    this.quizInteractiveBody = document.getElementById('quizInteractiveBody');
-    this.quizExplanationBox = document.getElementById('quizExplanationBox');
-    this.quizExpText = document.getElementById('quizExpText');
-    this.btnNextQuiz = document.getElementById('btnNextQuiz');
-    this.btnRestartQuiz = document.getElementById('btnRestartQuiz');
+    this.quizQuestionBadge = document.getElementById('quiz-question-badge');
+    this.quizScoreBadge = document.getElementById('quiz-score-badge');
+    this.quizProgressBar = document.getElementById('quiz-progress-bar');
+    this.quizQuestionCard = document.getElementById('quiz-question-card');
+    this.quizExplanationBox = document.getElementById('quiz-explanation-box');
+    this.quizExplanationText = document.getElementById('quiz-explanation-text');
+    this.btnNextQuiz = document.getElementById('btn-next-quiz');
+    this.btnRestartQuiz = document.getElementById('btn-restart-quiz');
 
     // Flashcards Elements
-    this.card3dObject = document.getElementById('card3dObject');
-    this.cardFrontText = document.getElementById('cardFrontText');
-    this.cardBackText = document.getElementById('cardBackText');
-    this.flashcardCounter = document.getElementById('flashcardCounter');
-    this.flashcardsDots = document.getElementById('flashcardsDots');
-    this.btnPrevCard = document.getElementById('btnPrevCard');
-    this.btnNextCard = document.getElementById('btnNextCard');
-    this.btnCardNeedsWork = document.getElementById('btnCardNeedsWork');
-    this.btnCardMastered = document.getElementById('btnCardMastered');
+    this.flashcardBadgeNum = document.getElementById('flashcard-badge-num');
+    this.flashcardContainer = document.getElementById('flashcard-container');
+    this.flashcardInner = document.getElementById('flashcard-inner');
+    this.cardFrontText = document.getElementById('card-front-text');
+    this.cardBackText = document.getElementById('card-back-text');
+    this.btnPrevCard = document.getElementById('btn-prev-card');
+    this.btnNextCard = document.getElementById('btn-next-card');
+    this.btnCardReview = document.getElementById('btn-card-review');
+    this.btnCardMaster = document.getElementById('btn-card-master');
+    this.flashcardDots = document.getElementById('flashcard-dots');
 
-    // Progreso Global
-    this.progTotalGuides = document.getElementById('progTotalGuides');
-    this.progTotalAnswers = document.getElementById('progTotalAnswers');
-    this.progTotalCards = document.getElementById('progTotalCards');
-    this.progMasteredCards = document.getElementById('progMasteredCards');
-    this.guideProgressTableList = document.getElementById('guideProgressTableList');
-    this.btnResetAllProgress = document.getElementById('btnResetAllProgress');
+    // Acciones Copiar / Imprimir
+    this.btnCopy = document.getElementById('btn-copy');
+
+    // Modal Crear
+    this.createModal = document.getElementById('create-modal');
+    this.createModalBackdrop = document.getElementById('create-modal-backdrop');
+    this.btnCloseCreateModal = document.getElementById('btn-close-create-modal');
+    this.btnCancelCreate = document.getElementById('btn-cancel-create');
+    this.newGuideForm = document.getElementById('new-guide-form');
+
+    // Toast
+    this.toast = document.getElementById('toast');
+    this.toastMessage = document.getElementById('toast-message');
   }
 
   initEventListeners() {
-    // Manejo de Hash de navegación
-    window.addEventListener('hashchange', () => this.handleHashRoute());
+    // Dropzone y subida de archivos .md
+    this.fileUploader.addEventListener('change', (e) => this.handleFileUpload(e.target.files));
 
-    // Switch de vistas de navegación superior
-    this.navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const target = link.dataset.nav;
-        if (target === 'catalogo') this.navigateTo('catalogo');
-        if (target === 'progreso-global') this.navigateTo('progreso');
-      });
+    this.dropzoneBox.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      this.dropzoneBox.classList.add('dragover');
     });
 
-    this.btnBackToCatalogo.addEventListener('click', () => this.navigateTo('catalogo'));
-    this.btnBackFromProgress.addEventListener('click', () => this.navigateTo('catalogo'));
-
-    // Búsqueda y Filtros
-    this.catalogSearchInput.addEventListener('input', (e) => {
-      this.state.searchQuery = e.target.value.toLowerCase().trim();
-      this.renderCatalog();
+    this.dropzoneBox.addEventListener('dragleave', () => {
+      this.dropzoneBox.classList.remove('dragover');
     });
 
-    // Atajo de teclado Cmd/Ctrl+K para buscar
-    window.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        this.navigateTo('catalogo');
-        this.catalogSearchInput.focus();
+    this.dropzoneBox.addEventListener('drop', (e) => {
+      e.preventDefault();
+      this.dropzoneBox.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        this.handleFileUpload(e.dataTransfer.files);
       }
     });
 
-    // Filtros de categoría
-    this.categoryPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        this.categoryPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        this.state.currentCategory = pill.dataset.category;
-        this.renderCatalog();
+    // Filtro buscador lateral
+    this.filterGuidesInput.addEventListener('input', (e) => {
+      this.state.filterQuery = e.target.value.toLowerCase().trim();
+      this.renderGuidesList();
+    });
+
+    // Control de tamaño de fuente
+    this.btnDecFont.addEventListener('click', () => {
+      if (this.state.fontSizeStep > 0) {
+        this.markdownViewer.classList.remove(this.fontSizes[this.state.fontSizeStep]);
+        this.state.fontSizeStep--;
+        this.markdownViewer.classList.add(this.fontSizes[this.state.fontSizeStep]);
+      }
+    });
+
+    this.btnIncFont.addEventListener('click', () => {
+      if (this.state.fontSizeStep < this.fontSizes.length - 1) {
+        this.markdownViewer.classList.remove(this.fontSizes[this.state.fontSizeStep]);
+        this.state.fontSizeStep++;
+        this.markdownViewer.classList.add(this.fontSizes[this.state.fontSizeStep]);
+      }
+    });
+
+    // Selector de Modo (Lectura, Quiz, Tarjetas)
+    this.tabModeReader.addEventListener('click', () => this.switchStudyMode('reader'));
+    this.tabModeQuiz.addEventListener('click', () => this.switchStudyMode('quiz'));
+    this.tabModeFlashcards.addEventListener('click', () => this.switchStudyMode('flashcards'));
+
+    // Copiar contenido
+    this.btnCopy.addEventListener('click', () => {
+      const activeGuide = this.state.getActiveGuide();
+      if (!activeGuide) return;
+      navigator.clipboard.writeText(activeGuide.content).then(() => {
+        this.showToast("Contenido copiado al portapapeles");
       });
     });
 
-    // Ordenar guías
-    this.sortGuidesSelect.addEventListener('change', (e) => {
-      this.state.sortMethod = e.target.value;
-      this.renderCatalog();
-    });
+    // Modal Crear
+    const openCreate = () => this.createModal.classList.remove('hidden');
+    const closeCreate = () => this.createModal.classList.add('hidden');
 
-    this.btnClearFilters.addEventListener('click', () => {
-      this.catalogSearchInput.value = '';
-      this.state.searchQuery = '';
-      this.categoryPills.forEach(p => p.classList.toggle('active', p.dataset.category === 'all'));
-      this.state.currentCategory = 'all';
-      this.renderCatalog();
-    });
+    this.btnOpenCreateModal.addEventListener('click', openCreate);
+    this.btnCloseCreateModal.addEventListener('click', closeCreate);
+    this.btnCancelCreate.addEventListener('click', closeCreate);
+    this.createModalBackdrop.addEventListener('click', closeCreate);
 
-    // Modal Subir Guía
-    const openModal = () => {
-      this.uploadModal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    };
-    const closeModal = () => {
-      this.uploadModal.classList.add('hidden');
-      document.body.style.overflow = '';
-    };
-
-    this.btnOpenUploadModal.addEventListener('click', openModal);
-    this.btnHeroUpload.addEventListener('click', openModal);
-    this.btnCloseModal.addEventListener('click', closeModal);
-    this.btnCancelForm.addEventListener('click', closeModal);
-    this.uploadModal.addEventListener('click', (e) => {
-      if (e.target === this.uploadModal) closeModal();
-    });
-
-    // Pestañas del Modal
-    this.tabBtnFormUpload.addEventListener('click', () => {
-      this.tabBtnFormUpload.classList.add('active');
-      this.tabBtnJsonUpload.classList.remove('active');
-      this.createGuideForm.classList.remove('hidden');
-      this.jsonUploadContainer.classList.add('hidden');
-    });
-
-    this.tabBtnJsonUpload.addEventListener('click', () => {
-      this.tabBtnJsonUpload.classList.add('active');
-      this.tabBtnFormUpload.classList.remove('active');
-      this.createGuideForm.classList.add('hidden');
-      this.jsonUploadContainer.classList.remove('hidden');
-    });
-
-    // Dynamic Form: Agregar filas
-    this.btnAddSubtemaRow.addEventListener('click', () => this.addSubtemaRow());
-    this.btnAddQuizRow.addEventListener('click', () => this.addQuizRow());
-    this.btnAddCardRow.addEventListener('click', () => this.addCardRow());
-
-    // Submit del formulario guiado
-    this.createGuideForm.addEventListener('submit', (e) => {
+    this.newGuideForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      this.handleFormSubmit();
-      closeModal();
+      this.handleCreateSubmit();
+      closeCreate();
     });
 
-    // Importación por JSON / Archivo
-    this.initJsonUploadEvents();
-
-    // Exportar todas las guías
-    this.btnExportAllGuides.addEventListener('click', () => this.exportAllGuidesJson());
-
-    // Pestañas de estudio de la guía (Resumen, Subtemas, Quiz, Flashcards)
-    this.studyTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        this.setStudyTab(tab.dataset.tab);
-      });
-    });
-
-    // Controles de Acordeón
-    this.btnExpandAllTemas.addEventListener('click', () => {
-      this.temasAccordionList.querySelectorAll('.accordion-item').forEach(acc => acc.open = true);
-    });
-    this.btnCollapseAllTemas.addEventListener('click', () => {
-      this.temasAccordionList.querySelectorAll('.accordion-item').forEach(acc => acc.open = false);
-    });
-
-    // Controles del Quiz
+    // Quiz Controls
     this.btnNextQuiz.addEventListener('click', () => this.nextQuizQuestion());
     this.btnRestartQuiz.addEventListener('click', () => this.restartQuiz());
 
-    // Controles de Flashcards
-    this.card3dObject.addEventListener('click', () => this.flipFlashcard());
-    this.btnPrevCard.addEventListener('click', (e) => { e.stopPropagation(); this.prevFlashcard(); });
-    this.btnNextCard.addEventListener('click', (e) => { e.stopPropagation(); this.nextFlashcard(); });
-    this.btnCardNeedsWork.addEventListener('click', (e) => { e.stopPropagation(); this.recordCardConfidence(false); });
-    this.btnCardMastered.addEventListener('click', (e) => { e.stopPropagation(); this.recordCardConfidence(true); });
-
-    // Navegación con teclado en flashcards
-    window.addEventListener('keydown', (e) => {
-      if (this.viewGuiaDetail.classList.contains('active') && this.state.activeTab === 'flashcards') {
-        if (e.code === 'Space') {
-          e.preventDefault();
-          this.flipFlashcard();
-        } else if (e.key === 'ArrowRight') {
-          this.nextFlashcard();
-        } else if (e.key === 'ArrowLeft') {
-          this.prevFlashcard();
-        }
-      }
+    // Flashcard Controls
+    this.flashcardContainer.addEventListener('click', () => this.flipFlashcard());
+    this.btnPrevCard.addEventListener('click', () => this.prevCard());
+    this.btnNextCard.addEventListener('click', () => this.nextCard());
+    this.btnCardReview.addEventListener('click', () => this.nextCard());
+    this.btnCardMaster.addEventListener('click', () => {
+      this.showToast("¡Concepto dominado! 🎯");
+      this.nextCard();
     });
-
-    // Compartir / Exportar guía individual
-    this.btnShareGuide.addEventListener('click', () => this.shareCurrentGuide());
-    this.btnDeleteCustomGuide.addEventListener('click', () => this.deleteCurrentCustomGuide());
-
-    // Reset de progreso global
-    this.btnResetAllProgress.addEventListener('click', () => {
-      if (confirm("¿Estás seguro de reiniciar todo el historial de estadísticas de estudio? Las guías no se eliminarán.")) {
-        this.state.resetAllStats();
-        this.updateHeroStats();
-        this.renderGlobalProgressView();
-        this.showToast("Estadísticas reiniciadas con éxito");
-      }
-    });
-
-    // Toggle de tema
-    this.themeToggle.addEventListener('click', () => this.toggleTheme());
   }
 
   // ===========================================================================
-  // 4. RUTEO Y NAVEGACIÓN
+  // 4. LISTADO DE GUÍAS DE ESTUDIO (SIDEBAR)
   // ===========================================================================
-  navigateTo(viewName, guideId = null) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Actualizar nav links
-    this.navLinks.forEach(link => {
-      link.classList.toggle('active', link.dataset.nav === viewName);
-    });
-
-    this.viewCatalogo.classList.remove('active');
-    this.viewGuiaDetail.classList.remove('active');
-    this.viewProgresoGlobal.classList.remove('active');
-
-    if (viewName === 'catalogo') {
-      window.location.hash = '#catalogo';
-      this.viewCatalogo.classList.add('active');
-      this.renderCatalog();
-      this.updateHeroStats();
-    } else if (viewName === 'guia') {
-      if (guideId) {
-        window.location.hash = `#guia/${guideId}`;
-        this.openGuide(guideId);
-      }
-      this.viewGuiaDetail.classList.add('active');
-    } else if (viewName === 'progreso') {
-      window.location.hash = '#progreso-global';
-      this.viewProgresoGlobal.classList.add('active');
-      this.renderGlobalProgressView();
-    }
-  }
-
-  handleHashRoute() {
-    const hash = window.location.hash;
-    if (hash.startsWith('#guia/')) {
-      const guideId = hash.replace('#guia/', '');
-      this.navigateTo('guia', guideId);
-    } else if (hash === '#progreso-global') {
-      this.navigateTo('progreso');
-    } else {
-      this.navigateTo('catalogo');
-    }
-  }
-
-  // ===========================================================================
-  // 5. RENDERIZADO DEL CATÁLOGO DE GUÍAS (PÁGINA PRINCIPAL / INDEX)
-  // ===========================================================================
-  renderCatalog() {
-    let guides = [...this.state.allGuides];
-
-    // 1. Filtrar por búsqueda
-    if (this.state.searchQuery) {
-      const q = this.state.searchQuery;
-      guides = guides.filter(g => {
-        const titleMatch = (g.title || '').toLowerCase().includes(q);
-        const subMatch = (g.subtitle || '').toLowerCase().includes(q);
-        const matMatch = (g.materia || '').toLowerCase().includes(q);
-        const tagsMatch = (g.tags || []).some(t => t.toLowerCase().includes(q));
-        const resumenMatch = (g.resumen?.lead || '').toLowerCase().includes(q);
-        return titleMatch || subMatch || matMatch || tagsMatch || resumenMatch;
-      });
+  renderGuidesList() {
+    let list = this.state.guides;
+    if (this.state.filterQuery) {
+      list = list.filter(g => 
+        g.filename.toLowerCase().includes(this.state.filterQuery) ||
+        g.title.toLowerCase().includes(this.state.filterQuery) ||
+        g.materia.toLowerCase().includes(this.state.filterQuery)
+      );
     }
 
-    // 2. Filtrar por categoría
-    if (this.state.currentCategory !== 'all') {
-      guides = guides.filter(g => {
-        const category = g.category || g.materia;
-        return category.toLowerCase().includes(this.state.currentCategory.toLowerCase());
-      });
-    }
+    const badgeElem = document.getElementById('guides-badge-count');
+    if (badgeElem) badgeElem.textContent = `${this.state.guides.length} archivos`;
 
-    // 3. Ordenar
-    if (this.state.sortMethod === 'recent') {
-      guides.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-    } else if (this.state.sortMethod === 'title') {
-      guides.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (this.state.sortMethod === 'cards') {
-      guides.sort((a, b) => (b.cards?.length || 0) - (a.cards?.length || 0));
-    } else if (this.state.sortMethod === 'questions') {
-      guides.sort((a, b) => (b.quiz?.length || 0) - (a.quiz?.length || 0));
-    }
-
-    // Actualizar conteos
-    this.visibleGuidesCount.textContent = guides.length;
-    this.totalGuidesCount.textContent = this.state.allGuides.length;
-
-    // Mostrar empty state si no hay coincidencias
-    if (guides.length === 0) {
-      this.guidesGrid.innerHTML = '';
-      this.emptyStateGuides.classList.remove('hidden');
-      return;
-    } else {
-      this.emptyStateGuides.classList.add('hidden');
-    }
-
-    // Renderizar Cards modernas
-    this.guidesGrid.innerHTML = guides.map(guide => {
-      const qCount = guide.quiz ? guide.quiz.length : 0;
-      const cCount = guide.cards ? guide.cards.length : 0;
-      const tCount = guide.temas ? guide.temas.length : 0;
-      const isCustom = Boolean(guide.isCustom);
-
-      // Distintivo de materia
-      let badgeClass = 'badge-custom';
-      const m = (guide.materia || '').toLowerCase();
-      if (m.includes('penal')) badgeClass = 'badge-penal';
-      else if (m.includes('civil')) badgeClass = 'badge-civil';
-      else if (m.includes('const') || m.includes('amparo')) badgeClass = 'badge-const';
-
-      const tagsHtml = (guide.tags || []).slice(0, 3).map(tag => 
-        `<span class="guide-mini-pill">${tag}</span>`
-      ).join('');
-
-      return `
-        <article class="guide-card" data-guide-id="${guide.id}">
-          <div class="guide-card-top">
-            <span class="badge ${badgeClass}">${guide.materia || 'Derecho'}</span>
-            ${isCustom ? '<span class="badge badge-custom" title="Guía subida por ti">★ Tuya</span>' : ''}
-          </div>
-          <h3 class="guide-card-title">${guide.title}</h3>
-          <p class="guide-card-desc">${guide.subtitle || 'Guía completa con conceptos, preguntas y flashcards.'}</p>
-          
-          <div class="guide-card-pills">
-            ${tagsHtml}
-          </div>
-
-          <div class="guide-card-metrics">
-            <div class="metric-item">
-              <span class="metric-val">${tCount}</span>
-              <span class="metric-lbl">Subtemas</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val">${qCount}</span>
-              <span class="metric-lbl">Preguntas</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val">${cCount}</span>
-              <span class="metric-lbl">Tarjetas</span>
-            </div>
-          </div>
-
-          <div class="guide-card-footer">
-            <button class="btn btn-primary btn-open-guide" data-guide-id="${guide.id}">
-              <span>Estudiar Guía</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
-          </div>
-        </article>
+    if (list.length === 0) {
+      this.fileListContainer.innerHTML = `
+        <div class="p-4 text-center text-xs text-outline">
+          No hay guías que coincidan con la búsqueda.
+        </div>
       `;
+      return;
+    }
+
+    this.fileListContainer.innerHTML = list.map(guide => {
+      const isActive = guide.id === this.state.activeGuideId;
+      const readingTime = this.estimateReadingTime(guide.content);
+
+      if (isActive) {
+        return `
+          <button class="w-full text-left p-3 rounded-lg bg-surface-container text-on-surface transition-all flex flex-col gap-1 group relative overflow-hidden" data-id="${guide.id}">
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r"></div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono font-medium text-primary truncate max-w-[200px]">${guide.filename}</span>
+              <span class="material-symbols-outlined text-primary text-[16px]">article</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-secondary">
+              <span>${guide.date || 'Hoy'}</span>
+              <span>•</span>
+              <span>${readingTime} min lectura</span>
+              <span>•</span>
+              <span class="${guide.statusClass || 'text-primary font-medium'}">${guide.status || 'Leyendo'}</span>
+            </div>
+          </button>
+        `;
+      } else {
+        return `
+          <button class="w-full text-left p-3 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all flex flex-col gap-1 group" data-id="${guide.id}">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono font-medium text-on-surface truncate max-w-[200px]">${guide.filename}</span>
+              <span class="material-symbols-outlined text-outline text-[16px] group-hover:text-on-surface">description</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-secondary">
+              <span>${guide.date || 'Ayer'}</span>
+              <span>•</span>
+              <span>${readingTime} min lectura</span>
+              <span>•</span>
+              <span>${guide.status || 'Completada'}</span>
+            </div>
+          </button>
+        `;
+      }
     }).join('');
 
-    // Eventos de apertura de guías
-    this.guidesGrid.querySelectorAll('.btn-open-guide, .guide-card').forEach(elem => {
-      elem.addEventListener('click', (e) => {
-        const guideId = elem.dataset.guideId || elem.closest('.guide-card').dataset.guideId;
-        this.navigateTo('guia', guideId);
+    // Eventos de selección de guía
+    this.fileListContainer.querySelectorAll('button[data-id]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.selectGuide(btn.dataset.id);
       });
     });
   }
 
-  updateHeroStats() {
-    this.totalCardsStudied.textContent = this.state.stats.cardsFlipped || 0;
-    this.totalQuizAnswered.textContent = this.state.stats.answered || 0;
-
-    const answered = this.state.stats.answered || 0;
-    const correct = this.state.stats.correct || 0;
-    const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
-    this.overallAccuracy.textContent = `${accuracy}%`;
+  selectGuide(id) {
+    this.state.activeGuideId = id;
+    this.renderGuidesList();
+    this.renderCurrentGuide();
   }
 
   // ===========================================================================
-  // 6. ENTORNO DE ESTUDIO DE GUÍA (DETALLE DE GUÍA)
+  // 5. VISOR EDITORIAL DE GUÍA ACTUAL
   // ===========================================================================
-  openGuide(guideId) {
-    const guide = this.state.getGuideById(guideId);
-    if (!guide) {
-      this.showToast("Guía no encontrada", "error");
-      this.navigateTo('catalogo');
-      return;
-    }
+  renderCurrentGuide() {
+    const guide = this.state.getActiveGuide();
+    if (!guide) return;
 
-    this.state.activeGuide = guide;
+    // Actualizar metadatos del encabezado
+    this.docFilenameBadge.textContent = guide.filename;
+    this.docModifiedDate.textContent = guide.date || 'Modificado hoy';
+    this.docMateriaBadge.textContent = guide.materia || 'Derecho';
 
-    // Actualizar encabezados
-    this.crumbMateria.textContent = guide.materia || 'Derecho';
-    this.crumbTitulo.textContent = guide.title;
-    this.detailMateriaBadge.textContent = guide.materia || 'Derecho';
-    this.detailTitle.textContent = guide.title;
-    this.detailSubtitle.textContent = guide.subtitle || '';
+    const wordCount = guide.content.trim().split(/\s+/).length;
+    const readingTime = this.estimateReadingTime(guide.content);
+    this.docMetaStats.textContent = `${readingTime} min de lectura estimada • ${wordCount.toLocaleString()} palabras`;
 
-    // Tags
-    this.detailTags.innerHTML = (guide.tags || []).map(t => 
-      `<span class="guide-mini-pill">#${t}</span>`
-    ).join('');
+    // Renderizar según el modo activo
+    this.renderMarkdownContent(guide.content);
+    this.initQuiz(guide.quiz || []);
+    this.initFlashcards(guide.cards || []);
 
-    // Conteos en los tabs
-    document.getElementById('tabTemasCount').textContent = guide.temas ? guide.temas.length : 0;
-    document.getElementById('tabQuizCount').textContent = guide.quiz ? guide.quiz.length : 0;
-    document.getElementById('tabCardsCount').textContent = guide.cards ? guide.cards.length : 0;
-
-    // Mostrar/ocultar botón de eliminar si es personalizada
-    this.btnDeleteCustomGuide.style.display = guide.isCustom ? 'inline-flex' : 'none';
-
-    // Renderizar contenidos
-    this.renderResumenTab(guide);
-    this.renderTemasTab(guide);
-    this.initQuizForGuide(guide);
-    this.initFlashcardsForGuide(guide);
-
-    // Activar pestaña predeterminada
-    this.setStudyTab('resumen');
+    // Asegurar que el modo visualizado coincida con la pestaña activa
+    this.switchStudyMode(this.state.activeMode);
   }
 
-  setStudyTab(tabName) {
-    this.state.activeTab = tabName;
+  switchStudyMode(mode) {
+    this.state.activeMode = mode;
 
-    // Activar botón tab
-    this.studyTabs.forEach(t => {
-      const isActive = t.dataset.tab === tabName;
-      t.classList.toggle('active', isActive);
-      t.setAttribute('aria-selected', String(isActive));
+    // Actualizar botones de tabs
+    const tabs = [this.tabModeReader, this.tabModeQuiz, this.tabModeFlashcards];
+    tabs.forEach(t => {
+      const active = t.dataset.mode === mode;
+      t.className = active
+        ? "px-3 py-1 text-xs rounded-md font-medium transition-colors bg-surface-container-lowest text-primary shadow-xs"
+        : "px-3 py-1 text-xs text-on-surface-variant hover:text-on-surface rounded-md font-medium transition-colors";
     });
 
-    // Activar panel
-    this.tabContentResumen.classList.toggle('active', tabName === 'resumen');
-    this.tabContentTemas.classList.toggle('active', tabName === 'temas');
-    this.tabContentQuiz.classList.toggle('active', tabName === 'quiz');
-    this.tabContentFlashcards.classList.toggle('active', tabName === 'flashcards');
+    // Alternar visores
+    this.markdownViewer.classList.toggle('hidden', mode !== 'reader');
+    this.quizViewer.classList.toggle('hidden', mode !== 'quiz');
+    this.flashcardsViewer.classList.toggle('hidden', mode !== 'flashcards');
   }
 
-  renderResumenTab(guide) {
-    const r = guide.resumen || {};
-    const leadText = typeof r === 'string' ? r : (r.lead || 'Resumen de la guía.');
-    const blocks = Array.isArray(r.blocks) ? r.blocks : [];
-    const callout = r.callout || 'Recuerda confirmar con la jurisprudencia y fuentes doctrinales sugeridas por tu profesor.';
+  // Convertidor simple y elegante de Markdown a HTML editorial
+  renderMarkdownContent(rawMarkdown) {
+    let html = rawMarkdown;
 
-    let blocksHtml = '';
-    if (blocks.length > 0) {
-      blocksHtml = `
-        <div class="cards-columns-grid">
-          ${blocks.map(b => `
-            <div class="resumen-info-box">
-              <h4>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>${b.title}</span>
-              </h4>
-              <p>${b.desc}</p>
-            </div>
-          `).join('')}
+    // Blockquote ANOTACIÓN DE ESTUDIO
+    html = html.replace(/^>\s*\*\*ANOTACIÓN DE ESTUDIO\*\*\s*\n>\s*"(.*?)"/gim, `
+      <div class="callout-anotacion">
+        <p class="title">Anotación de Estudio</p>
+        <p class="quote">"$1"</p>
+      </div>
+    `);
+
+    // Bloques de código formal ``` ... ```
+    html = html.replace(/```([\s\S]*?)```/gim, (match, code) => {
+      return `<div class="code-block-formal">${code.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>`;
+    });
+
+    // Tablas Markdown
+    html = html.replace(/(\|.+?\|\n\|[-:\s|]+?\n(?:\|.+?\|\n?)+)/g, (tableMatch) => {
+      const lines = tableMatch.trim().split('\n');
+      if (lines.length < 3) return tableMatch;
+
+      const headers = lines[0].split('|').slice(1, -1).map(h => `<th class="py-2.5 px-3 font-semibold text-on-surface">${h.trim()}</th>`).join('');
+      const rows = lines.slice(2).map(r => {
+        const cells = r.split('|').slice(1, -1).map(c => `<td class="py-2.5 px-3">${c.trim()}</td>`).join('');
+        return `<tr class="hover:bg-surface-container-low/30 border-b border-surface-container">${cells}</tr>`;
+      }).join('');
+
+      return `
+        <div class="overflow-x-auto my-6">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead class="border-b border-surface-container bg-surface-container-low/50">
+              <tr>${headers}</tr>
+            </thead>
+            <tbody class="divide-y divide-surface-container">
+              ${rows}
+            </tbody>
+          </table>
         </div>
       `;
-    }
+    });
 
-    this.resumenContentArea.innerHTML = `
-      <div class="resumen-lead">${leadText}</div>
-      ${blocksHtml}
-      <div class="legal-callout-card">
-        <span class="legal-callout-icon">⚖</span>
-        <div class="legal-callout-text">
-          <h4>Pauta Jurídica Importante</h4>
-          <p>${callout}</p>
-        </div>
+    // Encabezados
+    html = html.replace(/^# (.*$)/gim, '<h1 class="font-headline text-3xl sm:text-4xl text-on-surface font-normal tracking-tight mb-4 leading-tight">$1</h1>');
+    html = html.replace(/^## (.*$)/gim, '<h2 class="font-headline text-2xl text-on-surface font-medium mt-10 mb-4 tracking-tight pb-2 border-b border-surface-container">$1</h2>');
+    html = html.replace(/^### (.*$)/gim, '<h3 class="font-headline text-xl text-on-surface font-medium mt-6 mb-3">$1</h3>');
+
+    // Listas de comprobación
+    html = html.replace(/^- \[x\] (.*$)/gim, `
+      <div class="checklist-item">
+        <span class="material-symbols-outlined text-primary text-[18px]">check_box</span>
+        <span class="text-on-surface font-body text-sm">$1</span>
       </div>
-      <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-        <button class="btn btn-primary" onclick="window.iurisApp.setStudyTab('temas')">
-          <span>Ver Desarrollo de Subtemas</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-        <button class="btn btn-secondary" onclick="window.iurisApp.setStudyTab('quiz')">
-          <span>Cuestionario de Práctica</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
-        </button>
+    `);
+    html = html.replace(/^- \[ \] (.*$)/gim, `
+      <div class="checklist-item">
+        <span class="material-symbols-outlined text-outline text-[18px]">check_box_outline_blank</span>
+        <span class="text-on-surface font-body text-sm">$1</span>
       </div>
-    `;
-  }
+    `);
 
-  renderTemasTab(guide) {
-    const temas = guide.temas || [];
-    if (temas.length === 0) {
-      this.temasAccordionList.innerHTML = '<p class="muted">No hay subtemas redactados para esta guía.</p>';
-      return;
-    }
+    // Listas no ordenadas estándar
+    html = html.replace(/^- (.*$)/gim, '<li class="text-on-surface text-sm mb-1.5 list-disc ml-4 leading-relaxed">$1</li>');
 
-    this.temasAccordionList.innerHTML = temas.map((t, idx) => `
-      <details class="accordion-item" ${idx === 0 ? 'open' : ''}>
-        <summary class="accordion-summary">
-          <span>${t.title}</span>
-          <span class="summary-chevron">▼</span>
-        </summary>
-        <div class="accordion-body">
-          <p>${t.content}</p>
-        </div>
-      </details>
-    `).join('');
+    // Formato cursiva y negrita
+    html = html.replace(/\*\*(.*?)\*\*/gim, '<strong class="font-semibold text-on-surface">$1</strong>');
+    html = html.replace(/\*(.*?)\*/gim, '<em class="italic font-headline">$1</em>');
+
+    // Párrafos
+    html = html.split('\n\n').map(block => {
+      const trimmed = block.trim();
+      if (!trimmed) return '';
+      if (trimmed.startsWith('<h') || trimmed.startsWith('<div') || trimmed.startsWith('<table') || trimmed.startsWith('<li')) {
+        return trimmed;
+      }
+      return `<p class="text-on-surface/90 mb-4 leading-relaxed text-sm sm:text-base">${trimmed}</p>`;
+    }).join('\n');
+
+    this.markdownViewer.innerHTML = html;
   }
 
   // ===========================================================================
-  // 7. CUESTIONARIO INTERACTIVO (QUIZ)
+  // 6. CUESTIONARIO INTEGRADO (QUIZ)
   // ===========================================================================
-  initQuizForGuide(guide) {
+  initQuiz(questions) {
+    this.currentQuestions = questions;
     this.state.quizIndex = 0;
     this.state.quizScore = 0;
     this.state.quizAnswered = false;
@@ -1019,123 +792,103 @@ class IurisApp {
   }
 
   renderQuizQuestion() {
-    const guide = this.state.activeGuide;
-    const questions = guide?.quiz || [];
+    const list = this.currentQuestions || [];
+
+    if (list.length === 0) {
+      this.quizQuestionCard.innerHTML = `
+        <div class="p-8 text-center bg-surface-container-low rounded-xl">
+          <span class="material-symbols-outlined text-outline text-3xl mb-2">quiz</span>
+          <p class="font-headline text-lg text-on-surface">No hay preguntas formuladas para esta guía.</p>
+          <p class="text-xs text-secondary mt-1">Puedes agregar preguntas editando o subiendo una guía con cuestionario.</p>
+        </div>
+      `;
+      this.btnNextQuiz.classList.add('hidden');
+      this.btnRestartQuiz.classList.add('hidden');
+      this.quizProgressBar.style.width = '0%';
+      this.quizQuestionBadge.textContent = 'Sin cuestionario';
+      this.quizScoreBadge.textContent = '';
+      return;
+    }
+
+    // Fin del Cuestionario
+    if (this.state.quizIndex >= list.length) {
+      const percentage = Math.round((this.state.quizScore / list.length) * 100);
+      this.quizQuestionCard.innerHTML = `
+        <div class="p-8 text-center bg-surface-container-low rounded-xl space-y-3">
+          <span class="material-symbols-outlined text-primary text-4xl">verified</span>
+          <h3 class="font-headline text-2xl text-on-surface font-semibold">Cuestionario Concluido</h3>
+          <p class="text-sm font-headline italic text-on-surface">Tu resultado final fue de <strong>${this.state.quizScore} de ${list.length}</strong> respuestas correctas (${percentage}%).</p>
+        </div>
+      `;
+      this.quizProgressBar.style.width = '100%';
+      this.quizQuestionBadge.textContent = 'Completado';
+      this.quizScoreBadge.textContent = `Aciertos: ${this.state.quizScore}/${list.length}`;
+      this.quizExplanationBox.classList.add('hidden');
+      this.btnNextQuiz.classList.add('hidden');
+      this.btnRestartQuiz.classList.remove('hidden');
+      return;
+    }
+
+    const item = list[this.state.quizIndex];
+    this.quizQuestionBadge.textContent = `Pregunta ${this.state.quizIndex + 1} de ${list.length}`;
+    this.quizScoreBadge.textContent = `Aciertos: ${this.state.quizScore}`;
+    this.quizProgressBar.style.width = `${((this.state.quizIndex) / list.length) * 100}%`;
 
     this.quizExplanationBox.classList.add('hidden');
     this.btnNextQuiz.disabled = true;
     this.btnNextQuiz.classList.remove('hidden');
     this.btnRestartQuiz.classList.add('hidden');
 
-    if (questions.length === 0) {
-      this.quizInteractiveBody.innerHTML = `
-        <div class="quiz-completion-card">
-          <p>Esta guía no tiene preguntas de cuestionario todavía.</p>
-        </div>
-      `;
-      this.btnNextQuiz.classList.add('hidden');
-      return;
-    }
-
-    // Si terminó todas las preguntas
-    if (this.state.quizIndex >= questions.length) {
-      const percentage = Math.round((this.state.quizScore / questions.length) * 100);
-      let feedbackMsg = "¡Sigue repasando! Cada intento refuerza tu comprensión jurídica.";
-      if (percentage >= 80) feedbackMsg = "¡Excelente dominio dogmático y legal! Estás muy bien preparado.";
-      else if (percentage >= 60) feedbackMsg = "Buen avance. Refuerza los conceptos clave en la pestaña de Resumen.";
-
-      this.quizInteractiveBody.innerHTML = `
-        <div class="quiz-completion-card">
-          <div class="completion-trophy">🏆</div>
-          <h2>¡Cuestionario Completado!</h2>
-          <div class="completion-score">${this.state.quizScore} de ${questions.length} correctas (${percentage}%)</div>
-          <p style="max-width: 500px; margin: 0 auto 1.5rem;">${feedbackMsg}</p>
-        </div>
-      `;
-
-      this.quizProgressBar.style.width = '100%';
-      this.quizCurrentBadge.textContent = 'Cuestionario Concluido';
-      this.liveQuizScore.textContent = `${this.state.quizScore}/${questions.length}`;
-      this.btnNextQuiz.classList.add('hidden');
-      this.btnRestartQuiz.classList.remove('hidden');
-
-      // Guardar en estadísticas de progreso
-      if (!this.state.stats.guidesProgress[guide.id]) {
-        this.state.stats.guidesProgress[guide.id] = {};
-      }
-      this.state.stats.guidesProgress[guide.id].completedQuiz = true;
-      this.state.stats.guidesProgress[guide.id].score = this.state.quizScore;
-      this.state.stats.guidesProgress[guide.id].totalQuestions = questions.length;
-      this.state.saveStats();
-      this.updateHeroStats();
-      return;
-    }
-
-    const currentQ = questions[this.state.quizIndex];
-    const totalQ = questions.length;
-
-    this.quizCurrentBadge.textContent = `Pregunta ${this.state.quizIndex + 1} de ${totalQ}`;
-    this.liveQuizScore.textContent = this.state.quizScore;
-    this.quizProgressBar.style.width = `${((this.state.quizIndex) / totalQ) * 100}%`;
-
     const letters = ['A', 'B', 'C', 'D'];
-    const optionsHtml = currentQ.a.map((optText, i) => `
-      <button class="quiz-opt-btn" data-opt-idx="${i}">
-        <span class="opt-letter">${letters[i] || (i + 1)}</span>
-        <span>${optText}</span>
+    const optionsHtml = item.a.map((opt, i) => `
+      <button class="w-full text-left p-3.5 rounded-xl border border-surface-container hover:bg-surface-container-low text-on-surface font-body text-xs sm:text-sm transition-all flex items-start gap-3 quiz-option-btn" data-index="${i}">
+        <span class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center font-mono font-bold text-[10px] text-secondary shrink-0 mt-0.5">${letters[i]}</span>
+        <span>${opt}</span>
       </button>
     `).join('');
 
-    this.quizInteractiveBody.innerHTML = `
-      <div class="quiz-question-text">${currentQ.q}</div>
-      ${currentQ.note ? `<div class="quiz-question-hint">💡 ${currentQ.note}</div>` : ''}
-      <div class="quiz-options-list">
+    this.quizQuestionCard.innerHTML = `
+      <h3 class="font-headline text-lg sm:text-xl font-medium text-on-surface leading-snug">${item.q}</h3>
+      ${item.note ? `<p class="text-xs text-secondary italic font-headline">Nota: ${item.note}</p>` : ''}
+      <div class="space-y-2.5 pt-2">
         ${optionsHtml}
       </div>
     `;
 
-    // Vincular clic a las opciones
-    this.quizInteractiveBody.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+    this.quizQuestionCard.querySelectorAll('.quiz-option-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        this.handleQuizAnswer(parseInt(btn.dataset.optIdx, 10));
+        this.handleQuizSelection(parseInt(btn.dataset.index, 10));
       });
     });
   }
 
-  handleQuizAnswer(selectedIdx) {
+  handleQuizSelection(idx) {
     if (this.state.quizAnswered) return;
     this.state.quizAnswered = true;
 
-    const currentQ = this.state.activeGuide.quiz[this.state.quizIndex];
-    const isCorrect = selectedIdx === currentQ.correct;
+    const item = this.currentQuestions[this.state.quizIndex];
+    const isCorrect = idx === item.correct;
 
-    // Actualizar estadísticas globales
-    this.state.stats.answered++;
     if (isCorrect) {
       this.state.quizScore++;
-      this.state.stats.correct++;
+      this.quizScoreBadge.textContent = `Aciertos: ${this.state.quizScore}`;
     }
-    this.state.saveStats();
-    this.updateHeroStats();
 
-    // Actualizar estilos de los botones
-    const buttons = this.quizInteractiveBody.querySelectorAll('.quiz-opt-btn');
-    buttons.forEach((btn, idx) => {
+    const buttons = this.quizQuestionCard.querySelectorAll('.quiz-option-btn');
+    buttons.forEach((btn, i) => {
       btn.disabled = true;
-      if (idx === currentQ.correct) {
-        btn.classList.add('correct');
-      } else if (idx === selectedIdx && !isCorrect) {
-        btn.classList.add('wrong');
+      if (i === item.correct) {
+        btn.classList.add('bg-tertiary-container', 'border-primary', 'text-primary', 'font-medium');
+      } else if (i === idx && !isCorrect) {
+        btn.classList.add('bg-error-container/20', 'border-error', 'text-error');
       }
     });
 
-    // Mostrar explicación
-    this.quizExpText.textContent = (isCorrect ? '✓ ¡Correcto! ' : '✕ Incorrecto. ') + (currentQ.why || '');
+    this.quizExplanationText.textContent = (isCorrect ? '✓ Respuesta Correcta. ' : '✕ Respuesta Incorrecta. ') + (item.why || '');
     this.quizExplanationBox.classList.remove('hidden');
 
     this.btnNextQuiz.disabled = false;
-    this.btnNextQuiz.querySelector('span').textContent = 
-      this.state.quizIndex === this.state.activeGuide.quiz.length - 1 ? 'Ver Resultado Final' : 'Siguiente Pregunta';
+    this.btnNextQuiz.textContent = (this.state.quizIndex === this.currentQuestions.length - 1) ? 'Ver Resultado' : 'Siguiente pregunta ›';
   }
 
   nextQuizQuestion() {
@@ -1152,448 +905,169 @@ class IurisApp {
   }
 
   // ===========================================================================
-  // 8. FLASHCARDS (TARJETAS DE ESTUDIO 3D)
+  // 7. FLASHCARDS 3D EDITORIALES
   // ===========================================================================
-  initFlashcardsForGuide(guide) {
+  initFlashcards(cards) {
+    this.currentCards = cards;
     this.state.cardIndex = 0;
     this.state.cardFlipped = false;
     this.renderFlashcard();
   }
 
   renderFlashcard() {
-    const guide = this.state.activeGuide;
-    const cards = guide?.cards || [];
+    const list = this.currentCards || [];
+    this.state.cardFlipped = false;
+    this.flashcardInner.classList.remove('rotate-y-180');
 
-    if (cards.length === 0) {
-      this.cardFrontText.textContent = "No hay tarjetas disponibles en esta guía.";
-      this.cardBackText.textContent = "Agrega tarjetas mediante el editor de guías.";
-      this.flashcardCounter.textContent = "0 de 0";
-      this.flashcardsDots.innerHTML = '';
+    if (list.length === 0) {
+      this.cardFrontText.textContent = "No hay tarjetas de memoria para esta guía.";
+      this.cardBackText.textContent = "";
+      this.flashcardBadgeNum.textContent = "0 de 0";
+      this.flashcardDots.innerHTML = '';
       return;
     }
 
-    // Restablecer flip
-    this.state.cardFlipped = false;
-    this.card3dObject.classList.remove('is-flipped');
-
-    const card = cards[this.state.cardIndex];
+    const card = list[this.state.cardIndex];
     this.cardFrontText.textContent = card[0];
     this.cardBackText.textContent = card[1];
-    this.flashcardCounter.textContent = `Tarjeta ${this.state.cardIndex + 1} de ${cards.length}`;
+    this.flashcardBadgeNum.textContent = `Tarjeta ${this.state.cardIndex + 1} de ${list.length}`;
 
-    // Renderizar dots
-    this.flashcardsDots.innerHTML = cards.map((_, i) => 
-      `<span class="dot ${i === this.state.cardIndex ? 'active' : ''}"></span>`
-    ).join('');
+    // Renderizar dots indicadores
+    this.flashcardDots.innerHTML = list.map((_, i) => `
+      <span class="w-1.5 h-1.5 rounded-full transition-all ${i === this.state.cardIndex ? 'bg-primary w-4' : 'bg-surface-container-highest'}"></span>
+    `).join('');
   }
 
   flipFlashcard() {
     this.state.cardFlipped = !this.state.cardFlipped;
-    this.card3dObject.classList.toggle('is-flipped', this.state.cardFlipped);
-
-    if (this.state.cardFlipped) {
-      this.state.stats.cardsFlipped++;
-      this.state.saveStats();
-      this.updateHeroStats();
-    }
+    this.flashcardInner.classList.toggle('rotate-y-180', this.state.cardFlipped);
   }
 
-  nextFlashcard() {
-    const cards = this.state.activeGuide?.cards || [];
-    if (cards.length <= 1) return;
-    this.state.cardIndex = (this.state.cardIndex + 1) % cards.length;
+  nextCard() {
+    const list = this.currentCards || [];
+    if (list.length <= 1) return;
+    this.state.cardIndex = (this.state.cardIndex + 1) % list.length;
     this.renderFlashcard();
   }
 
-  prevFlashcard() {
-    const cards = this.state.activeGuide?.cards || [];
-    if (cards.length <= 1) return;
-    this.state.cardIndex = (this.state.cardIndex - 1 + cards.length) % cards.length;
+  prevCard() {
+    const list = this.currentCards || [];
+    if (list.length <= 1) return;
+    this.state.cardIndex = (this.state.cardIndex - 1 + list.length) % list.length;
     this.renderFlashcard();
   }
 
-  recordCardConfidence(mastered) {
-    if (mastered) {
-      this.state.stats.cardsMastered++;
-      this.state.saveStats();
-      this.showToast("¡Concepto marcado como dominado! 🎯");
-    }
-    this.nextFlashcard();
-  }
-
   // ===========================================================================
-  // 9. PROGRESO GLOBAL
+  // 8. SUBIDA Y CREACIÓN DE NUEVAS GUÍAS (INDEXADOR)
   // ===========================================================================
-  renderGlobalProgressView() {
-    const stats = this.state.stats;
-    this.progTotalGuides.textContent = this.state.allGuides.length;
-    this.progTotalAnswers.textContent = stats.answered;
-    this.progTotalCards.textContent = stats.cardsFlipped;
-    this.progMasteredCards.textContent = stats.cardsMastered;
+  handleFileUpload(files) {
+    if (!files || files.length === 0) return;
 
-    const rowsHtml = this.state.allGuides.map(guide => {
-      const qProg = stats.guidesProgress[guide.id] || {};
-      const scoreText = qProg.completedQuiz ? `${qProg.score}/${qProg.totalQuestions} aciertos` : 'Sin realizar';
-      const statusBadge = qProg.completedQuiz ? '<span class="badge badge-const">Completado</span>' : '<span class="badge" style="background:var(--bg-tertiary); color:var(--text-dim)">Pendiente</span>';
-
-      return `
-        <div class="progress-table-row">
-          <div>
-            <strong>${guide.title}</strong>
-            <div style="font-size:0.75rem; color:var(--text-dim);">${guide.materia || 'Derecho'}</div>
-          </div>
-          <div>${guide.cards?.length || 0} tarjetas</div>
-          <div>${scoreText}</div>
-          <div>${statusBadge}</div>
-        </div>
-      `;
-    }).join('');
-
-    this.guideProgressTableList.innerHTML = `
-      <div class="progress-table-row header-row">
-        <div>Guía Jurídica</div>
-        <div>Tarjetas</div>
-        <div>Cuestionario</div>
-        <div>Estado</div>
-      </div>
-      ${rowsHtml}
-    `;
-  }
-
-  // ===========================================================================
-  // 10. CREACIÓN Y SUBIDA DE NUEVAS GUÍAS (INDEXADOR)
-  // ===========================================================================
-  addSubtemaRow() {
-    const item = document.createElement('div');
-    item.className = 'dynamic-item-card';
-    item.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:0.8rem; font-weight:700; color:var(--text-dim);">Nuevo Subtema</span>
-        <button type="button" class="btn-icon-subtle" onclick="this.closest('.dynamic-item-card').remove()" title="Eliminar fila">✕</button>
-      </div>
-      <input type="text" class="subtema-titulo" placeholder="Título del subtema (Ej: Elementos típicos)" required>
-      <textarea rows="2" class="subtema-contenido" placeholder="Explicación jurídica..." required></textarea>
-    `;
-    this.subtemasInputsContainer.appendChild(item);
-  }
-
-  addQuizRow() {
-    const item = document.createElement('div');
-    item.className = 'dynamic-item-card';
-    item.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:0.8rem; font-weight:700; color:var(--text-dim);">Nueva Pregunta</span>
-        <button type="button" class="btn-icon-subtle" onclick="this.closest('.dynamic-item-card').remove()" title="Eliminar fila">✕</button>
-      </div>
-      <input type="text" class="quiz-q" placeholder="Pregunta jurídica" required>
-      <input type="text" class="quiz-note" placeholder="Pista orientativa (opcional)">
-      <div class="quiz-answers-grid">
-        <input type="text" class="quiz-opt-0" placeholder="Opción A (Respuesta Correcta)" required>
-        <input type="text" class="quiz-opt-1" placeholder="Opción B" required>
-        <input type="text" class="quiz-opt-2" placeholder="Opción C" required>
-        <input type="text" class="quiz-opt-3" placeholder="Opción D" required>
-      </div>
-      <input type="text" class="quiz-why" placeholder="Justificación jurídica / ¿por qué es correcta?" required>
-    `;
-    this.quizInputsContainer.appendChild(item);
-  }
-
-  addCardRow() {
-    const item = document.createElement('div');
-    item.className = 'dynamic-item-card';
-    item.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:0.8rem; font-weight:700; color:var(--text-dim);">Nueva Tarjeta de Memoria</span>
-        <button type="button" class="btn-icon-subtle" onclick="this.closest('.dynamic-item-card').remove()" title="Eliminar fila">✕</button>
-      </div>
-      <input type="text" class="card-pregunta" placeholder="Frente: Concepto o Pregunta" required>
-      <textarea rows="2" class="card-respuesta" placeholder="Reverso: Definición clave o fundamento" required></textarea>
-    `;
-    this.cardsInputsContainer.appendChild(item);
-  }
-
-  handleFormSubmit() {
-    const title = document.getElementById('formTitle').value.trim();
-    const materia = document.getElementById('formMateria').value.trim();
-    const subtitle = document.getElementById('formSubtitle').value.trim();
-    const tagsRaw = document.getElementById('formTags').value.trim();
-    const resumen = document.getElementById('formResumen').value.trim();
-
-    // Recoger subtemas
-    const temas = [];
-    this.subtemasInputsContainer.querySelectorAll('.dynamic-item-card').forEach(card => {
-      const tTitle = card.querySelector('.subtema-titulo')?.value.trim();
-      const tContent = card.querySelector('.subtema-contenido')?.value.trim();
-      if (tTitle && tContent) {
-        temas.push({ title: tTitle, content: tContent });
-      }
-    });
-
-    // Recoger preguntas de quiz
-    const quiz = [];
-    this.quizInputsContainer.querySelectorAll('.dynamic-item-card').forEach(card => {
-      const q = card.querySelector('.quiz-q')?.value.trim();
-      const note = card.querySelector('.quiz-note')?.value.trim();
-      const opt0 = card.querySelector('.quiz-opt-0')?.value.trim();
-      const opt1 = card.querySelector('.quiz-opt-1')?.value.trim();
-      const opt2 = card.querySelector('.quiz-opt-2')?.value.trim();
-      const opt3 = card.querySelector('.quiz-opt-3')?.value.trim();
-      const why = card.querySelector('.quiz-why')?.value.trim();
-
-      if (q && opt0 && opt1) {
-        quiz.push({
-          q,
-          note: note || '',
-          a: [opt0, opt1, opt2 || 'Otra opción', opt3 || 'Ninguna de las anteriores'],
-          correct: 0,
-          why: why || 'Respuesta correcta de acuerdo a la legislación aplicable.'
-        });
-      }
-    });
-
-    // Recoger tarjetas
-    const cards = [];
-    this.cardsInputsContainer.querySelectorAll('.dynamic-item-card').forEach(card => {
-      const q = card.querySelector('.card-pregunta')?.value.trim();
-      const a = card.querySelector('.card-respuesta')?.value.trim();
-      if (q && a) {
-        cards.push([q, a]);
-      }
-    });
-
-    const tags = tagsRaw ? tagsRaw.split(',').map(s => s.trim()).filter(Boolean) : [materia];
-
-    // Construir objeto de guía
-    const newGuide = {
-      id: 'custom-' + Date.now(),
-      title,
-      materia,
-      category: materia,
-      subtitle,
-      tags,
-      resumen: {
-        lead: resumen,
-        blocks: [],
-        callout: 'Guía personalizada creada por el usuario.'
-      },
-      temas,
-      quiz,
-      cards
-    };
-
-    const savedGuide = this.state.addGuide(newGuide);
-    this.createGuideForm.reset();
-    this.showToast(`¡Guía "${savedGuide.title}" indexada exitosamente! 🎉`);
-
-    // Actualizar catálogo y abrirla directamente
-    this.renderCatalog();
-    this.navigateTo('guia', savedGuide.id);
-  }
-
-  // ===========================================================================
-  // 11. IMPORTACIÓN / EXPORTACIÓN JSON
-  // ===========================================================================
-  initJsonUploadEvents() {
-    this.fileDropzone.addEventListener('click', () => this.jsonFileInput.click());
-
-    this.fileDropzone.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      this.fileDropzone.classList.add('dragover');
-    });
-
-    this.fileDropzone.addEventListener('dragleave', () => {
-      this.fileDropzone.classList.remove('dragover');
-    });
-
-    this.fileDropzone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      this.fileDropzone.classList.remove('dragover');
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        this.readJsonFile(e.dataTransfer.files[0]);
-      }
-    });
-
-    this.jsonFileInput.addEventListener('change', (e) => {
-      if (e.target.files && e.target.files[0]) {
-        this.readJsonFile(e.target.files[0]);
-      }
-    });
-
-    this.btnProcessJsonUpload.addEventListener('click', () => {
-      const text = this.jsonTextInput.value.trim();
-      if (!text) {
-        this.showToast("Pega un JSON válido o sube un archivo", "error");
-        return;
-      }
-      try {
-        const parsed = JSON.parse(text);
-        this.importParsedGuide(parsed);
-      } catch (err) {
-        this.showToast("Error de formato JSON: " + err.message, "error");
-      }
-    });
-
-    this.btnDownloadSampleJson.addEventListener('click', () => {
-      const sample = {
-        title: "Derecho Mercantil: Títulos y Operaciones de Crédito",
-        materia: "Derecho Mercantil",
-        subtitle: "Letra de cambio, pagaré, cheque y endoso cambiario",
-        tags: ["Pagaré", "Cheque", "Endoso", "Protesto"],
-        resumen: {
-          lead: "Los títulos de crédito son cosas mercantiles que incorporan un derecho literal y autónomo...",
-          blocks: [
-            { "title": "Literalidad", "desc": "El derecho se mide exactamente por el tenor literal del documento." },
-            { "title": "Autonomía", "desc": "Cada poseedor de buena fe adquiere un derecho independiente de los anteriores." }
-          ],
-          callout: "Regulado en la Ley General de Títulos y Operaciones de Crédito."
-        },
-        temas: [
-          { "title": "1. El Pagaré", "content": "Título de crédito que contiene la promesa incondicional de pagar una suma determinada..." },
-          { "title": "2. El Endoso", "content": "Acto formal mediante el cual se transmite el título en propiedad, procuración o garantía." }
-        ],
-        quiz: [
-          {
-            q: "¿Cuál es el efecto del endoso en propiedad?",
-            note: "Modalidad ordinaria de transmisión cambiaria.",
-            a: [
-              "Transfiere la propiedad del título y todos los derechos a él inherentes.",
-              "Solo faculta al endosatario para cobrar judicialmente.",
-              "Cancela la obligación mercantil.",
-              "Exime de responsabilidad al obligado principal."
-            ],
-            correct: 0,
-            why: "El endoso en propiedad transfiere plenamente el dominio del título y sus derechos incorporados."
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target.result;
+        
+        // Si es JSON
+        if (file.name.endsWith('.json')) {
+          try {
+            const parsed = JSON.parse(text);
+            const added = this.state.addGuide({
+              filename: file.name.replace('.json', '.md'),
+              title: parsed.title || file.name,
+              materia: parsed.materia || 'Derecho',
+              content: parsed.content || `# ${parsed.title}\n\n${parsed.resumen || ''}`,
+              quiz: parsed.quiz || [],
+              cards: parsed.cards || []
+            });
+            this.showToast(`Guía "${added.filename}" indexada.`);
+          } catch (err) {
+            this.showToast("Error al leer archivo JSON.");
           }
-        ],
-        cards: [
-          ["¿Qué es la incorporación en un título de crédito?", "Consiste en que el derecho está consustanciado con el documento físico; sin título no hay ejercicio de derecho."],
-          ["¿Cuáles son los tipos de endoso?", "En propiedad, en procuración (al cobro) y en garantía (en prenda)."]
-        ]
+        } else {
+          // Es .md o .txt
+          const lines = text.trim().split('\n');
+          let detectedTitle = file.name.replace(/\.(md|markdown|txt)$/i, '');
+          for (let line of lines) {
+            if (line.startsWith('# ')) {
+              detectedTitle = line.replace('# ', '').trim();
+              break;
+            }
+          }
+
+          const added = this.state.addGuide({
+            filename: file.name,
+            title: detectedTitle,
+            materia: "Guía Importada",
+            content: text,
+            quiz: [],
+            cards: []
+          });
+          this.showToast(`Archivo "${added.filename}" indexado en Mis Guías.`);
+        }
+
+        this.renderGuidesList();
+        this.renderCurrentGuide();
       };
-
-      const blob = new Blob([JSON.stringify(sample, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'plantilla-guia-iurisguides.json';
-      a.click();
-      URL.revokeObjectURL(url);
+      reader.readAsText(file);
     });
   }
 
-  readJsonFile(file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const parsed = JSON.parse(e.target.result);
-        this.jsonTextInput.value = JSON.stringify(parsed, null, 2);
-        this.showToast(`Archivo "${file.name}" cargado. Haz clic en Validar e Indexar.`);
-      } catch (err) {
-        this.showToast("El archivo seleccionado no contiene un JSON válido", "error");
-      }
-    };
-    reader.readAsText(file);
-  }
+  handleCreateSubmit() {
+    let filename = document.getElementById('new-guide-filename').value.trim();
+    if (!filename.endsWith('.md')) filename += '.md';
 
-  importParsedGuide(data) {
-    if (Array.isArray(data)) {
-      // Importación múltiple
-      data.forEach(g => this.state.addGuide(g));
-      this.showToast(`¡Se indexaron ${data.length} guías con éxito!`);
-    } else if (data && data.title) {
-      const saved = this.state.addGuide(data);
-      this.showToast(`¡Guía "${saved.title}" indexada con éxito!`);
-      this.uploadModal.classList.add('hidden');
-      document.body.style.overflow = '';
-      this.renderCatalog();
-      this.navigateTo('guia', saved.id);
-      return;
-    } else {
-      this.showToast("El JSON debe contener al menos la propiedad 'title'", "error");
-      return;
-    }
+    const title = document.getElementById('new-guide-title').value.trim();
+    const subtitle = document.getElementById('new-guide-subtitle').value.trim();
+    const rawContent = document.getElementById('new-guide-content').value.trim();
 
-    this.uploadModal.classList.add('hidden');
-    document.body.style.overflow = '';
-    this.renderCatalog();
-    this.navigateTo('catalogo');
-  }
+    const formattedContent = `
+# ${title}
 
-  exportAllGuidesJson() {
-    const data = JSON.stringify(this.state.allGuides, null, 2);
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `respaldo-guias-derecho-${new Date().toISOString().slice(0, 10)}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    this.showToast("Respaldo JSON descargado correctamente");
-  }
+*${subtitle}*
 
-  shareCurrentGuide() {
-    const guide = this.state.activeGuide;
-    if (!guide) return;
-    const url = window.location.href;
-    navigator.clipboard?.writeText(url).then(() => {
-      this.showToast("Enlace de la guía copiado al portapapeles 📋");
-    }).catch(() => {
-      this.showToast("Enlace: " + url);
-    });
-  }
+> **ANOTACIÓN DE ESTUDIO**  
+> "Guía de estudio personalizada registrada en el Archivo."
 
-  deleteCurrentCustomGuide() {
-    const guide = this.state.activeGuide;
-    if (!guide || !guide.isCustom) return;
+---
 
-    if (confirm(`¿Deseas eliminar permanentemente la guía "${guide.title}"?`)) {
-      this.state.deleteGuide(guide.id);
-      this.showToast("Guía eliminada");
-      this.navigateTo('catalogo');
-    }
-  }
-
-  // ===========================================================================
-  // 12. TEMA OSCURO / CLARO
-  // ===========================================================================
-  initTheme() {
-    const savedTheme = localStorage.getItem(this.state.STORAGE_KEY_THEME) || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }
-
-  toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem(this.state.STORAGE_KEY_THEME, next);
-  }
-
-  // ===========================================================================
-  // 13. TOAST NOTIFICACIONES
-  // ===========================================================================
-  showToast(message, type = 'success') {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.innerHTML = `
-      <span>${type === 'success' ? '✓' : 'ℹ'}</span>
-      <span>${message}</span>
+${rawContent}
     `;
 
-    container.appendChild(toast);
+    const added = this.state.addGuide({
+      filename,
+      title,
+      subtitle,
+      materia: "Derecho",
+      content: formattedContent,
+      quiz: [],
+      cards: []
+    });
 
+    this.newGuideForm.reset();
+    this.showToast(`¡Guía "${added.filename}" creada e indexada!`);
+    this.renderGuidesList();
+    this.renderCurrentGuide();
+  }
+
+  // ===========================================================================
+  // 9. UTILIDADES Y TOAST
+  // ===========================================================================
+  estimateReadingTime(text) {
+    const words = (text || '').trim().split(/\s+/).length;
+    return Math.max(1, Math.ceil(words / 180));
+  }
+
+  showToast(msg) {
+    this.toastMessage.textContent = msg;
+    this.toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
     setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateY(10px)';
-      toast.style.transition = 'all 0.25s ease';
-      setTimeout(() => toast.remove(), 250);
-    }, 3500);
+      this.toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+    }, 2800);
   }
 }
 
-// Inicializar la aplicación cuando el DOM esté listo
+// Inicialización automática
 document.addEventListener('DOMContentLoaded', () => {
-  window.iurisApp = new IurisApp();
+  window.archivistApp = new ArchivistApp();
 });

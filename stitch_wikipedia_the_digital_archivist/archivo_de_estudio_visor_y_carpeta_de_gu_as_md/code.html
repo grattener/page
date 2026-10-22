@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}}::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#dbe4e7;border-radius:9999px;}::-webkit-scrollbar-thumb:hover{background:#abb3b7;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary-dim": "#4b5555",
+          "on-primary-container": "#074cb1",
+          "surface": "#f8f9fa",
+          "secondary-dim": "#4f5458",
+          "secondary-fixed-dim": "#d0d5d9",
+          "on-primary-fixed": "#003a8e",
+          "error-dim": "#4f0116",
+          "on-background": "#2b3437",
+          "surface-container-low": "#f1f4f6",
+          "surface-container-lowest": "#ffffff",
+          "inverse-primary": "#6795fe",
+          "secondary": "#5b6064",
+          "on-error-container": "#782232",
+          "on-secondary-fixed": "#3b4044",
+          "background": "#f8f9fa",
+          "on-secondary-container": "#4d5256",
+          "on-error": "#fff7f7",
+          "tertiary-fixed": "#ebf6f6",
+          "secondary-container": "#dfe3e8",
+          "outline-variant": "#abb3b7",
+          "on-secondary-fixed-variant": "#575c60",
+          "surface-tint": "#2259bf",
+          "on-tertiary-fixed": "#414c4c",
+          "on-tertiary": "#f0fbfb",
+          "surface-variant": "#dbe4e7",
+          "on-tertiary-container": "#535e5e",
+          "outline": "#737c7f",
+          "primary-fixed-dim": "#c5d4ff",
+          "primary": "#2259bf",
+          "on-primary": "#f7f7ff",
+          "error": "#9e3f4e",
+          "error-container": "#ff8b9a",
+          "surface-dim": "#d1dce0",
+          "primary-container": "#d9e2ff",
+          "secondary-fixed": "#dfe3e8",
+          "primary-fixed": "#d9e2ff",
+          "primary-dim": "#094cb2",
+          "on-surface-variant": "#586064",
+          "on-primary-fixed-variant": "#1d56bc",
+          "tertiary-fixed-dim": "#dce7e7",
+          "surface-container": "#eaeff1",
+          "surface-bright": "#f8f9fa",
+          "on-surface": "#2b3437",
+          "inverse-on-surface": "#9b9d9e",
+          "tertiary-container": "#ebf6f6",
+          "inverse-surface": "#0c0f10",
+          "surface-container-high": "#e3e9ec",
+          "tertiary": "#566161",
+          "on-tertiary-fixed-variant": "#5d6868",
+          "on-secondary": "#f5f9fe",
+          "surface-container-highest": "#dbe4e7"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "fontFamily": {
+          "headline": ["Newsreader", "serif"],
+          "display": ["Newsreader", "serif"],
+          "body": ["Inter", "sans-serif"],
+          "label": ["Inter", "sans-serif"]
+        }
+      }
+    }
+  }</script></head><body class="bg-background font-body text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container"><header class="sticky top-0 z-40 w-full bg-surface/90 backdrop-blur-md shadow-[0_1px_6px_rgba(43,52,55,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between"><div class="flex items-baseline gap-3"><a class="font-headline text-2xl tracking-tight text-on-surface flex items-center gap-1.5" href="#"><span class="font-medium italic">Archivo de Estudio</span></a><span class="text-outline-variant font-light hidden sm:inline">/</span><span class="text-xs text-on-surface-variant font-medium tracking-wide hidden sm:inline">Visor &amp; Cuaderno Markdown</span></div><div class="flex items-center gap-3"><input accept=".md,.markdown,.txt" class="hidden" id="file-uploader" type="file"/><button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary-dim text-on-primary text-xs font-medium tracking-wide shadow-sm hover:shadow transition-all" onclick="document.getElementById('file-uploader').click()"><span class="material-symbols-outlined text-[17px]">upload_file</span><span>Subir archivo .md</span></button></div></div></header><main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-8 flex flex-col lg:flex-row gap-8 items-start"><aside class="w-full lg:w-80 shrink-0 flex flex-col gap-5"><div class="group relative rounded-xl border-2 border-dashed border-outline-variant/40 hover:border-primary/60 bg-surface-container-lowest/60 hover:bg-surface-container-lowest transition-all duration-200 p-5 text-center cursor-pointer flex flex-col items-center justify-center gap-2" onclick="document.getElementById('file-uploader').click()"><div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-[20px]">add_notes</span></div><div class="space-y-0.5"><p class="text-xs font-medium text-on-surface">Arrastra o suelta una guía <span class="font-mono text-primary font-semibold">.md</span></p><p class="text-[11px] text-on-surface-variant">o pulsa para explorar en tu equipo</p></div></div><div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_2px_12px_rgba(43,52,55,0.02)] space-y-3"><div class="flex items-center justify-between px-2 pt-1"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-outline text-[18px]">folder</span><h2 class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Mis Guías de Estudio</h2></div><span class="text-[11px] px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-medium">4 archivos</span></div><div class="space-y-1 pt-1" id="file-list"><button class="w-full text-left p-3 rounded-lg bg-surface-container text-on-surface transition-all flex flex-col gap-1 group relative overflow-hidden" data-file="01"><div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r"></div><div class="flex items-center justify-between text-xs"><span class="font-mono font-medium text-primary">01_Logica_Proposicional.md</span><span class="material-symbols-outlined text-primary text-[16px]">article</span></div><div class="flex items-center gap-3 text-[11px] text-secondary"><span>Hoy, 10:24</span><span>•</span><span>8 min lectura</span><span>•</span><span class="text-primary font-medium">Leyendo</span></div></button><button class="w-full text-left p-3 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all flex flex-col gap-1 group" data-file="02"><div class="flex items-center justify-between text-xs"><span class="font-mono font-medium text-on-surface">02_Historia_Moderna.md</span><span class="material-symbols-outlined text-outline text-[16px] group-hover:text-on-surface">description</span></div><div class="flex items-center gap-3 text-[11px] text-secondary"><span>Ayer</span><span>•</span><span>14 min lectura</span><span>•</span><span>Completada</span></div></button><button class="w-full text-left p-3 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all flex flex-col gap-1 group" data-file="03"><div class="flex items-center justify-between text-xs"><span class="font-mono font-medium text-on-surface">03_Mecanica_Cuantica.md</span><span class="material-symbols-outlined text-outline text-[16px] group-hover:text-on-surface">description</span></div><div class="flex items-center gap-3 text-[11px] text-secondary"><span>12 May</span><span>•</span><span>18 min lectura</span><span>•</span><span>Sin empezar</span></div></button><button class="w-full text-left p-3 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all flex flex-col gap-1 group" data-file="04"><div class="flex items-center justify-between text-xs"><span class="font-mono font-medium text-on-surface">04_Notas_Filosofia.md</span><span class="material-symbols-outlined text-outline text-[16px] group-hover:text-on-surface">description</span></div><div class="flex items-center gap-3 text-[11px] text-secondary"><span>8 May</span><span>•</span><span>6 min lectura</span><span>•</span><span>Borrador</span></div></button></div><div class="pt-2 border-t border-surface-container"><button class="w-full py-2 px-3 rounded-lg hover:bg-surface-container-low text-primary text-xs font-medium flex items-center justify-center gap-1.5 transition-colors" onclick="alert('Crea o abre cualquier archivo .md para visualizarlo de inmediato.')"><span class="material-symbols-outlined text-[16px]">add</span><span>+ Nueva Guía (.md)</span></button></div></div><div class="px-2 text-[11px] text-secondary/80 flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">lock_reset</span><span>Procesamiento local y privado en el navegador.</span></div></aside><section class="flex-1 w-full bg-surface-container-lowest rounded-2xl shadow-[0_2px_20px_rgba(43,52,55,0.03)] p-6 sm:p-10 lg:p-14 min-h-[640px] flex flex-col"><div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-surface-container gap-4"><div class="space-y-1"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary-container text-[11px] font-mono">01_Logica_Proposicional.md</span><span class="text-xs text-outline">•</span><span class="text-xs text-on-surface-variant">Modificado hoy</span></div><p class="text-xs text-secondary">8 min de lectura estimada • 1.240 palabras</p></div><div class="flex items-center gap-2 self-start sm:self-auto"><div class="flex items-center bg-surface-container rounded-lg p-0.5"><button class="px-2 py-1 text-xs text-on-surface-variant hover:text-on-surface rounded font-medium transition-colors" id="btn-dec-font" title="Reducir fuente">A-</button><div class="w-px h-3 bg-outline-variant/40"></div><button class="px-2 py-1 text-xs text-on-surface-variant hover:text-on-surface rounded font-medium transition-colors" id="btn-inc-font" title="Aumentar fuente">A+</button></div><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" id="btn-copy" title="Copiar texto"><span class="material-symbols-outlined text-[16px]">content_copy</span><span class="hidden sm:inline">Copiar</span></button><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" onclick="window.print()" title="Exportar a PDF o Imprimir"><span class="material-symbols-outlined text-[16px]">print</span><span class="hidden sm:inline">Imprimir / PDF</span></button></div></div><article class="prose max-w-none text-on-surface leading-relaxed text-base transition-all" id="markdown-viewer"><h1 class="font-headline text-3xl sm:text-4xl text-on-surface font-normal tracking-tight mb-4 leading-tight">Fundamentos de la Lógica Proposicional y Pensamiento Crítico</h1><p class="text-base sm:text-lg text-on-surface-variant font-headline italic mb-8 pb-4 border-b border-surface-container">Un manual conciso para estructurar argumentos rigurosos, reconocer premisas implícitas y formalizar razonamientos sin caer en sofismas.</p><div class="rounded-xl p-5 mb-8 bg-surface-container-low/70 border-l-2 border-primary"><p class="text-xs uppercase tracking-wider font-semibold text-primary mb-1">Anotación de Estudio</p><p class="text-sm italic text-on-surface font-headline leading-relaxed">"La validez de un argumento deductivo no depende de la verdad fáctica de sus proposiciones materiales, sino de la necesidad formal con la que la conclusión se deriva de sus premisas."</p></div><h2 class="font-headline text-2xl text-on-surface font-medium mt-10 mb-4 tracking-tight">1. Proposiciones y Conectores Fundamentales</h2><p class="text-on-surface/90 mb-5 leading-relaxed">En lógica clásica, una proposición es cualquier enunciado declarativo del cual tenga sentido afirmar que es <strong>verdadero (V)</strong> o <strong>falso (F)</strong>, excluyendo de plano las órdenes, interrogantes o valoraciones puramente emotivas. Toda proposición simple puede operar mediante operadores veritativo-funcionales:</p><div class="overflow-x-auto mb-8"><table class="w-full text-left text-xs sm:text-sm border-collapse"><thead class="border-b border-surface-container bg-surface-container-low/50"><tr><th class="py-2.5 px-3 font-semibold text-on-surface">Conector</th><th class="py-2.5 px-3 font-semibold text-on-surface">Símbolo Formal</th><th class="py-2.5 px-3 font-semibold text-on-surface">Lectura Natural</th><th class="py-2.5 px-3 font-semibold text-on-surface">Condición de Verdad</th></tr></thead><tbody class="divide-y divide-surface-container"><tr class="hover:bg-surface-container-low/30"><td class="py-2.5 px-3 font-medium">Negación</td><td class="py-2.5 px-3 font-mono text-primary">¬p</td><td class="py-2.5 px-3 italic font-headline">"no es el caso que p"</td><td class="py-2.5 px-3 text-on-surface-variant">Invierte el valor de verdad</td></tr><tr class="hover:bg-surface-container-low/30"><td class="py-2.5 px-3 font-medium">Conjunción</td><td class="py-2.5 px-3 font-mono text-primary">p ∧ q</td><td class="py-2.5 px-3 italic font-headline">"p y q"</td><td class="py-2.5 px-3 text-on-surface-variant">Verdadera solo si ambos son verdaderos</td></tr><tr class="hover:bg-surface-container-low/30"><td class="py-2.5 px-3 font-medium">Disyunción Débil</td><td class="py-2.5 px-3 font-mono text-primary">p ∨ q</td><td class="py-2.5 px-3 italic font-headline">"p o q (o ambos)"</td><td class="py-2.5 px-3 text-on-surface-variant">Falsa solo si ambos son falsos</td></tr><tr class="hover:bg-surface-container-low/30"><td class="py-2.5 px-3 font-medium">Condicional Material</td><td class="py-2.5 px-3 font-mono text-primary">p → q</td><td class="py-2.5 px-3 italic font-headline">"si p, entonces q"</td><td class="py-2.5 px-3 text-on-surface-variant">Falsa únicamente cuando p es V y q es F</td></tr></tbody></table></div><h3 class="font-headline text-xl text-on-surface font-medium mt-8 mb-3">Ejemplo de Formalización en Código Lógico</h3><p class="text-on-surface/90 mb-3 text-sm leading-relaxed">Consideremos el esquema de inferencia deductiva más universal: el <em>Modus Ponens</em>.</p><div class="rounded-lg bg-surface-container p-4 font-mono text-xs text-on-surface leading-relaxed mb-6 overflow-x-auto"><span class="text-secondary select-none">// Premisa 1: Condicional formal</span><br/><span class="text-primary font-semibold">Premisa 1:</span> p → q  (Si el testigo es fidedigno, el documento es auténtico)<br/><span class="text-primary font-semibold">Premisa 2:</span> p      (El testigo es fidedigno)<br/><span class="text-outline-variant">-------------------------------------------------------------</span><br/><span class="text-primary-dim font-bold">Conclusión:</span> ∴ q    (Por lo tanto, el documento es auténtico)</div><h2 class="font-headline text-2xl text-on-surface font-medium mt-10 mb-4 tracking-tight">2. Lista de Comprobación para Análisis de Guías</h2><p class="text-on-surface/90 mb-4 leading-relaxed">Antes de dar por concluida la sesión de lectura sobre este tema, asegúrate de verificar los siguientes puntos clave:</p><ul class="space-y-2 mb-8 text-sm"><li class="flex items-start gap-2.5 text-on-surface"><span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_box</span><span>Diferenciar con claridad entre verdad fáctica empírica y validez estructural de la fórmula.</span></li><li class="flex items-start gap-2.5 text-on-surface"><span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_box</span><span>Identificar las tres falacias formales más frecuentes (afirmación del consecuente, negación del antecedente).</span></li><li class="flex items-start gap-2.5 text-on-surface"><span class="material-symbols-outlined text-outline text-[18px] shrink-0 mt-0.5">check_box_outline_blank</span><span>Elaborar la tabla de verdad para el bicondicional <span class="font-mono text-xs bg-surface-container px-1.5 py-0.5 rounded">p ↔ q</span> y el dilema constructivo.</span></li></ul><div class="pt-8 mt-12 border-t border-surface-container flex items-center justify-between text-xs text-secondary"><span>Archivo activo: <code class="font-mono text-on-surface">01_Logica_Proposicional.md</code></span><div class="flex items-center gap-1.5 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span>Lectura al día</span></div></div></article></section></main><footer class="w-full bg-surface-container-low/60 border-t border-surface-container py-6 mt-12"><div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-surface-variant"><div class="flex items-center gap-2"><span class="font-headline italic text-sm text-on-surface">Archivo de Estudio</span><span class="text-outline-variant">•</span><span>Espacio personal de estudio y lectura serena en Markdown</span></div><p class="text-outline">Sin anuncios, sin distracciones.</p></div></footer><script>
+  // Control de tamaño de fuente tipográfico
+  const viewer = document.getElementById('markdown-viewer');
+  let currentStep = 1;
+  const fontSizes = ['text-sm', 'text-base', 'text-lg', 'text-xl'];
+  
+  document.getElementById('btn-dec-font').addEventListener('click', () => {
+    if (currentStep > 0) {
+      viewer.classList.remove(fontSizes[currentStep]);
+      currentStep--;
+      viewer.classList.add(fontSizes[currentStep]);
+    }
+  });
+  
+  document.getElementById('btn-inc-font').addEventListener('click', () => {
+    if (currentStep < fontSizes.length - 1) {
+      viewer.classList.remove(fontSizes[currentStep]);
+      currentStep++;
+      viewer.classList.add(fontSizes[currentStep]);
+    }
+  });
+
+  // Copiar contenido
+  document.getElementById('btn-copy').addEventListener('click', () => {
+    const text = viewer.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('btn-copy');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">done</span><span class="text-primary font-medium">Copiado</span>';
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+      }, 2000);
+    });
+  });
+
+  // Selector interactivo de lista de archivos
+  document.querySelectorAll('#file-list button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('#file-list button').forEach(b => {
+        b.className = 'w-full text-left p-3 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all flex flex-col gap-1 group';
+        const ind = b.querySelector('.bg-primary.rounded-r');
+        if (ind) ind.remove();
+        const icon = b.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = 'description';
+      });
+      button.className = 'w-full text-left p-3 rounded-lg bg-surface-container text-on-surface transition-all flex flex-col gap-1 group relative overflow-hidden';
+      button.insertAdjacentHTML('afterbegin', '<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r"></div>');
+      const icon = button.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = 'article';
+        icon.classList.add('text-primary');
+      }
+    });
+  });
+
+  // Soporte de subida directa de archivos .md
+  document.getElementById('file-uploader').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target.result;
+        // Reemplazar título y render básico simple
+        viewer.innerHTML = `
+          <h1 class="font-headline text-3xl sm:text-4xl text-on-surface font-normal tracking-tight mb-4 leading-tight">${file.name.replace('.md', '')}</h1>
+          <div class="rounded-xl p-4 mb-6 bg-surface-container-low border-l-2 border-primary text-xs font-mono text-on-surface-variant">Archivo cargado exitosamente (${(file.size / 1024).toFixed(1)} KB)</div>
+          <div class="whitespace-pre-wrap font-body text-on-surface leading-relaxed">${content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+        `;
+      };
+      reader.readAsText(file);
+    }
+  });
+</script></body></html>

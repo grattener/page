@@ -1,562 +1,419 @@
-<!doctype html>
-<html lang="es" data-theme="dark">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f19">
-  <meta name="description" content="Plataforma interactiva de guías de estudio, cuestionarios, flashcards y conceptos de Derecho. Sube y gestiona tus propias guías.">
-  <title>IurisGuides · Biblioteca Principal de Guías</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Archivo de Estudio / Visor y Cuaderno de Guías</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #dbe4e7; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #abb3b7; }
+    
+    /* 3D Flip Card Styles */
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-dim": "#4b5555",
+            "on-primary-container": "#074cb1",
+            "surface": "#f8f9fa",
+            "secondary-dim": "#4f5458",
+            "secondary-fixed-dim": "#d0d5d9",
+            "on-primary-fixed": "#003a8e",
+            "error-dim": "#4f0116",
+            "on-background": "#2b3437",
+            "surface-container-low": "#f1f4f6",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#6795fe",
+            "secondary": "#5b6064",
+            "on-error-container": "#782232",
+            "on-secondary-fixed": "#3b4044",
+            "background": "#f8f9fa",
+            "on-secondary-container": "#4d5256",
+            "on-error": "#fff7f7",
+            "tertiary-fixed": "#ebf6f6",
+            "secondary-container": "#dfe3e8",
+            "outline-variant": "#abb3b7",
+            "on-secondary-fixed-variant": "#575c60",
+            "surface-tint": "#2259bf",
+            "on-tertiary-fixed": "#414c4c",
+            "on-tertiary": "#f0fbfb",
+            "surface-variant": "#dbe4e7",
+            "on-tertiary-container": "#535e5e",
+            "outline": "#737c7f",
+            "primary-fixed-dim": "#c5d4ff",
+            "primary": "#2259bf",
+            "on-primary": "#f7f7ff",
+            "error": "#9e3f4e",
+            "error-container": "#ff8b9a",
+            "surface-dim": "#d1dce0",
+            "primary-container": "#d9e2ff",
+            "secondary-fixed": "#dfe3e8",
+            "primary-fixed": "#d9e2ff",
+            "primary-dim": "#094cb2",
+            "on-surface-variant": "#586064",
+            "on-primary-fixed-variant": "#1d56bc",
+            "tertiary-fixed-dim": "#dce7e7",
+            "surface-container": "#eaeff1",
+            "surface-bright": "#f8f9fa",
+            "on-surface": "#2b3437",
+            "inverse-on-surface": "#9b9d9e",
+            "tertiary-container": "#ebf6f6",
+            "inverse-surface": "#0c0f10",
+            "surface-container-high": "#e3e9ec",
+            "tertiary": "#566161",
+            "on-tertiary-fixed-variant": "#5d6868",
+            "on-secondary": "#f5f9fe",
+            "surface-container-highest": "#dbe4e7"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "2xl": "0.75rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "headline": ["Newsreader", "serif"],
+            "display": ["Newsreader", "serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
-  <!-- Fondo decorativo con gradientes suaves -->
-  <div class="bg-mesh" aria-hidden="true"></div>
+<body class="bg-background font-body text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
 
-  <!-- Barra de navegación principal -->
-  <header class="navbar" id="mainNavbar">
-    <div class="nav-container">
-      <div class="nav-left">
-        <a href="#catalogo" class="brand" id="brandLogo">
-          <div class="brand-badge">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
-              <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
-              <path d="M7 21h10"/>
-              <path d="M12 3v18"/>
-              <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
-            </svg>
-          </div>
-          <div class="brand-text">
-            <span class="brand-title">IurisGuides</span>
-            <span class="brand-subtitle">Biblioteca de Guías</span>
-          </div>
+  <!-- CABECERA PRINCIPAL (THE DIGITAL ARCHIVIST) -->
+  <header class="sticky top-0 z-40 w-full bg-surface/90 backdrop-blur-md shadow-[0_1px_6px_rgba(43,52,55,0.03)] border-b border-surface-container">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between">
+      <div class="flex items-baseline gap-3">
+        <a class="font-headline text-2xl tracking-tight text-on-surface flex items-center gap-1.5" href="#">
+          <span class="font-medium italic">Archivo de Estudio</span>
         </a>
+        <span class="text-outline-variant font-light hidden sm:inline">/</span>
+        <span class="text-xs text-on-surface-variant font-medium tracking-wide hidden sm:inline">Visor &amp; Carpeta de Guías</span>
       </div>
-
-      <nav class="nav-links">
-        <a href="#catalogo" class="nav-link active" data-nav="catalogo">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span>Guías Principales</span>
-        </a>
-        <a href="#progreso-global" class="nav-link" data-nav="progreso-global">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
-          <span>Mi Progreso</span>
-        </a>
-      </nav>
-
-      <div class="nav-right">
-        <!-- Botón Subir Guía destacado -->
-        <button id="btnOpenUploadModal" class="btn btn-primary btn-glow" aria-label="Subir o crear una nueva guía">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-          <span>Subir Guía</span>
-        </button>
-
-        <!-- Toggle Modo Oscuro / Claro -->
-        <button id="themeToggle" class="btn-icon" aria-label="Cambiar tema claro/oscuro" title="Alternar tema">
-          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      
+      <div class="flex items-center gap-3">
+        <input accept=".md,.markdown,.txt,.json" class="hidden" id="file-uploader" type="file" multiple/>
+        <button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary-dim text-on-primary text-xs font-medium tracking-wide shadow-sm hover:shadow transition-all" onclick="document.getElementById('file-uploader').click()" title="Subir guía en formato Markdown o texto">
+          <span class="material-symbols-outlined text-[17px]">upload_file</span>
+          <span>Subir archivo .md</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="main-layout" id="mainContent">
-
-    <!-- ==============================================
-         VISTA 1: CATÁLOGO PRINCIPAL DE GUÍAS (INDEX)
-         ============================================== -->
-    <section id="viewCatalogo" class="view active">
-      <!-- Hero de Bienvenida & Métricas -->
-      <div class="hero-hub">
-        <div class="hero-main">
-          <div class="hero-tag">
-            <span class="pulse-dot"></span> Centro de Estudio Jurídico
-          </div>
-          <h1 class="hero-title">Biblioteca Principal de Guías</h1>
-          <p class="hero-desc">
-            Consulta tus guías de estudio interactivas, repasa con flashcards inteligentes y ponte a prueba con cuestionarios dinámicos. Puedes <strong>subir nuevas guías</strong> para indexarlas al instante.
-          </p>
-          <div class="hero-actions">
-            <button class="btn btn-primary" id="btnHeroUpload">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-              <span>Subir Nueva Guía</span>
-            </button>
-            <button class="btn btn-secondary" id="btnExportAllGuides" title="Exportar todas las guías en JSON de respaldo">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              <span>Descargar Respaldo</span>
-            </button>
-          </div>
+  <!-- CONTENEDOR PRINCIPAL: SIDEBAR DE GUÍAS + VISOR EDITORIAL -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-8 flex flex-col lg:flex-row gap-8 items-start">
+    
+    <!-- LATERAL: CARPETA Y LISTADO DE GUÍAS DE ESTUDIO -->
+    <aside class="w-full lg:w-80 shrink-0 flex flex-col gap-5">
+      <!-- Tarjeta Dropzone -->
+      <div class="group relative rounded-xl border-2 border-dashed border-outline-variant/40 hover:border-primary/60 bg-surface-container-lowest/60 hover:bg-surface-container-lowest transition-all duration-200 p-5 text-center cursor-pointer flex flex-col items-center justify-center gap-2" id="dropzone-box" onclick="document.getElementById('file-uploader').click()">
+        <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+          <span class="material-symbols-outlined text-[20px]">add_notes</span>
         </div>
-
-        <div class="hero-stats-panel">
-          <div class="stat-box">
-            <span class="stat-number" id="totalGuidesCount">3</span>
-            <span class="stat-label">Guías Indexadas</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-number" id="totalCardsStudied">0</span>
-            <span class="stat-label">Tarjetas Repasadas</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-number" id="totalQuizAnswered">0</span>
-            <span class="stat-label">Preguntas Respondidas</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-number" id="overallAccuracy">0%</span>
-            <span class="stat-label">Precisión en Quizzes</span>
-          </div>
+        <div class="space-y-0.5">
+          <p class="text-xs font-medium text-on-surface">Arrastra o suelta una guía <span class="font-mono text-primary font-semibold">.md</span></p>
+          <p class="text-[11px] text-on-surface-variant">o pulsa para explorar en tu equipo</p>
         </div>
       </div>
 
-      <!-- Barra de Filtros, Búsqueda y Categorías -->
-      <div class="filters-bar">
-        <div class="search-input-wrapper">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" id="catalogSearchInput" placeholder="Buscar por tema, delito, concepto, artículo o materia..." autocomplete="off">
-          <kbd class="kbd-shortcut">⌘K</kbd>
+      <!-- Carpeta: Mis Guías de Estudio -->
+      <div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_2px_12px_rgba(43,52,55,0.02)] space-y-3">
+        <div class="flex items-center justify-between px-2 pt-1">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-outline text-[18px]">folder</span>
+            <h2 class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Mis Guías de Estudio</h2>
+          </div>
+          <span class="text-[11px] px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-medium" id="guides-badge-count">0 archivos</span>
         </div>
 
-        <div class="category-pills" id="categoryPillsContainer">
-          <button class="pill active" data-category="all">Todas las Materias</button>
-          <button class="pill" data-category="Penal">Derecho Penal</button>
-          <button class="pill" data-category="Civil">Derecho Civil</button>
-          <button class="pill" data-category="Constitucional">Constitucional y Amparo</button>
+        <!-- Buscador sutil de guías -->
+        <div class="px-1">
+          <div class="relative flex items-center">
+            <span class="material-symbols-outlined absolute left-2.5 text-outline text-[16px] pointer-events-none">search</span>
+            <input type="text" id="filter-guides-input" placeholder="Buscar en mis guías..." class="w-full text-xs pl-8 pr-3 py-1.5 rounded-lg bg-surface-container-low border-0 text-on-surface placeholder:text-outline focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all"/>
+          </div>
         </div>
-      </div>
 
-      <!-- Grid de Guías Indexadas -->
-      <div class="guides-grid-header">
-        <div class="guides-count-indicator">
-          Mostrando <strong id="visibleGuidesCount">0</strong> guías disponibles
+        <!-- Lista de Archivos de Guías -->
+        <div class="space-y-1 pt-1 max-h-[480px] overflow-y-auto" id="file-list">
+          <!-- Renderizado dinámico vía app.js -->
         </div>
-        <div class="guides-sort">
-          <label for="sortGuidesSelect">Ordenar por:</label>
-          <select id="sortGuidesSelect" class="form-select-sm">
-            <option value="recent">Más recientes</option>
-            <option value="title">Título (A-Z)</option>
-            <option value="cards">Más tarjetas</option>
-            <option value="questions">Más preguntas</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="guides-grid" id="guidesGrid">
-        <!-- Renderizado dinámicamente con JavaScript -->
-      </div>
-
-      <!-- Empty state si no hay resultados en búsqueda -->
-      <div class="empty-state hidden" id="emptyStateGuides">
-        <div class="empty-icon">📂</div>
-        <h3>No se encontraron guías</h3>
-        <p>No hay guías que coincidan con los filtros aplicados. Intenta con otra palabra clave o sube una nueva guía.</p>
-        <button class="btn btn-primary" id="btnClearFilters">Limpiar filtros</button>
-      </div>
-    </section>
-
-
-    <!-- ==============================================
-         VISTA 2: ENTORNO DE ESTUDIO DE UNA GUÍA
-         ============================================== -->
-    <section id="viewGuiaDetail" class="view">
-      <!-- Breadcrumb y Volver al Hub -->
-      <div class="detail-top-nav">
-        <button class="btn btn-ghost" id="btnBackToCatalogo">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-          <span>Volver a Guías</span>
-        </button>
-        <div class="breadcrumb" id="detailBreadcrumb">
-          <span class="crumb-cat" id="crumbMateria">Derecho Penal</span>
-          <span class="crumb-separator">/</span>
-          <span class="crumb-title" id="crumbTitulo">Delitos Patrimoniales</span>
-        </div>
-        <div class="detail-actions">
-          <button class="btn-icon-subtle" id="btnShareGuide" title="Copiar enlace o exportar guía">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-          </button>
-          <button class="btn-icon-subtle" id="btnDeleteCustomGuide" title="Eliminar guía" style="display:none;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <!-- Botón de Crear / Nueva Guía -->
+        <div class="pt-2 border-t border-surface-container">
+          <button class="w-full py-2 px-3 rounded-lg hover:bg-surface-container-low text-primary text-xs font-medium flex items-center justify-center gap-1.5 transition-colors" id="btn-open-create-modal">
+            <span class="material-symbols-outlined text-[16px]">add</span>
+            <span>+ Nueva Guía (.md)</span>
           </button>
         </div>
       </div>
 
-      <!-- Header de la Guía Seleccionada -->
-      <div class="guide-header-card" id="guideHeaderCard">
-        <div class="guide-header-badges">
-          <span class="badge badge-materia" id="detailMateriaBadge">Derecho Penal</span>
-          <span class="badge badge-level" id="detailLevelBadge">Nivel Universitario</span>
-        </div>
-        <h1 class="guide-header-title" id="detailTitle">Título de la Guía</h1>
-        <p class="guide-header-subtitle" id="detailSubtitle">Subtítulo o descripción breve del tema</p>
-        <div class="guide-tags-container" id="detailTags">
-          <!-- Tags dinámicos -->
-        </div>
+      <!-- Nota de Privacidad -->
+      <div class="px-2 text-[11px] text-secondary/80 flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[14px]">lock_reset</span>
+        <span>Procesamiento local y privado en el navegador.</span>
       </div>
+    </aside>
 
-      <!-- Selector de Pestañas de la Guía (Tabs) -->
-      <div class="study-tabs" role="tablist">
-        <button class="study-tab active" data-tab="resumen" role="tab" aria-selected="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <span>Resumen General</span>
-        </button>
-        <button class="study-tab" data-tab="temas" role="tab" aria-selected="false">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-          <span>Subtemas (<span id="tabTemasCount">0</span>)</span>
-        </button>
-        <button class="study-tab" data-tab="quiz" role="tab" aria-selected="false">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>Cuestionario (<span id="tabQuizCount">0</span>)</span>
-        </button>
-        <button class="study-tab" data-tab="flashcards" role="tab" aria-selected="false">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
-          <span>Tarjetas (<span id="tabCardsCount">0</span>)</span>
-        </button>
-      </div>
-
-      <!-- CONTENIDOS DE CADA PESTAÑA -->
-
-      <!-- TAB 1: RESUMEN GENERAL -->
-      <div class="tab-panel active" id="tabContentResumen">
-        <div class="panel-content" id="resumenContentArea">
-          <!-- Renderizado con JS -->
+    <!-- ÁREA PRINCIPAL: VISOR EDITORIAL Y MODOS DE ESTUDIO -->
+    <section class="flex-1 w-full bg-surface-container-lowest rounded-2xl shadow-[0_2px_20px_rgba(43,52,55,0.03)] p-6 sm:p-10 lg:p-12 min-h-[640px] flex flex-col">
+      
+      <!-- BARRA SUPERIOR DE ACCIONES DEL VISOR -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-surface-container gap-4">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary-container text-[11px] font-mono font-medium" id="doc-filename-badge">01_Guia.md</span>
+            <span class="text-xs text-outline">•</span>
+            <span class="text-xs text-on-surface-variant" id="doc-modified-date">Modificado hoy</span>
+            <span class="text-xs text-outline">•</span>
+            <span class="text-xs text-primary font-medium" id="doc-materia-badge">Derecho</span>
+          </div>
+          <p class="text-xs text-secondary" id="doc-meta-stats">8 min de lectura estimada • 1.240 palabras</p>
         </div>
-      </div>
 
-      <!-- TAB 2: DESARROLLO POR SUBTEMAS -->
-      <div class="tab-panel" id="tabContentTemas">
-        <div class="accordion-controls">
-          <button class="btn btn-sm btn-ghost" id="btnExpandAllTemas">Expandir todos</button>
-          <button class="btn btn-sm btn-ghost" id="btnCollapseAllTemas">Colapsar todos</button>
-        </div>
-        <div class="subtemas-accordion" id="temasAccordionList">
-          <!-- Renderizado con JS -->
-        </div>
-      </div>
-
-      <!-- TAB 3: CUESTIONARIO INTERACTIVO -->
-      <div class="tab-panel" id="tabContentQuiz">
-        <div class="quiz-container-card">
-          <div class="quiz-header-bar">
-            <div class="quiz-status">
-              <span class="quiz-badge" id="quizCurrentBadge">Pregunta 1 de 5</span>
-              <span class="quiz-score-live">Puntaje: <strong id="liveQuizScore">0</strong></span>
-            </div>
-            <div class="quiz-progress-track">
-              <div class="quiz-progress-bar" id="quizProgressBar" style="width: 20%;"></div>
-            </div>
+        <div class="flex items-center gap-2 self-start sm:self-auto flex-wrap">
+          <!-- Controles de tipografía A- / A+ -->
+          <div class="flex items-center bg-surface-container rounded-lg p-0.5">
+            <button class="px-2 py-1 text-xs text-on-surface-variant hover:text-on-surface rounded font-medium transition-colors" id="btn-dec-font" title="Reducir tamaño de fuente">A-</button>
+            <div class="w-px h-3 bg-outline-variant/40"></div>
+            <button class="px-2 py-1 text-xs text-on-surface-variant hover:text-on-surface rounded font-medium transition-colors" id="btn-inc-font" title="Aumentar tamaño de fuente">A+</button>
           </div>
 
-          <!-- Área de pregunta dinámica -->
-          <div class="quiz-body" id="quizInteractiveBody">
-            <!-- Inyectado por JS -->
-          </div>
-
-          <!-- Feedback de respuesta -->
-          <div class="quiz-explanation-box hidden" id="quizExplanationBox">
-            <div class="explanation-title" id="quizExpTitle">Explicación Jurídica</div>
-            <p class="explanation-text" id="quizExpText"></p>
-          </div>
-
-          <div class="quiz-footer-actions">
-            <button class="btn btn-primary" id="btnNextQuiz" disabled>
-              <span>Siguiente Pregunta</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          <!-- Selector de Modo de Estudio (Lectura, Cuestionario, Tarjetas) -->
+          <div class="flex items-center bg-surface-container rounded-lg p-0.5" id="study-mode-tabs">
+            <button class="px-3 py-1 text-xs rounded-md font-medium transition-colors bg-surface-container-lowest text-primary shadow-xs" data-mode="reader" id="tab-mode-reader" title="Lectura y Notas">
+              <span class="inline-flex items-center gap-1">
+                <span class="material-symbols-outlined text-[15px]">menu_book</span>
+                <span>Lectura</span>
+              </span>
             </button>
-            <button class="btn btn-secondary hidden" id="btnRestartQuiz">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              <span>Reiniciar Cuestionario</span>
+            <button class="px-3 py-1 text-xs text-on-surface-variant hover:text-on-surface rounded-md font-medium transition-colors" data-mode="quiz" id="tab-mode-quiz" title="Cuestionario Didáctico">
+              <span class="inline-flex items-center gap-1">
+                <span class="material-symbols-outlined text-[15px]">quiz</span>
+                <span>Cuestionario</span>
+              </span>
+            </button>
+            <button class="px-3 py-1 text-xs text-on-surface-variant hover:text-on-surface rounded-md font-medium transition-colors" data-mode="flashcards" id="tab-mode-flashcards" title="Tarjetas de Memoria">
+              <span class="inline-flex items-center gap-1">
+                <span class="material-symbols-outlined text-[15px]">style</span>
+                <span>Tarjetas</span>
+              </span>
             </button>
           </div>
+
+          <!-- Copiar e Imprimir -->
+          <button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" id="btn-copy" title="Copiar texto de la guía">
+            <span class="material-symbols-outlined text-[16px]">content_copy</span>
+            <span class="hidden sm:inline">Copiar</span>
+          </button>
+          <button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" onclick="window.print()" title="Exportar a PDF o Imprimir">
+            <span class="material-symbols-outlined text-[16px]">print</span>
+            <span class="hidden sm:inline">Imprimir</span>
+          </button>
         </div>
       </div>
 
-      <!-- TAB 4: FLASHCARDS (TARJETAS 3D) -->
-      <div class="tab-panel" id="tabContentFlashcards">
-        <div class="flashcards-wrapper">
-          <div class="flashcard-meta">
-            <span class="card-counter" id="flashcardCounter">Tarjeta 1 de 6</span>
-            <span class="card-hint-text">Presiona la tarjeta o usa la barra espaciadora para voltear</span>
-          </div>
+      <!-- ==============================================
+           MODO 1: VISOR DE LECTURA EDITORIAL MARKDOWN
+           ============================================== -->
+      <article class="prose max-w-none text-on-surface leading-relaxed text-base transition-all" id="markdown-viewer">
+        <!-- Inyectado dinámicamente con estilo editorial -->
+      </article>
 
-          <div class="flashcard-scene">
-            <div class="flashcard-object" id="card3dObject">
-              <!-- Cara Frontal (Pregunta / Concepto) -->
-              <div class="card-face card-front">
-                <div class="card-face-header">
-                  <span class="card-type-tag">CONCEPTO / PREGUNTA</span>
-                  <span class="card-icon-flip">↻</span>
-                </div>
-                <div class="card-face-body">
-                  <p id="cardFrontText">Cargando concepto...</p>
-                </div>
-                <div class="card-face-footer">
-                  <span class="click-to-flip">Toca para ver la respuesta</span>
-                </div>
+      <!-- ==============================================
+           MODO 2: CUESTIONARIO DIDÁCTICO INTEGRADO
+           ============================================== -->
+      <section class="hidden w-full max-w-2xl mx-auto py-4" id="quiz-viewer">
+        <div class="mb-6 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-primary font-mono" id="quiz-question-badge">Pregunta 1 de 5</span>
+          </div>
+          <span class="text-xs font-medium text-secondary" id="quiz-score-badge">Aciertos: 0</span>
+        </div>
+
+        <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-8">
+          <div class="bg-primary h-full transition-all duration-300" id="quiz-progress-bar" style="width: 20%;"></div>
+        </div>
+
+        <div id="quiz-question-card" class="space-y-6">
+          <!-- Inyectado dinámicamente -->
+        </div>
+
+        <div class="mt-6 p-4 rounded-xl bg-surface-container-low border-l-2 border-primary hidden" id="quiz-explanation-box">
+          <p class="text-xs uppercase tracking-wider font-semibold text-primary mb-1">Fundamento Jurídico</p>
+          <p class="text-sm text-on-surface font-headline leading-relaxed" id="quiz-explanation-text"></p>
+        </div>
+
+        <div class="mt-8 flex items-center justify-between">
+          <button class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-medium text-on-surface transition-all hidden" id="btn-restart-quiz">
+            Reiniciar cuestionario
+          </button>
+          <button class="ml-auto px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-dim text-on-primary text-xs font-medium tracking-wide shadow-sm hover:shadow transition-all disabled:opacity-40 disabled:pointer-events-none" id="btn-next-quiz" disabled>
+            Siguiente pregunta ›
+          </button>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           MODO 3: TARJETAS DE ESTUDIO EDITORIALES (FLASHCARDS)
+           ============================================== -->
+      <section class="hidden w-full max-w-xl mx-auto py-6" id="flashcards-viewer">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-mono text-primary font-medium" id="flashcard-badge-num">Tarjeta 1 de 6</span>
+          <span class="text-xs text-secondary">Toca la tarjeta para voltear</span>
+        </div>
+
+        <!-- Tarjeta 3D -->
+        <div class="w-full h-80 perspective-1000 cursor-pointer select-none" id="flashcard-container">
+          <div class="w-full h-full relative transform-style-3d transition-transform duration-500 rounded-2xl shadow-[0_4px_24px_rgba(43,52,55,0.06)]" id="flashcard-inner">
+            
+            <!-- Frente (Pregunta / Concepto) -->
+            <div class="absolute inset-0 w-full h-full bg-surface-container-lowest rounded-2xl p-8 flex flex-col justify-between backface-hidden border border-surface-container">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-semibold tracking-wider text-outline uppercase font-mono">Concepto / Cuestión</span>
+                <span class="material-symbols-outlined text-outline text-[18px]">sync</span>
               </div>
+              <div class="text-center py-4">
+                <p class="font-headline text-2xl text-on-surface font-medium leading-snug" id="card-front-text">Cargando...</p>
+              </div>
+              <div class="text-center">
+                <span class="text-[11px] text-outline font-medium">Voltear para ver fundamento</span>
+              </div>
+            </div>
 
-              <!-- Cara Trasera (Definición / Respuesta) -->
-              <div class="card-face card-back">
-                <div class="card-face-header">
-                  <span class="card-type-tag tag-answer">RESPUESTA / FUNDAMENTO</span>
-                  <span class="card-icon-flip">↺</span>
-                </div>
-                <div class="card-face-body">
-                  <p id="cardBackText">Cargando definición...</p>
-                </div>
-                <div class="card-face-footer">
-                  <span class="click-to-flip">Toca para volver a la pregunta</span>
-                </div>
+            <!-- Reverso (Respuesta / Fundamento) -->
+            <div class="absolute inset-0 w-full h-full bg-surface-container-low rounded-2xl p-8 flex flex-col justify-between backface-hidden rotate-y-180 border border-primary/20">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-semibold tracking-wider text-primary uppercase font-mono">Respuesta / Fundamento</span>
+                <span class="material-symbols-outlined text-primary text-[18px]">sync</span>
+              </div>
+              <div class="text-center py-4">
+                <p class="font-headline text-lg sm:text-xl text-on-surface italic leading-relaxed" id="card-back-text">Cargando...</p>
+              </div>
+              <div class="text-center">
+                <span class="text-[11px] text-outline font-medium">Voltear a la pregunta</span>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Navegación y Evaluación de la Tarjeta -->
-          <div class="flashcard-controls">
-            <button class="btn btn-round" id="btnPrevCard" aria-label="Tarjeta anterior" title="Anterior">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+        <!-- Controles de Navegación de Flashcards -->
+        <div class="flex items-center justify-between mt-6">
+          <button class="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-all" id="btn-prev-card" title="Tarjeta anterior">
+            <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+          </button>
+          
+          <div class="flex items-center gap-2">
+            <button class="px-3 py-1.5 rounded-lg border border-outline-variant/50 hover:bg-surface-container text-xs text-secondary hover:text-on-surface transition-all" id="btn-card-review">
+              ✕ Aún repasando
             </button>
-            <div class="flashcard-rating-buttons">
-              <button class="btn btn-sm btn-outline-danger" id="btnCardNeedsWork">
-                <span>✕ Aún repasando</span>
-              </button>
-              <button class="btn btn-sm btn-outline-success" id="btnCardMastered">
-                <span>✓ ¡Lo domino!</span>
-              </button>
-            </div>
-            <button class="btn btn-round" id="btnNextCard" aria-label="Tarjeta siguiente" title="Siguiente">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-primary/10 text-xs text-primary font-medium transition-all" id="btn-card-master">
+              ✓ ¡Lo domino!
             </button>
           </div>
 
-          <div class="flashcards-dots" id="flashcardsDots">
-            <!-- Puntos indicadores -->
-          </div>
+          <button class="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-all" id="btn-next-card" title="Siguiente tarjeta">
+            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+          </button>
         </div>
-      </div>
-    </section>
 
-    <!-- ==============================================
-         VISTA 3: MI PROGRESO GLOBAL
-         ============================================== -->
-    <section id="viewProgresoGlobal" class="view">
-      <div class="progress-page-header">
-        <button class="btn btn-ghost" id="btnBackFromProgress">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-          <span>Volver a Guías</span>
-        </button>
-        <h1>Mi Avance General de Estudio</h1>
-        <p class="lead">Estadísticas consolidadas de retención, cuestionarios y dominio en tus materias jurídicas.</p>
-      </div>
+        <!-- Puntos indicadores -->
+        <div class="flex items-center justify-center gap-1.5 mt-4" id="flashcard-dots"></div>
+      </section>
 
-      <div class="stats-overview-cards">
-        <div class="overview-card">
-          <div class="overview-icon icon-emerald">📚</div>
-          <div class="overview-data">
-            <strong id="progTotalGuides">0</strong>
-            <span>Guías en tu biblioteca</span>
-          </div>
-        </div>
-        <div class="overview-card">
-          <div class="overview-icon icon-indigo">🎯</div>
-          <div class="overview-data">
-            <strong id="progTotalAnswers">0</strong>
-            <span>Preguntas respondidas</span>
-          </div>
-        </div>
-        <div class="overview-card">
-          <div class="overview-icon icon-amber">🗂</div>
-          <div class="overview-data">
-            <strong id="progTotalCards">0</strong>
-            <span>Tarjetas volteadas</span>
-          </div>
-        </div>
-        <div class="overview-card">
-          <div class="overview-icon icon-violet">🏆</div>
-          <div class="overview-data">
-            <strong id="progMasteredCards">0</strong>
-            <span>Conceptos dominados</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="progress-details-section">
-        <h2>Detalle por Guía</h2>
-        <div class="guide-progress-table-card" id="guideProgressTableList">
-          <!-- Renderizado dinámicamente -->
-        </div>
-      </div>
-
-      <div class="progress-reset-box">
-        <button class="btn btn-danger-outline" id="btnResetAllProgress">Reiniciar Estadísticas de Estudio</button>
-        <small class="muted-note">Tus guías no se borrarán, únicamente el conteo de progreso.</small>
-      </div>
     </section>
   </main>
 
-
-  <!-- ==========================================================
-       MODAL: SUBIR O CREAR NUEVA GUÍA
-       ========================================================== -->
-  <div class="modal-backdrop hidden" id="uploadModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div class="modal-header-text">
-          <span class="modal-tag">INDEXADOR DE CONTENIDO</span>
-          <h2 id="modalTitle">Subir Nueva Guía de Estudio</h2>
+  <!-- MODAL: CREAR / REDACTAR NUEVA GUÍA MARKDOWN -->
+  <div class="hidden fixed inset-0 z-50 transition-all duration-200" id="create-modal">
+    <div class="absolute inset-0 bg-on-surface/20 backdrop-blur-xs" id="create-modal-backdrop"></div>
+    <div class="relative max-w-2xl w-full mx-auto my-10 bg-surface-container-lowest rounded-2xl shadow-[0_8px_30px_rgba(43,52,55,0.12)] p-6 sm:p-8 flex flex-col gap-5 border border-surface-container max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-surface-container pb-4">
+        <div>
+          <span class="text-[11px] font-mono font-semibold text-primary uppercase tracking-wider">Crear Documento</span>
+          <h3 class="font-headline text-xl text-on-surface font-semibold">Nueva Guía de Estudio (.md)</h3>
         </div>
-        <button class="modal-close-btn" id="btnCloseModal" aria-label="Cerrar modal">&times;</button>
+        <button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-outline hover:text-on-surface transition-colors" id="btn-close-create-modal">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
       </div>
 
-      <div class="modal-tabs">
-        <button class="modal-tab-btn active" id="tabBtnFormUpload">Editor Visual Guiado</button>
-        <button class="modal-tab-btn" id="tabBtnJsonUpload">Importar Archivo JSON / Texto</button>
-      </div>
-
-      <div class="modal-body">
-        <!-- Pestaña 1: Formulario paso a paso -->
-        <form id="createGuideForm" class="modal-form">
-          <div class="form-row">
-            <div class="form-group flex-2">
-              <label for="formTitle">Título de la Guía *</label>
-              <input type="text" id="formTitle" placeholder="Ej: Derecho Penal · Delitos Fiscales" required autocomplete="off">
-            </div>
-            <div class="form-group flex-1">
-              <label for="formMateria">Materia *</label>
-              <input type="text" id="formMateria" placeholder="Ej: Derecho Penal" required list="materiasDatalist">
-              <datalist id="materiasDatalist">
-                <option value="Derecho Penal">
-                <option value="Derecho Civil">
-                <option value="Derecho Constitucional">
-                <option value="Derecho Mercantil">
-                <option value="Derecho Laboral">
-                <option value="Derecho Administrativo">
-              </datalist>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="formSubtitle">Subtítulo o Resumen Corto *</label>
-            <input type="text" id="formSubtitle" placeholder="Ej: Elementos típicos, evasión, defraudación y procedimiento penal" required>
-          </div>
-
-          <div class="form-group">
-            <label for="formTags">Etiquetas o Palabras Clave (separadas por coma)</label>
-            <input type="text" id="formTags" placeholder="Ej: Defraudación, Art. 108 CFF, Querella, Dolo">
-          </div>
-
-          <div class="form-group">
-            <label for="formResumen">Texto del Resumen General *</label>
-            <textarea id="formResumen" rows="4" placeholder="Escribe la explicación general del tema, conceptos base y principios rectores..." required></textarea>
-          </div>
-
-          <!-- Sección dinámica: Subtemas -->
-          <div class="form-dynamic-section">
-            <div class="dynamic-header">
-              <h3>Subtemas y Elementos (Acordeones)</h3>
-              <button type="button" class="btn btn-sm btn-secondary" id="btnAddSubtemaRow">+ Agregar Subtema</button>
-            </div>
-            <div id="subtemasInputsContainer" class="dynamic-list">
-              <!-- Subtema inicial -->
-              <div class="dynamic-item-card">
-                <input type="text" class="subtema-titulo" placeholder="Título del subtema (Ej: Conducta típica)" required>
-                <textarea rows="2" class="subtema-contenido" placeholder="Explicación detallada..." required></textarea>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sección dinámica: Preguntas de Quiz -->
-          <div class="form-dynamic-section">
-            <div class="dynamic-header">
-              <h3>Cuestionario (Preguntas de opción múltiple)</h3>
-              <button type="button" class="btn btn-sm btn-secondary" id="btnAddQuizRow">+ Agregar Pregunta</button>
-            </div>
-            <div id="quizInputsContainer" class="dynamic-list">
-              <!-- Pregunta inicial -->
-              <div class="dynamic-item-card">
-                <input type="text" class="quiz-q" placeholder="Pregunta (Ej: ¿Qué se requiere para consumar la figura?)" required>
-                <input type="text" class="quiz-note" placeholder="Nota o pista breve orientativa...">
-                <div class="quiz-answers-grid">
-                  <input type="text" class="quiz-opt-0" placeholder="Opción A (Respuesta correcta por defecto)" required>
-                  <input type="text" class="quiz-opt-1" placeholder="Opción B" required>
-                  <input type="text" class="quiz-opt-2" placeholder="Opción C" required>
-                  <input type="text" class="quiz-opt-3" placeholder="Opción D" required>
-                </div>
-                <input type="text" class="quiz-why" placeholder="Justificación jurídica / ¿por qué es correcta?" required>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sección dinámica: Flashcards -->
-          <div class="form-dynamic-section">
-            <div class="dynamic-header">
-              <h3>Tarjetas de Memoria (Flashcards)</h3>
-              <button type="button" class="btn btn-sm btn-secondary" id="btnAddCardRow">+ Agregar Tarjeta</button>
-            </div>
-            <div id="cardsInputsContainer" class="dynamic-list">
-              <!-- Tarjeta inicial -->
-              <div class="dynamic-item-card">
-                <input type="text" class="card-pregunta" placeholder="Frente de la tarjeta: Concepto o Pregunta" required>
-                <textarea rows="2" class="card-respuesta" placeholder="Reverso: Definición o Explicación clave" required></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-ghost" id="btnCancelForm">Cancelar</button>
-            <button type="submit" class="btn btn-primary btn-glow">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-              <span>Guardar e Indexar Guía</span>
-            </button>
-          </div>
-        </form>
-
-        <!-- Pestaña 2: Importar por JSON / Archivo -->
-        <div id="jsonUploadContainer" class="modal-json-panel hidden">
-          <div class="dropzone" id="fileDropzone">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-            <p><strong>Arrastra un archivo JSON</strong> o haz clic para seleccionar</p>
-            <input type="file" id="jsonFileInput" accept=".json" class="hidden-file-input">
-          </div>
-
-          <div class="or-separator"><span>O pega el contenido JSON directamente</span></div>
-
-          <textarea id="jsonTextInput" rows="8" placeholder='{
-  "id": "mi-nueva-guia",
-  "title": "Derecho Civil: Contratos",
-  "materia": "Derecho Civil",
-  "subtitle": "Consentimiento, objeto y vicios de la voluntad",
-  "tags": ["Contratos", "Vicios", "Nulidad"],
-  "resumen": "Los contratos son acuerdos de voluntades...",
-  "temas": [{"title": "Consentimiento", "content": "..."}],
-  "quiz": [{"q": "¿Cuál es un vicio del consentimiento?", "a": ["Error", "Fuerza mayor", "Plazo", "Materia"], "correct": 0, "why": "..."}],
-  "cards": [["¿Qué es el dolo civil?", "Cualquier sugestión o artificio que se emplee para inducir a error."]]
-}'></textarea>
-
-          <div class="modal-json-actions">
-            <button class="btn btn-secondary btn-sm" id="btnDownloadSampleJson">Descargar plantilla JSON de ejemplo</button>
-            <button class="btn btn-primary" id="btnProcessJsonUpload">Validar e Indexar Guía</button>
-          </div>
+      <form id="new-guide-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-on-surface mb-1" for="new-guide-filename">Nombre de archivo (.md) *</label>
+          <input type="text" id="new-guide-filename" placeholder="Ej: 05_Derecho_Mercantil.md" required class="w-full text-xs font-mono p-2.5 rounded-lg bg-surface-container-low border-0 text-on-surface focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest"/>
         </div>
-      </div>
+
+        <div>
+          <label class="block text-xs font-medium text-on-surface mb-1" for="new-guide-title">Título de la Guía *</label>
+          <input type="text" id="new-guide-title" placeholder="Ej: Títulos y Operaciones de Crédito" required class="w-full text-xs p-2.5 rounded-lg bg-surface-container-low border-0 text-on-surface focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-on-surface mb-1" for="new-guide-subtitle">Subtítulo o Resumen *</label>
+          <input type="text" id="new-guide-subtitle" placeholder="Ej: Pagaré, cheque, endoso cambiario y acciones de cobro" required class="w-full text-xs p-2.5 rounded-lg bg-surface-container-low border-0 text-on-surface focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-on-surface mb-1" for="new-guide-content">Contenido en Markdown o Texto *</label>
+          <textarea id="new-guide-content" rows="9" placeholder="Escribe o pega aquí el contenido de la guía... Puedes usar encabezados (#, ##), listas y párrafos." required class="w-full text-xs font-mono p-2.5 rounded-lg bg-surface-container-low border-0 text-on-surface focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest leading-relaxed"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-surface-container">
+          <button type="button" class="px-4 py-2 rounded-lg text-xs font-medium text-secondary hover:text-on-surface transition-colors" id="btn-cancel-create">
+            Cancelar
+          </button>
+          <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-dim text-on-primary text-xs font-medium tracking-wide shadow-sm transition-all">
+            <span class="material-symbols-outlined text-[16px]">save</span>
+            <span>Indexar y Abrir Guía</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
-  <!-- Toast Notification Container -->
-  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+  <!-- NOTIFICACIÓN TOAST DISCRETA -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-on-surface text-surface text-xs py-2.5 px-4 rounded-xl shadow-lg transition-all duration-300 opacity-0 pointer-events-none transform translate-y-2 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary text-[16px]" id="toast-icon">check_circle</span>
+    <span id="toast-message">Operación realizada con éxito</span>
+  </div>
 
-  <!-- Footer general -->
-  <footer class="app-footer">
-    <div class="footer-content">
-      <div class="footer-left">
-        <span class="footer-brand">⚖ IurisGuides</span>
-        <span>· Sistema Integral de Estudio Jurídico</span>
+  <!-- PIE DE PÁGINA (EDITORIAL ALABASTER) -->
+  <footer class="w-full bg-surface-container-low/60 border-t border-surface-container py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-surface-variant">
+      <div class="flex items-center gap-2">
+        <span class="font-headline italic text-sm text-on-surface">Archivo de Estudio</span>
+        <span class="text-outline-variant">•</span>
+        <span>Espacio personal de estudio y lectura serena en Markdown</span>
       </div>
-      <div class="footer-right">
-        <span>Tus guías se indexan y persisten localmente en tu navegador.</span>
-      </div>
+      <p class="text-outline">Sin anuncios, sin distracciones.</p>
     </div>
   </footer>
 
