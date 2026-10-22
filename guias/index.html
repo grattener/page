@@ -1,124 +1,565 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#124a46">
-  <meta name="description" content="Guías de estudio interactivas para Derecho: apuntes, cuestionarios y tarjetas de memoria.">
-  <title>Mi biblioteca de Derecho</title>
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="description" content="Plataforma interactiva de guías de estudio, cuestionarios, flashcards y conceptos de Derecho. Sube y gestiona tus propias guías.">
+  <title>IurisGuides · Biblioteca Principal de Guías</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#inicio" aria-label="Inicio">
-      <span class="brand-icon" aria-hidden="true">⚖</span>
-      <span>Mi biblioteca de Derecho</span>
-    </a>
-    <button id="menuButton" class="icon-button" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  <!-- Fondo decorativo con gradientes suaves -->
+  <div class="bg-mesh" aria-hidden="true"></div>
+
+  <!-- Barra de navegación principal -->
+  <header class="navbar" id="mainNavbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="#catalogo" class="brand" id="brandLogo">
+          <div class="brand-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+              <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+              <path d="M7 21h10"/>
+              <path d="M12 3v18"/>
+              <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">IurisGuides</span>
+            <span class="brand-subtitle">Biblioteca de Guías</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#catalogo" class="nav-link active" data-nav="catalogo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Guías Principales</span>
+        </a>
+        <a href="#progreso-global" class="nav-link" data-nav="progreso-global">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+          <span>Mi Progreso</span>
+        </a>
+      </nav>
+
+      <div class="nav-right">
+        <!-- Botón Subir Guía destacado -->
+        <button id="btnOpenUploadModal" class="btn btn-primary btn-glow" aria-label="Subir o crear una nueva guía">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          <span>Subir Guía</span>
+        </button>
+
+        <!-- Toggle Modo Oscuro / Claro -->
+        <button id="themeToggle" class="btn-icon" aria-label="Cambiar tema claro/oscuro" title="Alternar tema">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <aside id="drawer" class="drawer" aria-hidden="true">
-    <div class="drawer-head"><strong>Mi biblioteca de Derecho</strong><button id="closeMenu" class="icon-button" aria-label="Cerrar menú">×</button></div>
-    <nav>
-      <a href="#inicio" data-view="inicio">⌂ <span>Inicio</span></a>
-      <a href="#materias" data-view="materias">▣ <span>Materias</span></a>
-      <a href="#buscador" data-view="buscador">⌕ <span>Buscador</span></a>
-      <a href="#progreso" data-view="progreso">▥ <span>Mi progreso</span></a>
-    </nav>
-    <p class="drawer-note">El conocimiento también es una forma de libertad.</p>
-  </aside>
-  <div id="scrim" class="scrim"></div>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-layout" id="mainContent">
 
-  <main id="app">
-    <section id="inicio" class="view active">
-      <div class="hero">
-        <div class="hero-content">
-          <span class="back hidden">‹</span>
-          <p class="eyebrow">TU ESPACIO DE ESTUDIO</p>
-          <h1>Derecho Penal</h1>
-          <p>Guía de estudio · Delitos patrimoniales</p>
-          <div class="pills"><span>Robo</span><span>Fraude</span><span>Abuso de confianza</span></div>
+    <!-- ==============================================
+         VISTA 1: CATÁLOGO PRINCIPAL DE GUÍAS (INDEX)
+         ============================================== -->
+    <section id="viewCatalogo" class="view active">
+      <!-- Hero de Bienvenida & Métricas -->
+      <div class="hero-hub">
+        <div class="hero-main">
+          <div class="hero-tag">
+            <span class="pulse-dot"></span> Centro de Estudio Jurídico
+          </div>
+          <h1 class="hero-title">Biblioteca Principal de Guías</h1>
+          <p class="hero-desc">
+            Consulta tus guías de estudio interactivas, repasa con flashcards inteligentes y ponte a prueba con cuestionarios dinámicos. Puedes <strong>subir nuevas guías</strong> para indexarlas al instante.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="btnHeroUpload">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              <span>Subir Nueva Guía</span>
+            </button>
+            <button class="btn btn-secondary" id="btnExportAllGuides" title="Exportar todas las guías en JSON de respaldo">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <span>Descargar Respaldo</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-stats-panel">
+          <div class="stat-box">
+            <span class="stat-number" id="totalGuidesCount">3</span>
+            <span class="stat-label">Guías Indexadas</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="totalCardsStudied">0</span>
+            <span class="stat-label">Tarjetas Repasadas</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="totalQuizAnswered">0</span>
+            <span class="stat-label">Preguntas Respondidas</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="overallAccuracy">0%</span>
+            <span class="stat-label">Precisión en Quizzes</span>
+          </div>
         </div>
       </div>
-      <div class="home-cards">
-        <button class="nav-card" data-view="resumen"><span class="tile-icon">▤</span><span><strong>Resumen general</strong><small>Conceptos clave y panorama del tema</small></span><b>›</b></button>
-        <button class="nav-card" data-view="temas"><span class="tile-icon">▧</span><span><strong>Desarrollo por subtemas</strong><small>Explicación detallada de cada delito</small></span><b>›</b></button>
-        <button class="nav-card" data-view="quiz"><span class="tile-icon">☷</span><span><strong>Cuestionario</strong><small>Pon a prueba lo aprendido</small></span><b>›</b></button>
-        <button class="nav-card" data-view="flashcards"><span class="tile-icon">▱</span><span><strong>Tarjetas de estudio</strong><small>Conceptos importantes</small></span><b>›</b></button>
+
+      <!-- Barra de Filtros, Búsqueda y Categorías -->
+      <div class="filters-bar">
+        <div class="search-input-wrapper">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="catalogSearchInput" placeholder="Buscar por tema, delito, concepto, artículo o materia..." autocomplete="off">
+          <kbd class="kbd-shortcut">⌘K</kbd>
+        </div>
+
+        <div class="category-pills" id="categoryPillsContainer">
+          <button class="pill active" data-category="all">Todas las Materias</button>
+          <button class="pill" data-category="Penal">Derecho Penal</button>
+          <button class="pill" data-category="Civil">Derecho Civil</button>
+          <button class="pill" data-category="Constitucional">Constitucional y Amparo</button>
+        </div>
       </div>
-      <div class="encouragement"><span>♧</span><p>La práctica constante también es parte del estudio. ¡Tú puedes!</p><span>♡</span></div>
-      <p class="disclaimer">Plantilla de demostración. Verifica siempre los conceptos y artículos con el código y las fuentes indicadas por tu docente.</p>
-    </section>
 
-    <section id="resumen" class="view">
-      <button class="back-link" data-view="inicio">‹ Volver</button>
-      <p class="eyebrow">DERECHO PENAL</p><h1>Resumen general</h1>
-      <p class="lead">Los delitos patrimoniales son conductas que afectan bienes, derechos o intereses económicos protegidos por la ley. Para distinguirlos, hay que analizar los hechos concretos y los elementos que exige la disposición aplicable.</p>
-      <div class="info-card"><span class="tile-icon">▤</span><div><strong>¿Cómo estudiar este tema?</strong><p>Identifica qué conducta ocurrió, qué relación tenía la persona con el bien, si existió engaño o abuso de confianza y qué establece exactamente la legislación aplicable.</p></div></div>
-      <h2>Figuras que debes distinguir</h2>
-      <article class="content-card"><h3>Robo</h3><p>En términos generales, se relaciona con el apoderamiento de una cosa mueble ajena sin derecho y sin consentimiento de quien legalmente puede otorgarlo. La definición exacta y sus elementos deben verificarse en el código aplicable.</p></article>
-      <article class="content-card"><h3>Fraude</h3><p>Generalmente implica engañar a alguien o aprovechar un error para obtener ilícitamente una cosa o un beneficio. Deben revisarse la conducta, el engaño o error, el beneficio y los demás requisitos legales.</p></article>
-      <article class="content-card"><h3>Abuso de confianza</h3><p>Se relaciona, en términos generales, con disponer indebidamente de un bien ajeno que se recibió bajo una relación de confianza o con una finalidad determinada. La entrega y la forma de disposición son claves para analizar el caso.</p></article>
-      <div class="callout"><strong>Importante</strong><p>Estas explicaciones son orientativas y no sustituyen el estudio de los artículos vigentes del Código Penal del Estado de Chihuahua ni las instrucciones de clase.</p></div>
-      <button class="primary full" data-view="quiz">Practicar con preguntas <span>›</span></button>
-    </section>
-
-    <section id="temas" class="view">
-      <button class="back-link" data-view="inicio">‹ Volver</button>
-      <p class="eyebrow">LECTURA POR SUBTEMAS</p><h1>Elementos del delito</h1>
-      <p class="lead">Abre cada apartado para repasar la idea principal. Completa el contenido con los artículos asignados por tu profesora.</p>
-      <div class="accordion">
-        <details open><summary>Conducta</summary><p>Consiste en el comportamiento que la norma describe. Al analizar un caso, distingue qué hizo la persona, en qué circunstancias y qué elementos exige la ley para esa figura.</p></details>
-        <details><summary>Objeto material</summary><p>Es la persona o cosa sobre la que recae directamente la conducta, según la figura jurídica estudiada. En delitos patrimoniales suele ser importante identificar el bien involucrado y su relación con la persona afectada.</p></details>
-        <details><summary>Consentimiento y derecho</summary><p>Revisa si existía consentimiento válido, autorización o algún derecho que justifique la conducta. No des por hecho estos elementos: deben analizarse con los hechos y la norma aplicable.</p></details>
-        <details><summary>Engaño o error</summary><p>En el análisis del fraude, estudia si hubo engaño o aprovechamiento de un error y qué relación tiene con la obtención del beneficio. Comprueba los requisitos específicos del artículo correspondiente.</p></details>
-        <details><summary>Entrega y disposición del bien</summary><p>Para distinguir el abuso de confianza de otras figuras, importa cómo llegó el bien a manos de la persona y qué facultades tenía para usarlo o disponer de él.</p></details>
+      <!-- Grid de Guías Indexadas -->
+      <div class="guides-grid-header">
+        <div class="guides-count-indicator">
+          Mostrando <strong id="visibleGuidesCount">0</strong> guías disponibles
+        </div>
+        <div class="guides-sort">
+          <label for="sortGuidesSelect">Ordenar por:</label>
+          <select id="sortGuidesSelect" class="form-select-sm">
+            <option value="recent">Más recientes</option>
+            <option value="title">Título (A-Z)</option>
+            <option value="cards">Más tarjetas</option>
+            <option value="questions">Más preguntas</option>
+          </select>
+        </div>
       </div>
-      <div class="callout"><strong>Tip para el examen</strong><p>En cada figura, aprende la definición legal, identifica sus verbos rectores y después compara sus diferencias con las otras figuras.</p></div>
-      <button class="primary full" data-view="flashcards">Repasar con tarjetas <span>›</span></button>
-    </section>
 
-    <section id="quiz" class="view">
-      <button class="back-link" data-view="inicio">‹ Volver</button>
-      <div class="quiz-head"><span class="quiz-icon">☷</span><div><h1>Cuestionario</h1><p>Pon a prueba lo aprendido</p></div></div>
-      <div class="progress-line"><span id="quizProgress"></span></div>
-      <div class="progress-meta"><span id="questionCount">Pregunta 1 de 5</span><span id="scoreLabel">Aciertos: 0</span></div>
-      <div id="quizArea"></div>
-      <div id="quizFeedback" class="feedback" aria-live="polite"></div>
-      <button id="nextQuestion" class="primary full" disabled>Siguiente pregunta ›</button>
-      <button id="restartQuiz" class="text-button hidden">Volver a intentarlo</button>
-      <p class="disclaimer">Preguntas didácticas de práctica; confirma las respuestas con tu legislación y materiales de clase.</p>
-    </section>
-
-    <section id="flashcards" class="view">
-      <button class="back-link" data-view="inicio">‹ Volver</button>
-      <p class="eyebrow">REPASO RÁPIDO</p><h1>Tarjetas de estudio</h1>
-      <p class="lead">Piensa en la respuesta y toca la tarjeta para voltearla.</p>
-      <div class="flashcard-wrap">
-        <button id="prevCard" class="round-button" aria-label="Tarjeta anterior">‹</button>
-        <button id="flashcard" class="flashcard"><span id="cardNumber">1 / 6</span><strong id="cardText">¿Qué debes identificar al analizar un delito?</strong><small id="cardHint">Toca para ver la respuesta</small></button>
-        <button id="nextCard" class="round-button" aria-label="Tarjeta siguiente">›</button>
+      <div class="guides-grid" id="guidesGrid">
+        <!-- Renderizado dinámicamente con JavaScript -->
       </div>
-      <div id="dots" class="dots"></div>
-      <p class="center muted">No memorices solo palabras: intenta explicar cada concepto con tus propias palabras.</p>
+
+      <!-- Empty state si no hay resultados en búsqueda -->
+      <div class="empty-state hidden" id="emptyStateGuides">
+        <div class="empty-icon">📂</div>
+        <h3>No se encontraron guías</h3>
+        <p>No hay guías que coincidan con los filtros aplicados. Intenta con otra palabra clave o sube una nueva guía.</p>
+        <button class="btn btn-primary" id="btnClearFilters">Limpiar filtros</button>
+      </div>
     </section>
 
-    <section id="buscador" class="view">
-      <button class="back-link" data-view="inicio">‹ Volver</button>
-      <p class="eyebrow">ENCUENTRA UN CONCEPTO</p><h1>Buscador</h1>
-      <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar en las guías…" autocomplete="off"></label>
-      <div id="searchResults" class="search-results"><p class="muted">Escribe una palabra como “robo”, “engaño” o “consentimiento”.</p></div>
+
+    <!-- ==============================================
+         VISTA 2: ENTORNO DE ESTUDIO DE UNA GUÍA
+         ============================================== -->
+    <section id="viewGuiaDetail" class="view">
+      <!-- Breadcrumb y Volver al Hub -->
+      <div class="detail-top-nav">
+        <button class="btn btn-ghost" id="btnBackToCatalogo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Volver a Guías</span>
+        </button>
+        <div class="breadcrumb" id="detailBreadcrumb">
+          <span class="crumb-cat" id="crumbMateria">Derecho Penal</span>
+          <span class="crumb-separator">/</span>
+          <span class="crumb-title" id="crumbTitulo">Delitos Patrimoniales</span>
+        </div>
+        <div class="detail-actions">
+          <button class="btn-icon-subtle" id="btnShareGuide" title="Copiar enlace o exportar guía">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
+          <button class="btn-icon-subtle" id="btnDeleteCustomGuide" title="Eliminar guía" style="display:none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Header de la Guía Seleccionada -->
+      <div class="guide-header-card" id="guideHeaderCard">
+        <div class="guide-header-badges">
+          <span class="badge badge-materia" id="detailMateriaBadge">Derecho Penal</span>
+          <span class="badge badge-level" id="detailLevelBadge">Nivel Universitario</span>
+        </div>
+        <h1 class="guide-header-title" id="detailTitle">Título de la Guía</h1>
+        <p class="guide-header-subtitle" id="detailSubtitle">Subtítulo o descripción breve del tema</p>
+        <div class="guide-tags-container" id="detailTags">
+          <!-- Tags dinámicos -->
+        </div>
+      </div>
+
+      <!-- Selector de Pestañas de la Guía (Tabs) -->
+      <div class="study-tabs" role="tablist">
+        <button class="study-tab active" data-tab="resumen" role="tab" aria-selected="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Resumen General</span>
+        </button>
+        <button class="study-tab" data-tab="temas" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span>Subtemas (<span id="tabTemasCount">0</span>)</span>
+        </button>
+        <button class="study-tab" data-tab="quiz" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Cuestionario (<span id="tabQuizCount">0</span>)</span>
+        </button>
+        <button class="study-tab" data-tab="flashcards" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
+          <span>Tarjetas (<span id="tabCardsCount">0</span>)</span>
+        </button>
+      </div>
+
+      <!-- CONTENIDOS DE CADA PESTAÑA -->
+
+      <!-- TAB 1: RESUMEN GENERAL -->
+      <div class="tab-panel active" id="tabContentResumen">
+        <div class="panel-content" id="resumenContentArea">
+          <!-- Renderizado con JS -->
+        </div>
+      </div>
+
+      <!-- TAB 2: DESARROLLO POR SUBTEMAS -->
+      <div class="tab-panel" id="tabContentTemas">
+        <div class="accordion-controls">
+          <button class="btn btn-sm btn-ghost" id="btnExpandAllTemas">Expandir todos</button>
+          <button class="btn btn-sm btn-ghost" id="btnCollapseAllTemas">Colapsar todos</button>
+        </div>
+        <div class="subtemas-accordion" id="temasAccordionList">
+          <!-- Renderizado con JS -->
+        </div>
+      </div>
+
+      <!-- TAB 3: CUESTIONARIO INTERACTIVO -->
+      <div class="tab-panel" id="tabContentQuiz">
+        <div class="quiz-container-card">
+          <div class="quiz-header-bar">
+            <div class="quiz-status">
+              <span class="quiz-badge" id="quizCurrentBadge">Pregunta 1 de 5</span>
+              <span class="quiz-score-live">Puntaje: <strong id="liveQuizScore">0</strong></span>
+            </div>
+            <div class="quiz-progress-track">
+              <div class="quiz-progress-bar" id="quizProgressBar" style="width: 20%;"></div>
+            </div>
+          </div>
+
+          <!-- Área de pregunta dinámica -->
+          <div class="quiz-body" id="quizInteractiveBody">
+            <!-- Inyectado por JS -->
+          </div>
+
+          <!-- Feedback de respuesta -->
+          <div class="quiz-explanation-box hidden" id="quizExplanationBox">
+            <div class="explanation-title" id="quizExpTitle">Explicación Jurídica</div>
+            <p class="explanation-text" id="quizExpText"></p>
+          </div>
+
+          <div class="quiz-footer-actions">
+            <button class="btn btn-primary" id="btnNextQuiz" disabled>
+              <span>Siguiente Pregunta</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button class="btn btn-secondary hidden" id="btnRestartQuiz">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              <span>Reiniciar Cuestionario</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: FLASHCARDS (TARJETAS 3D) -->
+      <div class="tab-panel" id="tabContentFlashcards">
+        <div class="flashcards-wrapper">
+          <div class="flashcard-meta">
+            <span class="card-counter" id="flashcardCounter">Tarjeta 1 de 6</span>
+            <span class="card-hint-text">Presiona la tarjeta o usa la barra espaciadora para voltear</span>
+          </div>
+
+          <div class="flashcard-scene">
+            <div class="flashcard-object" id="card3dObject">
+              <!-- Cara Frontal (Pregunta / Concepto) -->
+              <div class="card-face card-front">
+                <div class="card-face-header">
+                  <span class="card-type-tag">CONCEPTO / PREGUNTA</span>
+                  <span class="card-icon-flip">↻</span>
+                </div>
+                <div class="card-face-body">
+                  <p id="cardFrontText">Cargando concepto...</p>
+                </div>
+                <div class="card-face-footer">
+                  <span class="click-to-flip">Toca para ver la respuesta</span>
+                </div>
+              </div>
+
+              <!-- Cara Trasera (Definición / Respuesta) -->
+              <div class="card-face card-back">
+                <div class="card-face-header">
+                  <span class="card-type-tag tag-answer">RESPUESTA / FUNDAMENTO</span>
+                  <span class="card-icon-flip">↺</span>
+                </div>
+                <div class="card-face-body">
+                  <p id="cardBackText">Cargando definición...</p>
+                </div>
+                <div class="card-face-footer">
+                  <span class="click-to-flip">Toca para volver a la pregunta</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navegación y Evaluación de la Tarjeta -->
+          <div class="flashcard-controls">
+            <button class="btn btn-round" id="btnPrevCard" aria-label="Tarjeta anterior" title="Anterior">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div class="flashcard-rating-buttons">
+              <button class="btn btn-sm btn-outline-danger" id="btnCardNeedsWork">
+                <span>✕ Aún repasando</span>
+              </button>
+              <button class="btn btn-sm btn-outline-success" id="btnCardMastered">
+                <span>✓ ¡Lo domino!</span>
+              </button>
+            </div>
+            <button class="btn btn-round" id="btnNextCard" aria-label="Tarjeta siguiente" title="Siguiente">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <div class="flashcards-dots" id="flashcardsDots">
+            <!-- Puntos indicadores -->
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="progreso" class="view">
-      <button class="back-link" data-view="inicio">‹ Volver</button>
-      <p class="eyebrow">TU AVANCE</p><h1>Mi progreso</h1>
-      <div class="stats-grid"><div class="stat-card"><strong id="statAnswered">0</strong><span>Preguntas contestadas</span></div><div class="stat-card"><strong id="statCorrect">0</strong><span>Respuestas correctas</span></div><div class="stat-card"><strong id="statCards">0</strong><span>Tarjetas repasadas</span></div></div>
-      <div class="callout"><strong>Un paso a la vez</strong><p>El progreso se guarda en este navegador. Si cambias de dispositivo o borras los datos del navegador, no se sincronizará automáticamente.</p></div>
-      <button id="resetProgress" class="secondary full">Reiniciar progreso</button>
+    <!-- ==============================================
+         VISTA 3: MI PROGRESO GLOBAL
+         ============================================== -->
+    <section id="viewProgresoGlobal" class="view">
+      <div class="progress-page-header">
+        <button class="btn btn-ghost" id="btnBackFromProgress">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Volver a Guías</span>
+        </button>
+        <h1>Mi Avance General de Estudio</h1>
+        <p class="lead">Estadísticas consolidadas de retención, cuestionarios y dominio en tus materias jurídicas.</p>
+      </div>
+
+      <div class="stats-overview-cards">
+        <div class="overview-card">
+          <div class="overview-icon icon-emerald">📚</div>
+          <div class="overview-data">
+            <strong id="progTotalGuides">0</strong>
+            <span>Guías en tu biblioteca</span>
+          </div>
+        </div>
+        <div class="overview-card">
+          <div class="overview-icon icon-indigo">🎯</div>
+          <div class="overview-data">
+            <strong id="progTotalAnswers">0</strong>
+            <span>Preguntas respondidas</span>
+          </div>
+        </div>
+        <div class="overview-card">
+          <div class="overview-icon icon-amber">🗂</div>
+          <div class="overview-data">
+            <strong id="progTotalCards">0</strong>
+            <span>Tarjetas volteadas</span>
+          </div>
+        </div>
+        <div class="overview-card">
+          <div class="overview-icon icon-violet">🏆</div>
+          <div class="overview-data">
+            <strong id="progMasteredCards">0</strong>
+            <span>Conceptos dominados</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-details-section">
+        <h2>Detalle por Guía</h2>
+        <div class="guide-progress-table-card" id="guideProgressTableList">
+          <!-- Renderizado dinámicamente -->
+        </div>
+      </div>
+
+      <div class="progress-reset-box">
+        <button class="btn btn-danger-outline" id="btnResetAllProgress">Reiniciar Estadísticas de Estudio</button>
+        <small class="muted-note">Tus guías no se borrarán, únicamente el conteo de progreso.</small>
+      </div>
     </section>
   </main>
-  <footer><span>⚖</span> Hecho para estudiar con calma.</footer>
+
+
+  <!-- ==========================================================
+       MODAL: SUBIR O CREAR NUEVA GUÍA
+       ========================================================== -->
+  <div class="modal-backdrop hidden" id="uploadModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <span class="modal-tag">INDEXADOR DE CONTENIDO</span>
+          <h2 id="modalTitle">Subir Nueva Guía de Estudio</h2>
+        </div>
+        <button class="modal-close-btn" id="btnCloseModal" aria-label="Cerrar modal">&times;</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" id="tabBtnFormUpload">Editor Visual Guiado</button>
+        <button class="modal-tab-btn" id="tabBtnJsonUpload">Importar Archivo JSON / Texto</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Pestaña 1: Formulario paso a paso -->
+        <form id="createGuideForm" class="modal-form">
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="formTitle">Título de la Guía *</label>
+              <input type="text" id="formTitle" placeholder="Ej: Derecho Penal · Delitos Fiscales" required autocomplete="off">
+            </div>
+            <div class="form-group flex-1">
+              <label for="formMateria">Materia *</label>
+              <input type="text" id="formMateria" placeholder="Ej: Derecho Penal" required list="materiasDatalist">
+              <datalist id="materiasDatalist">
+                <option value="Derecho Penal">
+                <option value="Derecho Civil">
+                <option value="Derecho Constitucional">
+                <option value="Derecho Mercantil">
+                <option value="Derecho Laboral">
+                <option value="Derecho Administrativo">
+              </datalist>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="formSubtitle">Subtítulo o Resumen Corto *</label>
+            <input type="text" id="formSubtitle" placeholder="Ej: Elementos típicos, evasión, defraudación y procedimiento penal" required>
+          </div>
+
+          <div class="form-group">
+            <label for="formTags">Etiquetas o Palabras Clave (separadas por coma)</label>
+            <input type="text" id="formTags" placeholder="Ej: Defraudación, Art. 108 CFF, Querella, Dolo">
+          </div>
+
+          <div class="form-group">
+            <label for="formResumen">Texto del Resumen General *</label>
+            <textarea id="formResumen" rows="4" placeholder="Escribe la explicación general del tema, conceptos base y principios rectores..." required></textarea>
+          </div>
+
+          <!-- Sección dinámica: Subtemas -->
+          <div class="form-dynamic-section">
+            <div class="dynamic-header">
+              <h3>Subtemas y Elementos (Acordeones)</h3>
+              <button type="button" class="btn btn-sm btn-secondary" id="btnAddSubtemaRow">+ Agregar Subtema</button>
+            </div>
+            <div id="subtemasInputsContainer" class="dynamic-list">
+              <!-- Subtema inicial -->
+              <div class="dynamic-item-card">
+                <input type="text" class="subtema-titulo" placeholder="Título del subtema (Ej: Conducta típica)" required>
+                <textarea rows="2" class="subtema-contenido" placeholder="Explicación detallada..." required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección dinámica: Preguntas de Quiz -->
+          <div class="form-dynamic-section">
+            <div class="dynamic-header">
+              <h3>Cuestionario (Preguntas de opción múltiple)</h3>
+              <button type="button" class="btn btn-sm btn-secondary" id="btnAddQuizRow">+ Agregar Pregunta</button>
+            </div>
+            <div id="quizInputsContainer" class="dynamic-list">
+              <!-- Pregunta inicial -->
+              <div class="dynamic-item-card">
+                <input type="text" class="quiz-q" placeholder="Pregunta (Ej: ¿Qué se requiere para consumar la figura?)" required>
+                <input type="text" class="quiz-note" placeholder="Nota o pista breve orientativa...">
+                <div class="quiz-answers-grid">
+                  <input type="text" class="quiz-opt-0" placeholder="Opción A (Respuesta correcta por defecto)" required>
+                  <input type="text" class="quiz-opt-1" placeholder="Opción B" required>
+                  <input type="text" class="quiz-opt-2" placeholder="Opción C" required>
+                  <input type="text" class="quiz-opt-3" placeholder="Opción D" required>
+                </div>
+                <input type="text" class="quiz-why" placeholder="Justificación jurídica / ¿por qué es correcta?" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección dinámica: Flashcards -->
+          <div class="form-dynamic-section">
+            <div class="dynamic-header">
+              <h3>Tarjetas de Memoria (Flashcards)</h3>
+              <button type="button" class="btn btn-sm btn-secondary" id="btnAddCardRow">+ Agregar Tarjeta</button>
+            </div>
+            <div id="cardsInputsContainer" class="dynamic-list">
+              <!-- Tarjeta inicial -->
+              <div class="dynamic-item-card">
+                <input type="text" class="card-pregunta" placeholder="Frente de la tarjeta: Concepto o Pregunta" required>
+                <textarea rows="2" class="card-respuesta" placeholder="Reverso: Definición o Explicación clave" required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" id="btnCancelForm">Cancelar</button>
+            <button type="submit" class="btn btn-primary btn-glow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span>Guardar e Indexar Guía</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Pestaña 2: Importar por JSON / Archivo -->
+        <div id="jsonUploadContainer" class="modal-json-panel hidden">
+          <div class="dropzone" id="fileDropzone">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            <p><strong>Arrastra un archivo JSON</strong> o haz clic para seleccionar</p>
+            <input type="file" id="jsonFileInput" accept=".json" class="hidden-file-input">
+          </div>
+
+          <div class="or-separator"><span>O pega el contenido JSON directamente</span></div>
+
+          <textarea id="jsonTextInput" rows="8" placeholder='{
+  "id": "mi-nueva-guia",
+  "title": "Derecho Civil: Contratos",
+  "materia": "Derecho Civil",
+  "subtitle": "Consentimiento, objeto y vicios de la voluntad",
+  "tags": ["Contratos", "Vicios", "Nulidad"],
+  "resumen": "Los contratos son acuerdos de voluntades...",
+  "temas": [{"title": "Consentimiento", "content": "..."}],
+  "quiz": [{"q": "¿Cuál es un vicio del consentimiento?", "a": ["Error", "Fuerza mayor", "Plazo", "Materia"], "correct": 0, "why": "..."}],
+  "cards": [["¿Qué es el dolo civil?", "Cualquier sugestión o artificio que se emplee para inducir a error."]]
+}'></textarea>
+
+          <div class="modal-json-actions">
+            <button class="btn btn-secondary btn-sm" id="btnDownloadSampleJson">Descargar plantilla JSON de ejemplo</button>
+            <button class="btn btn-primary" id="btnProcessJsonUpload">Validar e Indexar Guía</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Footer general -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <span class="footer-brand">⚖ IurisGuides</span>
+        <span>· Sistema Integral de Estudio Jurídico</span>
+      </div>
+      <div class="footer-right">
+        <span>Tus guías se indexan y persisten localmente en tu navegador.</span>
+      </div>
+    </div>
+  </footer>
+
   <script src="app.js"></script>
 </body>
 </html>
